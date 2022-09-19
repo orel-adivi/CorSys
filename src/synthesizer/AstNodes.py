@@ -8,13 +8,13 @@ import ast
 
 # -------------------- Null-ary operations: --------------------
 
-def generateIntLiteralNode(value: int, children: list, assignments: list):
+def generateIntLiteralNode(value: int, children: list, assignments: list[dict]):
     node = ast.Constant(value=value)
     node.results = list(map(lambda inp: value, assignments))
     return node
 
 
-def generateVariableNode(name: str, children: list, assignments: list):
+def generateVariableNode(name: str, children: list, assignments: list[dict]):
     node = ast.Name(id=name, ctx=ast.Load())
     node.results = list(map(lambda inp: inp[name], assignments))
     return node
@@ -28,7 +28,7 @@ def __generateUnaryOperationNode(children: list, assignments: list, operation: o
     return node
 
 
-def generateInverseNode(children: list, assignments: list):
+def generateInverseNode(children: list, assignments: list[dict]):
     return __generateUnaryOperationNode(children=children,
                                         assignments=assignments,
                                         operation=ast.USub(),
@@ -57,7 +57,7 @@ def __generateBinaryOperationNode(children: list, assignments: list, operation: 
     return node
 
 
-def generateAdditionNode(children: list, assignments: list):
+def generateAdditionNode(children: list, assignments: list[dict]):
     return __generateBinaryOperationNode(children=children,
                                          assignments=assignments,
                                          operation=ast.Add(),
@@ -65,7 +65,7 @@ def generateAdditionNode(children: list, assignments: list):
                                                           zip(children[0].results, children[1].results))))
 
 
-def generateSubtractionNode(children: list, assignments: list):
+def generateSubtractionNode(children: list, assignments: list[dict]):
     return __generateBinaryOperationNode(children=children,
                                          assignments=assignments,
                                          operation=ast.Sub(),
@@ -73,7 +73,7 @@ def generateSubtractionNode(children: list, assignments: list):
                                                           zip(children[0].results, children[1].results))))
 
 
-def generateMultiplicationNode(children: list, assignments: list):
+def generateMultiplicationNode(children: list, assignments: list[dict]):
     return __generateBinaryOperationNode(children=children,
                                          assignments=assignments,
                                          operation=ast.Mult(),
@@ -81,7 +81,7 @@ def generateMultiplicationNode(children: list, assignments: list):
                                                           zip(children[0].results, children[1].results))))
 
 
-def generateDivisionNode(children: list, assignments: list):
+def generateDivisionNode(children: list, assignments: list[dict]):
     return __generateBinaryOperationNode(children=children,
                                          assignments=assignments,
                                          operation=ast.FloorDiv(),
@@ -89,7 +89,7 @@ def generateDivisionNode(children: list, assignments: list):
                                                           zip(children[0].results, children[1].results))))
 
 
-def generateModuloNode(children: list, assignments: list):
+def generateModuloNode(children: list, assignments: list[dict]):
     return __generateBinaryOperationNode(children=children,
                                          assignments=assignments,
                                          operation=ast.Mod(),
@@ -97,7 +97,7 @@ def generateModuloNode(children: list, assignments: list):
                                                           zip(children[0].results, children[1].results))))
 
 
-def generatePowerNode(children: list, assignments: list):
+def generatePowerNode(children: list, assignments: list[dict]):
     return __generateBinaryOperationNode(children=children,
                                          assignments=assignments,
                                          operation=ast.Pow(),
@@ -105,7 +105,7 @@ def generatePowerNode(children: list, assignments: list):
                                                           zip(children[0].results, children[1].results))))
 
 
-def generateLeftShiftNode(children: list, assignments: list):
+def generateLeftShiftNode(children: list, assignments: list[dict]):
     return __generateBinaryOperationNode(children=children,
                                          assignments=assignments,
                                          operation=ast.LShift(),
@@ -113,7 +113,7 @@ def generateLeftShiftNode(children: list, assignments: list):
                                                           zip(children[0].results, children[1].results))))
 
 
-def generateRightShiftNode(children: list, assignments: list):
+def generateRightShiftNode(children: list, assignments: list[dict]):
     return __generateBinaryOperationNode(children=children,
                                          assignments=assignments,
                                          operation=ast.RShift(),
@@ -121,7 +121,7 @@ def generateRightShiftNode(children: list, assignments: list):
                                                           zip(children[0].results, children[1].results))))
 
 
-def generateBitwiseOrNode(children: list, assignments: list):
+def generateBitwiseOrNode(children: list, assignments: list[dict]):
     return __generateBinaryOperationNode(children=children,
                                          assignments=assignments,
                                          operation=ast.BitOr(),
@@ -129,7 +129,7 @@ def generateBitwiseOrNode(children: list, assignments: list):
                                                           zip(children[0].results, children[1].results))))
 
 
-def generateBitwiseXorNode(children: list, assignments: list):
+def generateBitwiseXorNode(children: list, assignments: list[dict]):
     return __generateBinaryOperationNode(children=children,
                                          assignments=assignments,
                                          operation=ast.BitXor(),
@@ -137,7 +137,7 @@ def generateBitwiseXorNode(children: list, assignments: list):
                                                           zip(children[0].results, children[1].results))))
 
 
-def generateBitwiseAndNode(children: list, assignments: list):
+def generateBitwiseAndNode(children: list, assignments: list[dict]):
     return __generateBinaryOperationNode(children=children,
                                          assignments=assignments,
                                          operation=ast.BitAnd(),
