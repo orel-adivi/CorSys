@@ -5,7 +5,8 @@ Software synthesis with correction of strings and number literals to account for
 # Todo:
 1) make working synthesizer with Bottom-up and OE
 2) add support for different types (int, list, (float?, str?))
-3) write unittests & add CI
-4) add good enough synthesis support
-5) add wighted heuristics for strings and number literals
-6) add documentation & small website
+3) limit search space with Grammar input file
+4) write unittests & add CI
+5) add good enough synthesis support
+6) add wighted heuristics for strings and number literals
+7) add documentation & small website
