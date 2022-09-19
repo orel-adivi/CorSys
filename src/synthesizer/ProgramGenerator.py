@@ -46,6 +46,7 @@ class ProgramGenerator(object):
                                 yield program
                         except ZeroDivisionError:
                             continue
+            observational_equivalence.moveNextHeightPrograms()
 
     def findProgram(self, assignments: list[dict], evaluations: list):
         for program in self.enumerate(assignments=assignments):
@@ -54,8 +55,8 @@ class ProgramGenerator(object):
 
 
 if __name__ == '__main__':
-    inputs = [{'x': 1, 'y': 2}, {'x': 11, 'y': 20}]
+    inputs = [{'x': 1, 'y': 2, 'z': 3}, {'x': 11, 'y': 20, 'z': -1}]
     outputs = [3, 221]
-    generator = ProgramGenerator([0, 1, 2], list(inputs[0].keys()), 10)
+    generator = ProgramGenerator([0, 1, 2], list(inputs[0].keys()), 4)
     result = generator.findProgram(inputs, outputs)
     print(ast.unparse(result))
