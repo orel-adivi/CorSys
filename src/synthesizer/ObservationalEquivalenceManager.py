@@ -5,11 +5,6 @@
 #
 import ast
 
-"""
-addNewHeightLevel
-getPrevHeightLevel
-"""
-
 
 class ObservationalEquivalenceManager(object):
 

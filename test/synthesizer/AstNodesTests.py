@@ -13,7 +13,7 @@ class MyTestCase(unittest.TestCase):
 
     def testGenerateIntLiteralNode(self):
         for num in [0, 1, -1] + [random.randint(-(10 ** 100), 10 ** 100) for _ in range(100000)]:
-            node = generateIntLiteralNode(num, [], [{'x': 0}])
+            node = generateLiteralNode(num, [], [{'x': 0}])
             evaluated = node.results[0]
             self.assertEqual(evaluated, num)
 
@@ -28,7 +28,7 @@ class MyTestCase(unittest.TestCase):
 
     def testGenerateInverseNode(self):
         for num in [0, 1, -1] + [random.randint(-(10 ** 100), 10 ** 100) for _ in range(100000)]:
-            node = generateInverseNode([generateIntLiteralNode(num, [], [{'x': 0}])], [{'x': 0}])
+            node = generateInverseNode([generateLiteralNode(num, [], [{'x': 0}])], [{'x': 0}])
             evaluated = node.results[0]
             self.assertEqual(evaluated, -num)
 
@@ -36,8 +36,8 @@ class MyTestCase(unittest.TestCase):
         for left, right in [(0, 1), (1, 1), (-1, 1), (1, 2), (1, -2)] + \
                            [(random.randint(-(10 ** 100), 10 ** 100), random.randint(-(10 ** 100), 10 ** 100))
                             for _ in range(100000)]:
-            left_node = generateIntLiteralNode(left, [], [{'x': 0}])
-            right_node = generateIntLiteralNode(right, [], [{'x': 0}])
+            left_node = generateLiteralNode(left, [], [{'x': 0}])
+            right_node = generateLiteralNode(right, [], [{'x': 0}])
             node = generateAdditionNode([left_node, right_node], [{'x': 0}])
             evaluated = node.results[0]
             self.assertEqual(evaluated, left + right)
@@ -46,8 +46,8 @@ class MyTestCase(unittest.TestCase):
         for left, right in [(0, 1), (1, 1), (-1, 1), (1, 2), (1, -2)] + \
                            [(random.randint(-(10 ** 100), 10 ** 100), random.randint(-(10 ** 100), 10 ** 100))
                             for _ in range(100000)]:
-            left_node = generateIntLiteralNode(left, [], [{'x': 0}])
-            right_node = generateIntLiteralNode(right, [], [{'x': 0}])
+            left_node = generateLiteralNode(left, [], [{'x': 0}])
+            right_node = generateLiteralNode(right, [], [{'x': 0}])
             node = generateSubtractionNode([left_node, right_node], [{'x': 0}])
             evaluated = node.results[0]
             self.assertEqual(evaluated, left - right)
@@ -56,8 +56,8 @@ class MyTestCase(unittest.TestCase):
         for left, right in [(0, 1), (1, 1), (-1, 1), (1, 2), (1, -2)] + \
                            [(random.randint(-(10 ** 100), 10 ** 100), random.randint(-(10 ** 100), 10 ** 100))
                             for _ in range(100000)]:
-            left_node = generateIntLiteralNode(left, [], [{'x': 0}])
-            right_node = generateIntLiteralNode(right, [], [{'x': 0}])
+            left_node = generateLiteralNode(left, [], [{'x': 0}])
+            right_node = generateLiteralNode(right, [], [{'x': 0}])
             node = generateMultiplicationNode([left_node, right_node], [{'x': 0}])
             evaluated = node.results[0]
             self.assertEqual(evaluated, left * right)
@@ -68,7 +68,7 @@ class MyTestCase(unittest.TestCase):
                             for _ in range(50000)] + \
                            [(random.randint(-(10 ** 100), 10 ** 100), random.randint(-(10 ** 100), -1))
                             for _ in range(50000)]:
-            left_node = generateIntLiteralNode(left, [], [{'x': 0}])
+            left_node = generateLiteralNode(left, [], [{'x': 0}])
             right_name = ''.join(random.choice(string.ascii_letters) for _ in range(random.randint(1, 100)))
             right_node = generateVariableNode(right_name, [], [{'x': 0, right_name: right}])
             node = generateDivisionNode([left_node, right_node], [{'x': 0, right_name: right}])
@@ -81,7 +81,7 @@ class MyTestCase(unittest.TestCase):
                             for _ in range(50000)] + \
                            [(random.randint(-(10 ** 100), 10 ** 100), random.randint(-(10 ** 100), -1))
                             for _ in range(50000)]:
-            left_node = generateIntLiteralNode(left, [], [{'x': 0}])
+            left_node = generateLiteralNode(left, [], [{'x': 0}])
             right_name = ''.join(random.choice(string.ascii_letters) for _ in range(random.randint(1, 100)))
             right_node = generateVariableNode(right_name, [], [{'x': 0, right_name: right}])
             node = generateModuloNode([left_node, right_node], [{'x': 0, right_name: right}])
@@ -92,8 +92,8 @@ class MyTestCase(unittest.TestCase):
         for left, right in [(0, 1), (1, 1), (-1, 1), (1, 2), (1, -2)] + \
                            [(random.randint(-(10 ** 100), 10 ** 100), random.randint(1, 250))
                             for _ in range(10000)]:
-            left_node = generateIntLiteralNode(left, [], [{'x': 0}])
-            right_node = generateIntLiteralNode(right, [], [{'x': 0}])
+            left_node = generateLiteralNode(left, [], [{'x': 0}])
+            right_node = generateLiteralNode(right, [], [{'x': 0}])
             node = generatePowerNode([left_node, right_node], [{'x': 0}])
             evaluated = node.results[0]
             self.assertEqual(evaluated, left ** right)
@@ -102,8 +102,8 @@ class MyTestCase(unittest.TestCase):
         for left, right in [(0, 1), (1, 1), (-1, 1), (1, 2), (-1, 2)] + \
                            [(random.randint(-(10 ** 100), 10 ** 100), random.randint(0, 150))
                             for _ in range(100000)]:
-            left_node = generateIntLiteralNode(left, [], [{'x': 0}])
-            right_node = generateIntLiteralNode(right, [], [{'x': 0}])
+            left_node = generateLiteralNode(left, [], [{'x': 0}])
+            right_node = generateLiteralNode(right, [], [{'x': 0}])
             node = generateLeftShiftNode([left_node, right_node], [{'x': 0}])
             evaluated = node.results[0]
             self.assertEqual(evaluated, left << right)
@@ -112,8 +112,8 @@ class MyTestCase(unittest.TestCase):
         for left, right in [(0, 1), (1, 1), (-1, 1), (1, 2), (-1, 2)] + \
                            [(random.randint(-(10 ** 100), 10 ** 100), random.randint(0, 150))
                             for _ in range(100000)]:
-            left_node = generateIntLiteralNode(left, [], [{'x': 0}])
-            right_node = generateIntLiteralNode(right, [], [{'x': 0}])
+            left_node = generateLiteralNode(left, [], [{'x': 0}])
+            right_node = generateLiteralNode(right, [], [{'x': 0}])
             node = generateRightShiftNode([left_node, right_node], [{'x': 0}])
             evaluated = node.results[0]
             self.assertEqual(evaluated, left >> right)
@@ -122,8 +122,8 @@ class MyTestCase(unittest.TestCase):
         for left, right in [(0, 1), (1, 1), (-1, 1), (1, 2), (-1, -2)] + \
                            [(random.randint(-(10 ** 100), 10 ** 100), random.randint(-(10 ** 100), 10 ** 100))
                             for _ in range(100000)]:
-            left_node = generateIntLiteralNode(left, [], [{'x': 0}])
-            right_node = generateIntLiteralNode(right, [], [{'x': 0}])
+            left_node = generateLiteralNode(left, [], [{'x': 0}])
+            right_node = generateLiteralNode(right, [], [{'x': 0}])
             node = generateBitwiseOrNode([left_node, right_node], [{'x': 0}])
             evaluated = node.results[0]
             self.assertEqual(evaluated, left | right)
@@ -132,8 +132,8 @@ class MyTestCase(unittest.TestCase):
         for left, right in [(0, 1), (1, 1), (-1, 1), (1, 2), (-1, -2)] + \
                            [(random.randint(-(10 ** 100), 10 ** 100), random.randint(-(10 ** 100), 10 ** 100))
                             for _ in range(100000)]:
-            left_node = generateIntLiteralNode(left, [], [{'x': 0}])
-            right_node = generateIntLiteralNode(right, [], [{'x': 0}])
+            left_node = generateLiteralNode(left, [], [{'x': 0}])
+            right_node = generateLiteralNode(right, [], [{'x': 0}])
             node = generateBitwiseXorNode([left_node, right_node], [{'x': 0}])
             evaluated = node.results[0]
             self.assertEqual(evaluated, left ^ right)
@@ -142,8 +142,8 @@ class MyTestCase(unittest.TestCase):
         for left, right in [(0, 1), (1, 1), (-1, 1), (1, 2), (-1, -2)] + \
                            [(random.randint(-(10 ** 100), 10 ** 100), random.randint(-(10 ** 100), 10 ** 100))
                             for _ in range(100000)]:
-            left_node = generateIntLiteralNode(left, [], [{'x': 0}])
-            right_node = generateIntLiteralNode(right, [], [{'x': 0}])
+            left_node = generateLiteralNode(left, [], [{'x': 0}])
+            right_node = generateLiteralNode(right, [], [{'x': 0}])
             node = generateBitwiseAndNode([left_node, right_node], [{'x': 0}])
             evaluated = node.results[0]
             self.assertEqual(evaluated, left & right)

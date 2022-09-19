@@ -3,7 +3,6 @@
 #   @date : 19 September 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
-from functools import partial
 from itertools import combinations_with_replacement
 
 from src.synthesizer.AstNodes import *  # todo limit
@@ -12,14 +11,8 @@ from src.synthesizer.ObservationalEquivalenceManager import ObservationalEquival
 
 class ProgramGenerator(object):
 
-    def __init__(self, literal: list[int], variables: list[str], max_height: int):
-        self._search_space = [
-            [partial(generateIntLiteralNode, value=num) for num in literal] +
-                [partial(generateVariableNode, name=name) for name in variables],
-            [generateInverseNode],
-            [generateAdditionNode, generateSubtractionNode, generateMultiplicationNode, generateDivisionNode,
-             generateModuloNode, generatePowerNode]
-        ]
+    def __init__(self, search_space: list[list], max_height: int):
+        self._search_space = search_space
         self._max_height = max_height
 
     def enumerate(self, assignments: list[dict]):
@@ -52,11 +45,3 @@ class ProgramGenerator(object):
         for program in self.enumerate(assignments=assignments):
             if program.results == evaluations:
                 return program
-
-
-if __name__ == '__main__':
-    inputs = [{'x': 1, 'y': 2, 'z': 3}, {'x': 11, 'y': 20, 'z': -1}]
-    outputs = [3, 221]
-    generator = ProgramGenerator([0, 1, 2], list(inputs[0].keys()), 4)
-    result = generator.findProgram(inputs, outputs)
-    print(ast.unparse(result))

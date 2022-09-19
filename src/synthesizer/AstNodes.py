@@ -8,7 +8,7 @@ import ast
 
 # -------------------- Null-ary operations: --------------------
 
-def generateIntLiteralNode(value: int, children: list, assignments: list[dict]):
+def generateLiteralNode(value: object, children: list, assignments: list[dict]):
     node = ast.Constant(value=value)
     node.results = list(map(lambda inp: value, assignments))
     return node
