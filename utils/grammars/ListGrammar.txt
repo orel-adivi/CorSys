@@ -1,0 +1,6 @@
+0 1 2 3 'a' 'b' [7,66,101,1,2,3,4,5]
+x
+[] len sorted reversed
++
+
+slice

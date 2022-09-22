@@ -12,12 +12,18 @@ class ObservationalEquivalenceManager(object):
         self._equivalence_classes = {}
         self._program_stack = [[]]
 
+    @staticmethod
+    def __generateKey(key: object):
+        if type(key) == list:
+            return tuple([ObservationalEquivalenceManager.__generateKey(child) for child in key])
+        return key
+
     def isObservationallyEquivalent(self, program: ast):
-        return tuple(program.results) in self._equivalence_classes
+        return ObservationalEquivalenceManager.__generateKey(program.results) in self._equivalence_classes
 
     def addEquivalentClass(self, program: ast):
         assert(not self.isObservationallyEquivalent(program))
-        self._equivalence_classes[tuple(program.results)] = program
+        self._equivalence_classes[ObservationalEquivalenceManager.__generateKey(program.results)] = program
         self._program_stack[-1].append(program)
 
     def getAllPreviousHeightPrograms(self):

@@ -3,9 +3,9 @@
 #   @date : 19 September 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
-from itertools import combinations_with_replacement
+from itertools import product
+from tqdm import tqdm
 
-from src.synthesizer.AstNodes import *  # todo limit
 from src.synthesizer.ObservationalEquivalenceManager import ObservationalEquivalenceManager
 
 
@@ -22,7 +22,7 @@ class ProgramGenerator(object):
                 observational_equivalence.addEquivalentClass(program)
                 yield program
         observational_equivalence.moveNextHeightPrograms()
-        for height in range(1, self._max_height):
+        for height in tqdm(range(1, self._max_height)):
             for arity, functions in zip(range(1, len(self._search_space) + 1), self._search_space[1:]):
                 for func in functions:
                     last_height_programs = observational_equivalence.getLastHeightPrograms()
@@ -30,14 +30,14 @@ class ProgramGenerator(object):
                     children_list = [list(children)[0:i] + [last_height_program] + list(children)[i:]
                                      for i in range(arity)
                                      for last_height_program in last_height_programs
-                                     for children in combinations_with_replacement(prev_height_programs, arity - 1)]
+                                     for children in product(prev_height_programs, repeat=arity-1)]
                     for children in children_list:
                         try:
                             program = func(children=children, assignments=assignments)
                             if not observational_equivalence.isObservationallyEquivalent(program):
                                 observational_equivalence.addEquivalentClass(program)
                                 yield program
-                        except ZeroDivisionError:
+                        except Exception:
                             continue
             observational_equivalence.moveNextHeightPrograms()
 
