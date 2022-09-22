@@ -250,5 +250,15 @@ if __name__ == '__main__':
         print(node5.results[i])
     print('')
 
-
+"""
+count
+capitlize
+casefold
+join
+lower
+title
+upper
+abs
+/
+"""
 
