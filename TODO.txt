@@ -8,6 +8,7 @@ Todo:
 6) add wighted heuristics for strings and number literals
 7) add documentation & small website
 
+
 - interactive synthesizer
 - program equivalence finder
 - synthesizer to file
