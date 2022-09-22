@@ -1,6 +1,6 @@
 #
 #   @file : SearchSpace.py
-#   @date : 19 September 2022
+#   @date : 22 September 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
 from functools import partial
