@@ -1,6 +1,6 @@
-remote_theme: pages-themes/minimal@v0.2.0
-plugins:
-- jekyll-remote-theme
-title: CorSys - Synthesizing & Correcting
-description: Synthesizing best-effort python expressions while weighting the chance for mistakes in given user outputs.
+title: CorSys
+logo:
+description:
 show_downloads: true
+google_analytics:
+theme: jekyll-theme-minimal
