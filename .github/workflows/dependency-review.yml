@@ -1,7 +1,7 @@
 # Dependency Review Action
 name: 'Dependency Review - Security'
 
-on: [pull_request, push]
+on: [push]
 
 permissions:
   contents: read
