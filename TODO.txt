@@ -8,7 +8,6 @@
 7) add documentation & small website
 8) show success using automatic test with random noise
 
-
 --- Metrics:
 (1) number distance (normal)
 (2) calculation mistakes
@@ -17,7 +16,6 @@
 (5) permutation
 (6) letter with close pronunciation
 (7) combined metric
-
 
 --- Other:
 - interactive synthesizer
