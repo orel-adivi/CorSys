@@ -6,7 +6,7 @@
 import ast
 import time
 
-from src.synthesizer.SearchSpace import SearchSpace
+from src.io.SearchSpace import SearchSpace
 from src.synthesizer.ProgramGenerator import ProgramGenerator
 
 

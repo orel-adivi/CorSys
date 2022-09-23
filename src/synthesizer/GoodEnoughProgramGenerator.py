@@ -4,7 +4,7 @@
 #   @authors : Orel Adivi and Daniel Noor
 #
 from src.synthesizer.ProgramGenerator import ProgramGenerator
-from src.synthesizer.SearchSpace import SearchSpace
+from src.io.SearchSpace import SearchSpace
 from src.metrics.Metric import Metric
 from src.metrics.DefaultMetric import DefaultMetric
 
