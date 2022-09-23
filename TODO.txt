@@ -14,9 +14,9 @@ matrics:
 
 (2) number distance (normal)
 (3) calculation mistakes
-(4) Hamming distance
+
 (5) Levenshtein distance
-(6) vector similarity (scipy)
+
 (7) keyboard distance
 (8) permutation
 (9) letter with close pronunciation

@@ -12,20 +12,17 @@ class Metric(ABC):
     def __init__(self):
         pass
 
-    @staticmethod
-    def intDistance(actual: int, expected: int) -> float:
+    def intDistance(self, actual: int, expected: int) -> float:
         if actual == expected:
             return 0.0
         return 1.0
 
-    @staticmethod
-    def floatDistance(actual: float, expected: float, EPS: float = 1e-3) -> float:
+    def floatDistance(self, actual: float, expected: float, EPS: float = 1e-3) -> float:
         if abs(actual - expected) <= EPS:
             return 0.0
         return 1.0
 
-    @staticmethod
-    def strDistance(actual: str, expected: str) -> float:
+    def strDistance(self, actual: str, expected: str) -> float:
         if actual == expected:
             return 0.0
         return 1.0
