@@ -6,7 +6,7 @@ This document outlines security procedures for the CorSys open source project.
 ## Reporting a Vulnerability
 
 The team takes all security vulnerabilities seriously. Thank you for helping
-us improving the security of our open source project. Report any security
+us improve the security of our open source project. Report any security
 vulnerabilities by emailing the team at:
 
 	orel.adivi@cs.technion.ac.il
