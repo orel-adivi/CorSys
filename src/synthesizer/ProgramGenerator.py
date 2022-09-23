@@ -4,7 +4,6 @@
 #   @authors : Orel Adivi and Daniel Noor
 #
 from itertools import product
-from tqdm import tqdm
 
 from src.synthesizer.ObservationalEquivalenceManager import ObservationalEquivalenceManager
 
@@ -22,7 +21,7 @@ class ProgramGenerator(object):
                 observational_equivalence.addEquivalentClass(program)
                 yield program
         observational_equivalence.moveNextHeightPrograms()
-        for height in tqdm(range(1, self._max_height)):
+        for _ in range(1, self._max_height):
             for arity, functions in zip(range(1, len(self._search_space) + 1), self._search_space[1:]):
                 for func in functions:
                     last_height_programs = observational_equivalence.getLastHeightPrograms()

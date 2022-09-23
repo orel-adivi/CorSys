@@ -7,7 +7,7 @@ Todo:
 5) add good enough synthesis support
 6) add wighted heuristics for strings and number literals
 7) add documentation & small website
-
+show success using automatic test with random noise
 
 - interactive synthesizer
 - program equivalence finder
