@@ -9,7 +9,7 @@
 8) show success using automatic test with random noise
 
 
---- Matrics:
+--- Metrics:
 (1) number distance (normal)
 (2) calculation mistakes
 (3) Levenshtein distance
