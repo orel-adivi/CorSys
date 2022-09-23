@@ -16,7 +16,7 @@
 (4) keyboard distance
 (5) permutation
 (6) letter with close pronunciation
-(7) combined
+(7) combined metric
 
 
 --- Other:
