@@ -31,7 +31,7 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
-        languages: ${{ matrix.language }}
+        languages: ${{matrix.language}}
 
         
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
