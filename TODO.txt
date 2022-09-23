@@ -11,16 +11,14 @@ show success using automatic test with random noise
 
 
 matrics:
-
 (2) number distance (normal)
 (3) calculation mistakes
-
 (5) Levenshtein distance
-
 (7) keyboard distance
 (8) permutation
 (9) letter with close pronunciation
 (10) combined
+
 
 - interactive synthesizer
 - program equivalence finder
