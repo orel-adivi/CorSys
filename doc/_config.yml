@@ -1,4 +1,1 @@
 theme: jekyll-theme-cayman
-title: CorSys - Synthesizing & Correcting
-description: Synthesizing best-effort python expressions while weighting the chance for mistakes in given user outputs.
-show_downloads: true
