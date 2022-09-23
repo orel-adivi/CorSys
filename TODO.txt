@@ -10,7 +10,7 @@ Todo:
 show success using automatic test with random noise
 
 
-matrics:
+--- matrics:
 (2) number distance (normal)
 (3) calculation mistakes
 (5) Levenshtein distance
