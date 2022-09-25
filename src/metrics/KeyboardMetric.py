@@ -3,6 +3,8 @@
 #   @date : 25 September 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
+from overrides import overrides
+
 from src.metrics.Metric import Metric
 
 
@@ -22,9 +24,11 @@ class KeyboardMetric(Metric):
         return abs(KeyboardMetric.__letter_mapper(actual) - KeyboardMetric.__letter_mapper(expected)) * \
                KeyboardMetric.SCALE_PARAMETER
 
+    @overrides
     def __init__(self):
         super().__init__()
 
+    @overrides
     def strDistance(self, actual: str, expected: str, penalty: float = 0.25) -> float:
         if len(actual) != len(expected):
             return 1.0

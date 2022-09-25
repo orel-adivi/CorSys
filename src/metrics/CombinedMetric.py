@@ -3,6 +3,8 @@
 #   @date : 25 September 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
+from overrides import overrides
+
 from src.metrics.Metric import Metric
 from src.metrics.DefaultMetric import DefaultMetric
 from src.metrics.NormalMetric import NormalMetric
@@ -28,6 +30,7 @@ class CombinedMetric(DefaultMetric, NormalMetric, CalculationMetric, HammingMetr
         'HomophoneMetric': HomophoneMetric
     }
 
+    @overrides
     def __init__(self, int_metric: str = 'DefaultMetric', float_metric: str = 'DefaultMetric',
                  str_metric: str = 'DefaultMetric', list_metric: str = 'DefaultMetric'):
         Metric.__init__(self)
@@ -38,15 +41,19 @@ class CombinedMetric(DefaultMetric, NormalMetric, CalculationMetric, HammingMetr
         self.__str_metric_class = CombinedMetric.REGULAR_METRICS[str_metric]
         self.__list_metric_class = CombinedMetric.REGULAR_METRICS[list_metric]
 
+    @overrides
     def intDistance(self, actual: int, expected: int, *args, **kwargs) -> float:
         return self.__int_metric_class.intDistance(self, actual=actual, expected=expected, *args, *kwargs)
 
+    @overrides
     def floatDistance(self, actual: float, expected: float, EPS: float = 1e-3, *args, **kwargs) -> float:
         return self.__float_metric_class.floatDistance(self, actual=actual, expected=expected, EPS=EPS, *args, *kwargs)
 
+    @overrides
     def strDistance(self, actual: str, expected: str, *args, **kwargs) -> float:
         return self.__str_metric_class.strDistance(self, actual=actual, expected=expected, *args, *kwargs)
 
+    @overrides
     def listDistance(self, actual: list, expected: list, *args, **kwargs) -> float:
         return self.__list_metric_class.listDistance(self, actual=actual, expected=expected, *args, *kwargs)
 

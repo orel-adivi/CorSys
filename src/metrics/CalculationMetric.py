@@ -3,14 +3,18 @@
 #   @date : 25 September 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
+from overrides import overrides
+
 from src.metrics.Metric import Metric
 
 
 class CalculationMetric(Metric):
 
+    @overrides
     def __init__(self):
         super().__init__()
 
+    @overrides
     def intDistance(self, actual: int, expected: int, penalty_off_by_one: float = 0.25,
                     penalty_units: float = 0.5) -> float:
         actual_list = list(str(actual))
@@ -32,6 +36,7 @@ class CalculationMetric(Metric):
                     return 1.0
         return score
 
+    @overrides
     def floatDistance(self, actual: float, expected: float, EPS: float = 1e-3, STD_DEV: float = 1.0,
                       penalty_off_by_one: float = 0.25, penalty_right_digit: float = 0.5) -> float:
         actual_list_whole, actual_list_fraction = list(str(actual).split('.')[0]), list(str(actual).split('.')[1])

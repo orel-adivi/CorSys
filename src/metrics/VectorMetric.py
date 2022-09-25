@@ -3,6 +3,8 @@
 #   @date : 25 September 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
+from overrides import overrides
+
 import scipy
 
 from src.metrics.Metric import Metric
@@ -22,12 +24,14 @@ class VectorMetric(Metric):
         "yule": (scipy.spatial.distance.yule, False)
     }
 
+    @overrides
     def __init__(self, dist_func: str):
         super().__init__()
         func, normalize = VectorMetric.METRIC_FUNCTIONS[dist_func]
         self.__func = func
         self.__normalize = normalize
 
+    @overrides
     def intDistance(self, actual: int, expected: int) -> float:
         actual_list = list(str(actual))
         expected_list = list(str(expected))
@@ -36,6 +40,7 @@ class VectorMetric(Metric):
         expected_list_padded = ['0'] * (max_len - len(expected_list)) + expected_list
         return self.listDistance(actual_list_padded, expected_list_padded)
 
+    @overrides
     def floatDistance(self, actual: float, expected: float, EPS: float = 1e-3) -> float:
         actual_list_whole = list(str(actual).split('.')[0])
         actual_list_fraction = list(str(actual).split('.')[1])
@@ -51,6 +56,7 @@ class VectorMetric(Metric):
         return self.listDistance(actual=actual_list_whole_padded + actual_list_fraction_padded,
                                  expected=expected_list_whole_padded + expected_list_fraction_padded)
 
+    @overrides
     def listDistance(self, actual: list, expected: list) -> float:
         min_length = min(len(actual), len(expected))
         max_length = max(len(actual), len(expected))

@@ -4,7 +4,7 @@
 #   @authors : Orel Adivi and Daniel Noor
 #
 from abc import ABC, abstractmethod
-from typing import final
+from overrides import final
 
 
 class Metric(ABC):

@@ -3,6 +3,7 @@
 #   @date : 25 September 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
+from overrides import overrides
 import numpy as np
 
 from src.metrics.Metric import Metric
@@ -44,6 +45,7 @@ class LevenshteinMetric(Metric):
                     )
         return dp_matrix[-1][-1]
 
+    @overrides
     def __init__(self, solve_recursively: bool = False):
         super().__init__()
         if solve_recursively:
@@ -51,12 +53,15 @@ class LevenshteinMetric(Metric):
         else:
             self.__solver = LevenshteinMetric.__calcLevenshteinDistDP
 
+    @overrides
     def intDistance(self, actual: int, expected: int) -> float:
         return self.strDistance(actual=str(actual), expected=str(expected))
 
+    @overrides
     def floatDistance(self, actual: float, expected: float, EPS: float = 1e-3) -> float:
         return self.strDistance(actual=str(actual), expected=str(expected))
 
+    @overrides
     def strDistance(self, actual: str, expected: str) -> float:
         if actual == expected == "":
             return 0.0
