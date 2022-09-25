@@ -12,13 +12,9 @@ Software synthesis with correction of strings and number literals to account for
 8) show success using automatic test with random noise
 
 ## Metrics:
-1) number distance (normal)
-2) calculation mistakes
-3) Levenshtein distance
-4) keyboard distance
-5) permutation
-6) letter with close pronunciation
-7) combined metric
+1) calculation mistakes
+2) Levenshtein distance
+3) combined metric
 
 ## Other:
 - interactive synthesizer

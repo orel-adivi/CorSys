@@ -1,6 +1,6 @@
 #
 #   @file : VectorMetric.py
-#   @date : 23 September 2022
+#   @date : 25 September 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
 import scipy
@@ -10,8 +10,21 @@ from src.metrics.Metric import Metric
 
 class VectorMetric(Metric):
 
-    def __init__(self, func: scipy.spatial.distance, normalize: bool):
+    METRIC_FUNCTIONS = {
+        "braycurtis": (scipy.spatial.distance.braycurtis, False),
+        "canberra": (scipy.spatial.distance.canberra, True),
+        "correlation": (scipy.spatial.distance.correlation, False),
+        "cosine": (scipy.spatial.distance.cosine, False),
+        "jensenshannon": (scipy.spatial.distance.jensenshannon, False),
+        "hamming": (scipy.spatial.distance.hamming, True),
+        "jaccard": (scipy.spatial.distance.jaccard, False),
+        "russellrao": (scipy.spatial.distance.russellrao, False),
+        "yule": (scipy.spatial.distance.yule, False)
+    }
+
+    def __init__(self, dist_func: str):
         super().__init__()
+        func, normalize = VectorMetric.METRIC_FUNCTIONS[dist_func]
         self.__func = func
         self.__normalize = normalize
 
@@ -44,16 +57,3 @@ class VectorMetric(Metric):
         if not self.__normalize:
             return shared_dist + (max_length - min_length)
         return (shared_dist + (max_length - min_length)) / max_length
-
-
-"""
----funcs:
-- braycurtis
-+ canberra
-- correlation
-- cosine
-- jensenshannon
-- jaccard
-- russellrao
-+ yule
-"""
