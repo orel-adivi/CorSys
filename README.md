@@ -13,8 +13,7 @@ Software synthesis with correction of strings and number literals to account for
 
 ## Metrics:
 1) calculation mistakes
-2) Levenshtein distance
-3) combined metric
+2) combined metric
 
 ## Other:
 - interactive synthesizer

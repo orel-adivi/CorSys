@@ -1,9 +1,10 @@
 #
 #   @file : Metric.py
-#   @date : 23 September 2022
+#   @date : 25 September 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
 from abc import ABC, abstractmethod
+from typing import final
 
 
 class Metric(ABC):
@@ -37,6 +38,7 @@ class Metric(ABC):
             return 1.0
         return sum_dist
 
+    @final
     def distance(self, actual: object, expected: object) -> float:
         if type(actual) == type(expected) == int:
             return self.intDistance(actual=actual, expected=expected)
