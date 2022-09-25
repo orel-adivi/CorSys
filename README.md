@@ -12,7 +12,6 @@ Software synthesis with correction of strings and number literals to account for
 8) show success using automatic test with random noise
 
 ## Metrics:
-1) combined metric
 weighted (?)
 
 ## Other:
