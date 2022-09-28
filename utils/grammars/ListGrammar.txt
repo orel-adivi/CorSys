@@ -1,6 +1,0 @@
-0 1 2 'a' 'b' [4,3,2,1,0]
-x y z
-[] len sorted reversed
-+ [] subscript index
-[]
-[] slice

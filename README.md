@@ -14,7 +14,7 @@ Software synthesis with correction of strings and number literals to account for
 10) add comments & lint for all io folder
 11) add grammar file examples
 12) add input-output file examples
-13)     automatic tests for benchmarks
+13) automatic tests for benchmarks
 14) small utils: PI calculator (maybe benchmarks ?), program minimizer (counter example ?), game man vs. synthesizer
 15) main synthesizer - support tactics
 16) util tests
