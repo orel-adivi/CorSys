@@ -11,19 +11,18 @@ Software synthesis with correction of strings and number literals to account for
 7) add comments & lint for all metrics folder
 8)     search space object
 9)     search space reader
-10)     input-output object
-11)     input-output reader
-12) test all io folder
-13) add comments & lint for all io folder
-14) add grammar file examples
-15) add input-output file examples
-16) automatic tests for benchmarks
-17) small utils: PI calculator (maybe benchmarks ?), program minimizer (counter example ?), game man vs. synthesizer
-18)     main synthesizer
-19) util tests
-20) system tests
-21) fix CI - tests, build, linter + requirement file
-22) write README.md
-23) write webpage documentation
-24) write pdf file for documentation
-25) fix photos
+10) input-output reader - add functionality
+11) test all io folder
+12) add comments & lint for all io folder
+13) add grammar file examples
+14) add input-output file examples
+15) automatic tests for benchmarks
+16) small utils: PI calculator (maybe benchmarks ?), program minimizer (counter example ?), game man vs. synthesizer
+17)     main synthesizer
+18) util tests
+19) system tests
+20) fix CI - tests, build, linter + requirement file
+21) write README.md
+22) write webpage documentation
+23) write pdf file for documentation
+24) fix photos

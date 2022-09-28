@@ -1,12 +1,14 @@
 #
 #   @file : Synthesizer.py
-#   @date : 22 September 2022
+#   @date : 28 September 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
 import ast
 import pathlib
 import time
 import argparse
+
+from src.io.InputOutputPairReader import InputOutputPairReader
 
 from src.io.SearchSpace import SearchSpace
 from src.synthesizer.ProgramGenerator import ProgramGenerator
@@ -33,14 +35,17 @@ if __name__ == '__main__':
     cl_parser.add_argument('-r', '--result-number', action='store', type=int, default=5,
                            help='the number of results for the synthesizer to show', dest='result_number')
     arguments = cl_parser.parse_args()
-    print(arguments)
-    pass
+
+    input_output_pairs = InputOutputPairReader.readCSV(arguments.input_output_file)
+    inputs = input_output_pairs.inputs
+    outputs = input_output_pairs.outputs
 
 
 
 
-    inputs = [{'x': 6, 'y': 1, 'z': 9}, {'x': 2, 'y': 3, 'z': 4}]
-    outputs = list(map(lambda env: env['x'] + env['y'] + env['z'], inputs))
+
+    # inputs = [{'x': 6, 'y': 1, 'z': 9}, {'x': 2, 'y': 3, 'z': 4}]
+    # outputs = list(map(lambda env: env['x'] + env['y'] + env['z'], inputs))
     search_space = SearchSpace.readGrammarFromFile('utils/grammars/IntegerGrammar.txt')
     generator = ProgramGenerator(search_space, 10)
     result = generator.findProgram(inputs, outputs)
