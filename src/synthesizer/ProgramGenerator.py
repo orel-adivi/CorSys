@@ -44,6 +44,10 @@ class ProgramGenerator(object):
                             continue
                         except LookupError:
                             continue
+                        except TypeError:
+                            continue
+                        except ValueError:
+                            continue
             observational_equivalence.moveNextHeightPrograms()
 
     def findProgram(self, assignments: list[dict], evaluations: list):

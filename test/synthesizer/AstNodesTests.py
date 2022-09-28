@@ -9,7 +9,7 @@ import unittest
 from src.synthesizer.AstNodes import *
 
 
-class MyTestCase(unittest.TestCase):
+class AstNodesTests(unittest.TestCase):
 
     def testGenerateIntLiteralNode(self):
         for num in [0, 1, -1] + [random.randint(-(10 ** 100), 10 ** 100) for _ in range(100000)]:

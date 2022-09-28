@@ -1,6 +1,6 @@
-0,1,-1
+0,None,-1
 x,y,z
--,sorted,
-+,-,subscript
+sorted,len,
++,subscript,
 ,,
 slice,,
