@@ -3,7 +3,7 @@ Software synthesis with correction of strings and number literals to account for
 
 ## Todo:
 1) AstNodes.py - add functionality & change design
-2) good-enough -> top 5, limit by time, best by height, name to best-effort
+2) good-enough -> top 5 / N, limit by time, best by height, name to best-effort
 3) test all synthesizer folder
 4) add comments & lint for all synthesizer folder
 5) add weighted metric (?)
@@ -19,7 +19,7 @@ Software synthesis with correction of strings and number literals to account for
 15) add input-output file examples
 16) automatic tests for benchmarks
 17) small utils: PI calculator (maybe benchmarks ?), program minimizer (counter example ?), game man vs. synthesizer
-18) main synthesizer
+18) - main synthesizer
 19) util tests
 20) system tests
 21) fix CI - tests, build, linter + requirement file
