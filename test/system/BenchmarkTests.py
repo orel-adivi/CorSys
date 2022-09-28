@@ -19,7 +19,7 @@ class BenchmarkTests(unittest.TestCase):
 
     def testNoisyExamples(self):
         os.system("python ..\\..\\Synthesizer.py -io ..\\..\\utils\\examples\\NoisyExamples.csv "
-                  "-s ..\\..\\utils\\grammars\\NoisyGrammar.csv -m NormalMetric -t height -mh 3 > .\\temp_out.txt")
+                  "-s ..\\..\\utils\\grammars\\NoisyGrammar.csv -m NormalMetric -t interrupt -mh 3 > .\\temp_out.txt")
         with open('.\\temp_out.txt', 'r') as file:
             content = file.read()
         os.remove('.\\temp_out.txt')
@@ -27,11 +27,11 @@ class BenchmarkTests(unittest.TestCase):
 
     def testListExamples(self):
         os.system("python ..\\..\\Synthesizer.py -io ..\\..\\utils\\examples\\ListExamples.csv "
-                  "-s ..\\..\\utils\\grammars\\ListGrammar.csv -m HammingMetric -t height -mh 3 > .\\temp_out.txt")
+                  "-s ..\\..\\utils\\grammars\\ListGrammar.csv -m DefaultMetric -t height -mh 3 > .\\temp_out.txt")
         with open('.\\temp_out.txt', 'r') as file:
             content = file.read()
         os.remove('.\\temp_out.txt')
-        self.assertEqual("sorted(x)[0:len(x):2]", content.strip())
+        self.assertEqual("sorted(x)[0:None:2]", content.strip())
 
     def testStringExamples(self):
         os.system("python ..\\..\\Synthesizer.py -io ..\\..\\utils\\examples\\StringExamples.csv "
