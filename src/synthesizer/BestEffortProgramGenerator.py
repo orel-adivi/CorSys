@@ -64,6 +64,22 @@ class BestEffortProgramGenerator(ProgramGenerator):
                 best_programs = sorted(best_programs, key=lambda prog: prog[1])[:programs]
         return [program[0] for program in best_programs]
 
+    def findBestEffortByHeightPrograms(self, assignments: list[dict], evaluations: list,
+                                       metric: Metric = DefaultMetric()):
+        best_programs = [None]
+        best_scores = [len(evaluations) + 1]
+        for program in self.enumerate(assignments=assignments):
+            if len(best_programs) < self._curr_height + 1:
+                best_programs += [None] * ((self._curr_height + 1) - len(best_programs))
+                best_scores = [len(evaluations) + 1] * ((self._curr_height + 1) - len(best_scores))
+            curr_score = BestEffortProgramGenerator.__get_distance(actual=program.results,
+                                                                   expected=evaluations,
+                                                                   metric=metric)
+            if curr_score < best_scores[-1]:
+                best_programs[-1] = program
+                best_scores[-1] = curr_score
+        return best_programs
+
     def findBestEffortPrioritizingHeightProgram(self, assignments: list[dict], evaluations: list, penalty: float = 0.75,
                                                 metric: Metric = DefaultMetric()):
         best_program = None
@@ -102,12 +118,13 @@ if __name__ == '__main__':
     outputs = list(map(lambda env: env['x'] + env['y'] + env['z'], inputs))
     outputs[-1] -= 1
     search_space1 = SearchSpaceReader.readCSV(pathlib.Path('../../utils/grammars/CsvGrammar.csv')).symbols
-    generator = BestEffortProgramGenerator(search_space1, 4)
+    generator = BestEffortProgramGenerator(search_space1, 3)
     # result = generator.findBestEffortAccuracyProgram(inputs, outputs, 0.2)
     # print(ast.unparse(result))
     # result = generator.findBestEffortPrograms(inputs, outputs)
-    # for res in result:
-    #     print(ast.unparse(res))
+    result = generator.findBestEffortByHeightPrograms(inputs, outputs)
+    for res in result:
+        print(ast.unparse(res))
     # result = generator.findBestEffortPrioritizingHeightProgram(inputs, outputs, 2)
-    result = generator.findBestEffortUntilInterruptProgram(inputs, outputs)
-    print(ast.unparse(result))
+    # result = generator.findBestEffortUntilInterruptProgram(inputs, outputs)
+    # print(ast.unparse(result))

@@ -16,7 +16,7 @@ Software synthesis with correction of strings and number literals to account for
 12) add input-output file examples
 13)     automatic tests for benchmarks
 14) small utils: PI calculator (maybe benchmarks ?), program minimizer (counter example ?), game man vs. synthesizer
-15)     main synthesizer
+15) main synthesizer - support tactics
 16) util tests
 17) system tests
 18) fix CI - tests, build, linter + requirement file
