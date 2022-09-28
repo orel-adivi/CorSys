@@ -12,7 +12,7 @@ from src.io.InputOutputPairs import InputOutputPairs
 class InputOutputPairReader(object):
 
     @staticmethod
-    def readCSV(root: Path):
+    def readCSV(root: Path) -> InputOutputPairs:
         with root.open() as file:
             file_content = list(csv.reader(file))
         variable_names = file_content[0]

@@ -9,8 +9,8 @@ import time
 import argparse
 
 from src.io.InputOutputPairReader import InputOutputPairReader
+from src.io.SearchSpaceReader import SearchSpaceReader
 
-from src.io.SearchSpace import SearchSpace
 from src.synthesizer.ProgramGenerator import ProgramGenerator
 
 
@@ -39,25 +39,19 @@ if __name__ == '__main__':
     input_output_pairs = InputOutputPairReader.readCSV(arguments.input_output_file)
     inputs = input_output_pairs.inputs
     outputs = input_output_pairs.outputs
+    search_space = SearchSpaceReader.readCSV(arguments.search_space_file).symbols
 
-
-
-
-
-    # inputs = [{'x': 6, 'y': 1, 'z': 9}, {'x': 2, 'y': 3, 'z': 4}]
-    # outputs = list(map(lambda env: env['x'] + env['y'] + env['z'], inputs))
-    search_space = SearchSpace.readGrammarFromFile('utils/grammars/IntegerGrammar.txt')
     generator = ProgramGenerator(search_space, 10)
     result = generator.findProgram(inputs, outputs)
     time.sleep(1)
     print(ast.unparse(result))
     print('')
 
-    outputs = list(map(lambda env: [4, 3], inputs))
-    search_space = SearchSpace.readGrammarFromFile('utils/grammars/ListGrammar.txt')
-    generator = ProgramGenerator(search_space, 10)
-    result = generator.findProgram(inputs, outputs)
-    time.sleep(0.1)
-    print(ast.unparse(result))
-    print('')
+    # outputs = list(map(lambda env: [4, 3], inputs))
+    # search_space = SearchSpace.readGrammarFromFile('utils/grammars/ListGrammar.txt')
+    # generator = ProgramGenerator(search_space, 10)
+    # result = generator.findProgram(inputs, outputs)
+    # time.sleep(0.1)
+    # print(ast.unparse(result))
+    # print('')
 
