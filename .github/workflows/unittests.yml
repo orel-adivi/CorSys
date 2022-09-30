@@ -1,5 +1,5 @@
-# Run all Benchmarks
-name: Run all Benchmarks - Testing
+# Run all Unittests
+name: Run all Unittests - Testing
 
 on:
   push:
@@ -32,4 +32,4 @@ jobs:
         python -m pip install -r requirements.txt
 
     - name: Run benchmarks
-      run: python RunAllBenchmarks.py
+      run: python RunAllUnittests.py
