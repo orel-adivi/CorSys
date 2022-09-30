@@ -11,7 +11,7 @@ from tests.synthesizer.AstNodesTests import AstNodesTests
 class MyTestCase(AstNodesTests, unittest.TestCase):
 
     def testSanityUnittests(self):
-        self.assertEqual(True, False)
+        self.assertEqual(True, True)
 
 
 if __name__ == '__main__':
