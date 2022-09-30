@@ -1,3 +1,8 @@
+#
+#   @file : build.yml
+#   @date : 30 September 2022
+#   @authors : Orel Adivi and Daniel Noor
+#
 # Sanity Checks
 name: Sanity Check - Build
 
