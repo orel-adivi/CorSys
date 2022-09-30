@@ -13,7 +13,7 @@ SYNTHESIZER = Path('Synthesizer.py')
 BENCHMARKS = Path('benchmarks')
 
 
-def run_test(grammar_path: Path, examples_path: Path, settings: dict[str]):
+def run_test(grammar_path: Path, examples_path: Path, settings: dict[str, str]):
     cmd = ["python", str(SYNTHESIZER)]
     cmd += ["-io", str(examples_path)]
     cmd += ["-s", str(grammar_path)]
