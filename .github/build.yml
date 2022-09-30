@@ -1,5 +1,5 @@
-# Run all Unittests
-name: Run all Unittests - Testing
+# Sanity Checks
+name: Sanity Check - Build
 
 on:
   push:
@@ -32,5 +32,5 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
 
-    - name: Run unittests
-      run: python RunAllTests.py
+    - name: Run sanity check
+      run: python Synthesizer.py -io ./utils/examples/SanityExamples.csv -s ./utils/grammars/SanityGrammar.txt
