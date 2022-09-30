@@ -8,7 +8,7 @@ Software synthesis with correction of strings and number literals to account for
 4) add weighted metric (?)
 5) test all metrics folder
 6) add comments & lint for all metrics folder
-7) search space reader - add functionality
+7) search space reader - add functionality + support txt
 8) input-output reader - add functionality
 9) test all io folder
 10) add comments & lint for all io folder
@@ -19,7 +19,7 @@ Software synthesis with correction of strings and number literals to account for
 15) main synthesizer - support tactics
 16) util tests
 17) system tests
-18) fix CI - tests, build, linter + requirement file
+18) fix CI - build, lint
 19) write README.md
 20) write webpage documentation
 21) write pdf file for documentation
