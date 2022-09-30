@@ -1,0 +1,10 @@
+(1) sanity, default + - * //
+(2) floats, default
+(4) strings, default
+(3) lists, default (+ optionally list comprehension)
+(5) floats, NormalMetric - numerical errors
+(6) integers, CalculationMetric - calculation mistakes
+(7) strings, LevenshteinMetric - typos
+(8) strings, KeyboardMetric - typos
+(9) strings, HomophoneMetric - typos
+(10) lists, WeightedMetric(VectorMetric - correlation? + HammingMetric) - mistakes in lists
