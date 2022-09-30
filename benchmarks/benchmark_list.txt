@@ -8,3 +8,5 @@
 (8) strings, KeyboardMetric - typos
 (9) strings, HomophoneMetric - typos
 (10) lists, WeightedMetric(VectorMetric - correlation? + HammingMetric) - mistakes in lists
+
++ manage "could not find"

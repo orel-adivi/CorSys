@@ -1,0 +1,10 @@
+Examples1,x + y + z
+Examples2,y + 1 + (1 - x)
+Examples3,-z
+Examples4,x * z + y * z
+Examples5,z // y
+metric,DefaultMetric
+tactic,match
+tactic-parameter,0
+max-height,3
+description,"This is a sanity benchmark, testing integer expression synthesis with the default metric."

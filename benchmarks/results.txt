@@ -1,0 +1,26 @@
+RUNNING ALL BENCHMARKS OF CorSys:
+
+======================================================================
+BENCHMARK: benchmark_1
+DESCRIPTION: This is a sanity benchmark, testing integer expression synthesis with the default metric.
+
+Running tests:
+----------------------------------------------------------------------
+Ran Examples1 successfully (in 0.9843742847442627 s):
+x + y + z
+----------------------------------------------------------------------
+Ran Examples2 successfully (in 0.9687728881835938 s):
+y + 1 + (1 - x)
+----------------------------------------------------------------------
+Ran Examples3 successfully (in 0.9531033039093018 s):
+-z
+----------------------------------------------------------------------
+Ran Examples4 successfully (in 0.9687492847442627 s):
+x * z + y * z
+----------------------------------------------------------------------
+Ran Examples5 successfully (in 0.9694714546203613 s):
+z // y
+======================================================================
+
+5 tests out of 5 tests were successful.
+ALL TESTS RAN SUCCESSFULLY.
