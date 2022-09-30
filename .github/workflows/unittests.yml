@@ -32,4 +32,4 @@ jobs:
         python -m pip install -r requirements.txt
 
     - name: Run benchmarks
-      run: python RunAllUnittests.py
+      run: python RunAllTests.py
