@@ -1,5 +1,5 @@
 # CodeQL
-name: 'Vulnerabilities Check (CodeQL) - Security'
+name: Vulnerabilities Check (CodeQL) - Security
 
 on:
   push:
