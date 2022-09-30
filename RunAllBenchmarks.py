@@ -76,7 +76,7 @@ def main():
         print('ALL TESTS RAN SUCCESSFULLY.')
     else:
         print(f'FAILED IN {run_counter - success_counter} TESTS.')
-    assert run_counter == success_counter
+    assert run_counter != success_counter
 
 
 if __name__ == '__main__':
