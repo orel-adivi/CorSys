@@ -1,0 +1,10 @@
+Examples1,sorted(y)[-1]
+Examples2,len(x) + -1
+Examples3,y[0] + x[-1]
+Examples4,x[None:None:-1] + y[None:None:-1]
+Examples5,sorted(x + y)
+metric,DefaultMetric
+tactic,match
+tactic-parameter,0
+max-height,3
+description,This benchmark tests string-related expression synthesis with the default metric.
