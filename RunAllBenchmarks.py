@@ -70,6 +70,8 @@ def main():
                 print(f'[NOT MATCH] Ran {examples_path.stem} and got a different output'
                       f' (in {end_time - start_time} s):')
                 print(output)
+            else:
+                assert False
     print('\n======================================================================')
     print(f'{success_counter} tests out of {run_counter} tests were successful.')
     if run_counter == success_counter:

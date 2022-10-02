@@ -1,0 +1,10 @@
+Examples1,x + y + z
+Examples2,y + 1.0 + (1.0 - x)
+Examples3,-(z / x)
+Examples4,x * z + y / z
+Examples5,z ** y
+metric,NormalMetric
+tactic,height
+tactic-parameter,1.0
+max-height,3
+description,"This is a numerical error benchmark, testing float expression synthesis with the normal metric."

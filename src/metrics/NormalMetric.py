@@ -5,6 +5,7 @@
 #
 from overrides import overrides
 import scipy.stats
+import numpy
 
 from src.metrics.Metric import Metric
 
@@ -14,6 +15,7 @@ class NormalMetric(Metric):
     @overrides
     def __init__(self):
         super().__init__()
+        numpy.seterr(all='raise')
 
     @overrides
     def intDistance(self, actual: int, expected: int) -> float:
@@ -21,8 +23,11 @@ class NormalMetric(Metric):
 
     @overrides
     def floatDistance(self, actual: float, expected: float, EPS: float = 1e-3, STD_DEV: float = 1.0) -> float:
-        res = scipy.stats.norm.pdf(x=actual, loc=expected, scale=STD_DEV)
-        max_val = scipy.stats.norm.pdf(x=expected, loc=expected, scale=STD_DEV)
+        try:
+            res = scipy.stats.norm.pdf(x=actual, loc=expected, scale=STD_DEV)
+            max_val = scipy.stats.norm.pdf(x=expected, loc=expected, scale=STD_DEV)
+        except FloatingPointError:
+            return 1.0
         return (max_val - res) / max_val
 
 
