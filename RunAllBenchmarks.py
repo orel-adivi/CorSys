@@ -6,6 +6,7 @@
 import csv
 import os
 import subprocess
+import sys
 import time
 from pathlib import Path
 
@@ -35,11 +36,15 @@ def run_test(grammar_path: Path, examples_path: Path, settings: dict[str, str]):
 
 def main():
     run_counter, success_counter = 0, 0
-    print('RUNNING ALL BENCHMARKS OF CorSys:')
-    for benchmark in sorted([benchmark for benchmark
-                             in next(os.walk(str(BENCHMARKS)))[1]
-                             if 'benchmark' in benchmark],
-                            key=lambda dirname: int(dirname.split('benchmark_')[1])):
+    if len(sys.argv) > 1:
+        print('RUNNING SELECTED BENCHMARKS OF CorSys:')
+        benchmarks = sys.argv[1:]
+    else:
+        print('RUNNING ALL BENCHMARKS OF CorSys:')
+        benchmarks = [benchmark for benchmark
+                      in next(os.walk(str(BENCHMARKS)))[1]
+                      if 'benchmark' in benchmark]
+    for benchmark in sorted(benchmarks, key=lambda dirname: int(dirname.split('benchmark_')[1])):
         settings = {}
         grammar_path = Path(str(BENCHMARKS) + '/' + benchmark + '/Grammar.csv')
         with Path(str(BENCHMARKS) + '/' + benchmark + '/Settings.csv').open() as file:
