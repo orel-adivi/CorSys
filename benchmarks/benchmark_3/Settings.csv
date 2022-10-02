@@ -7,4 +7,4 @@ metric,DefaultMetric
 tactic,match
 tactic-parameter,0
 max-height,3
-description,This benchmark tests string-related expression synthesis with the default metric.
+description,"This benchmark tests string-related expression synthesis with the default metric."

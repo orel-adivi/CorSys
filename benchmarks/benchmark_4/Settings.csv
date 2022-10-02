@@ -1,0 +1,10 @@
+Examples1,sorted(x) + [0]
+Examples2,len(x + y)
+Examples3,x[None:None:-1]
+Examples4,x[None:None:2]
+Examples5,x[2:None:None] + y[-1:None:None]
+metric,DefaultMetric
+tactic,match
+tactic-parameter,0
+max-height,3
+description,"This benchmark tests list-related expression synthesis with the default metric."
