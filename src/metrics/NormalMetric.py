@@ -4,8 +4,8 @@
 #   @authors : Orel Adivi and Daniel Noor
 #
 from overrides import overrides
+import numpy as np
 import scipy.stats
-import numpy
 
 from src.metrics.Metric import Metric
 
@@ -15,7 +15,7 @@ class NormalMetric(Metric):
     @overrides
     def __init__(self):
         super().__init__()
-        numpy.seterr(all='raise')
+        np.seterr(all='raise')
 
     @overrides
     def intDistance(self, actual: int, expected: int) -> float:

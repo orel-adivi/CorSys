@@ -50,9 +50,11 @@ def main():
         with Path(str(BENCHMARKS) + '/' + benchmark + '/Settings.csv').open() as file:
             for row in csv.reader(file):
                 settings[row[0]] = row[1]
-        print('\n======================================================================')
+        print('')
+        print('======================================================================')
         print(f'BENCHMARK: {benchmark}')
-        print(f'DESCRIPTION: {settings["description"]}\n')
+        print(f'DESCRIPTION: {settings["description"]}')
+        print('')
         print('Running tests:')
         for examples in sorted([examples for examples
                                 in next(os.walk(str(BENCHMARKS) + '/' + benchmark))[2]
@@ -78,7 +80,8 @@ def main():
                 print(f'[EXPECTED: {settings[examples_path.stem]} ]')
             else:
                 assert False
-    print('\n======================================================================')
+    print('')
+    print('======================================================================')
     print(f'{success_counter} tests out of {run_counter} tests were successful.')
     if run_counter == success_counter:
         print('ALL TESTS RAN SUCCESSFULLY.')

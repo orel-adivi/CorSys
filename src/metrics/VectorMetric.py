@@ -4,7 +4,7 @@
 #   @authors : Orel Adivi and Daniel Noor
 #
 from overrides import overrides
-
+import numpy as np
 import scipy
 
 from src.metrics.Metric import Metric
@@ -27,6 +27,7 @@ class VectorMetric(Metric):
     @overrides
     def __init__(self, dist_func: str):
         super().__init__()
+        np.seterr(all='raise')
         func, normalize = VectorMetric.METRIC_FUNCTIONS[dist_func]
         self.__func = func
         self.__normalize = normalize
@@ -60,7 +61,10 @@ class VectorMetric(Metric):
     def listDistance(self, actual: list, expected: list) -> float:
         min_length = min(len(actual), len(expected))
         max_length = max(len(actual), len(expected))
-        shared_dist = (self.__func(actual[0:min_length], expected[0:min_length]) * min_length)
+        if min_length > 0:
+            shared_dist = (self.__func(actual[0:min_length], expected[0:min_length]) * min_length)
+        else:
+            shared_dist = 0
         if not self.__normalize:
             return shared_dist + (max_length - min_length)
         return (shared_dist + (max_length - min_length)) / max_length

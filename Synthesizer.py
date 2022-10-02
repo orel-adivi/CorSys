@@ -108,7 +108,8 @@ def main() -> None:
         print(ast.unparse(program))
 
     if arguments.statistics:
-        print(f'\nThe synthesizer searched {generator.program_counter} programs '
+        print('')
+        print(f'The synthesizer searched {generator.program_counter} programs '
               f'up to height #{generator.current_height}.')
 
 
