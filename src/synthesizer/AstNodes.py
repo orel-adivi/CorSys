@@ -79,6 +79,13 @@ def generateMultiplicationNode(children: list, assignments: list[dict]):
 
 def generateDivisionNode(children: list, assignments: list[dict]):
     return __generateBinaryOperationNode(children=children,
+                                         operation=ast.Div(),
+                                         results=list(map(lambda inp: inp[0] / inp[1],
+                                                          zip(children[0].results, children[1].results))))
+
+
+def generateFloorDivisionNode(children: list, assignments: list[dict]):
+    return __generateBinaryOperationNode(children=children,
                                          operation=ast.FloorDiv(),
                                          results=list(map(lambda inp: inp[0] // inp[1],
                                                           zip(children[0].results, children[1].results))))

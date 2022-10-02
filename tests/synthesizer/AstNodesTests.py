@@ -71,7 +71,7 @@ class AstNodesTests(unittest.TestCase):
             left_node = generateLiteralNode(left, [], [{'x': 0}])
             right_name = ''.join(random.choice(string.ascii_letters) for _ in range(random.randint(1, 100)))
             right_node = generateVariableNode(right_name, [], [{'x': 0, right_name: right}])
-            node = generateDivisionNode([left_node, right_node], [{'x': 0, right_name: right}])
+            node = generateFloorDivisionNode([left_node, right_node], [{'x': 0, right_name: right}])
             evaluated = node.results[0]
             self.assertEqual(evaluated, left // right)
 
