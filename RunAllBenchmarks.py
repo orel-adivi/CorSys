@@ -35,7 +35,7 @@ def run_test(grammar_path: Path, examples_path: Path, settings: dict[str, str]):
 
 def main():
     run_counter, success_counter = 0, 0
-    print('RUNNING ALL BENCHMARKS OF CorSys:\n')
+    print('RUNNING ALL BENCHMARKS OF CorSys:')
     for benchmark in sorted([benchmark for benchmark
                              in next(os.walk(str(BENCHMARKS)))[1]
                              if 'benchmark' in benchmark],
@@ -45,7 +45,7 @@ def main():
         with Path(str(BENCHMARKS) + '/' + benchmark + '/Settings.csv').open() as file:
             for row in csv.reader(file):
                 settings[row[0]] = row[1]
-        print('======================================================================')
+        print('\n======================================================================')
         print(f'BENCHMARK: {benchmark}')
         print(f'DESCRIPTION: {settings["description"]}\n')
         print('Running tests:')
@@ -70,7 +70,7 @@ def main():
                 print(f'[NOT MATCH] Ran {examples_path.stem} and got a different output'
                       f' (in {end_time - start_time} s):')
                 print(output)
-    print('======================================================================\n')
+    print('\n======================================================================')
     print(f'{success_counter} tests out of {run_counter} tests were successful.')
     if run_counter == success_counter:
         print('ALL TESTS RAN SUCCESSFULLY.')

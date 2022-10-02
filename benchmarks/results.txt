@@ -6,21 +6,63 @@ DESCRIPTION: This is a sanity benchmark, testing integer expression synthesis wi
 
 Running tests:
 ----------------------------------------------------------------------
-Ran Examples1 successfully (in 0.9843742847442627 s):
+Ran Examples1 successfully (in 1.0523359775543213 s):
 x + y + z
 ----------------------------------------------------------------------
-Ran Examples2 successfully (in 0.9687728881835938 s):
+Ran Examples2 successfully (in 1.00933837890625 s):
 y + 1 + (1 - x)
 ----------------------------------------------------------------------
-Ran Examples3 successfully (in 0.9531033039093018 s):
+Ran Examples3 successfully (in 1.0133826732635498 s):
 -z
 ----------------------------------------------------------------------
-Ran Examples4 successfully (in 0.9687492847442627 s):
+Ran Examples4 successfully (in 1.1678447723388672 s):
 x * z + y * z
 ----------------------------------------------------------------------
-Ran Examples5 successfully (in 0.9694714546203613 s):
+Ran Examples5 successfully (in 1.1585159301757812 s):
 z // y
-======================================================================
 
-5 tests out of 5 tests were successful.
+======================================================================
+BENCHMARK: benchmark_2
+DESCRIPTION: This benchmark tests float expression synthesis with the default metric.
+
+Running tests:
+----------------------------------------------------------------------
+Ran Examples1 successfully (in 1.2820074558258057 s):
+x + y + z
+----------------------------------------------------------------------
+Ran Examples2 successfully (in 1.242074728012085 s):
+y + 1 + (1 - x)
+----------------------------------------------------------------------
+Ran Examples3 successfully (in 1.1458592414855957 s):
+-(z / x)
+----------------------------------------------------------------------
+Ran Examples4 successfully (in 1.1927587985992432 s):
+x * z + y / z
+----------------------------------------------------------------------
+Ran Examples5 successfully (in 1.0521228313446045 s):
+z ** y
+
+======================================================================
+BENCHMARK: benchmark_3
+DESCRIPTION: This benchmark tests string-related expression synthesis with the default metric.
+
+Running tests:
+----------------------------------------------------------------------
+Ran Examples1 successfully (in 1.20414400100708 s):
+sorted(y)[-1]
+----------------------------------------------------------------------
+Ran Examples2 successfully (in 1.1284825801849365 s):
+len(x) + -1
+----------------------------------------------------------------------
+Ran Examples3 successfully (in 1.0409302711486816 s):
+y[0] + x[-1]
+----------------------------------------------------------------------
+Ran Examples4 successfully (in 1.1053059101104736 s):
+x[None:None:-1] + y[None:None:-1]
+----------------------------------------------------------------------
+Ran Examples5 successfully (in 1.034003496170044 s):
+sorted(x + y)
+
+======================================================================
+15 tests out of 15 tests were successful.
 ALL TESTS RAN SUCCESSFULLY.

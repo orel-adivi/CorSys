@@ -1,5 +1,5 @@
 Examples1,x + y + z
-Examples2,y + 1.0 + (1.0 - x)
+Examples2,y + 1 + (1 - x)
 Examples3,-(z / x)
 Examples4,x * z + y / z
 Examples5,z ** y
@@ -7,4 +7,4 @@ metric,DefaultMetric
 tactic,match
 tactic-parameter,0
 max-height,3
-description,"This is a benchmark tests float expression synthesis with the default metric."
+description,"This benchmark tests float expression synthesis with the default metric."
