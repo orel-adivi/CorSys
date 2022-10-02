@@ -13,7 +13,16 @@ class ProgramGenerator(object):
     def __init__(self, search_space: list[list], max_height: int):
         self._search_space = search_space
         self._max_height = max_height
-        self._curr_height = 0
+        self._current_height = 0
+        self._program_counter = 0
+
+    @property
+    def current_height(self) -> int:
+        return self._current_height
+
+    @property
+    def program_counter(self) -> int:
+        return self._program_counter
 
     def enumerate(self, assignments: list[dict]):
         observational_equivalence = ObservationalEquivalenceManager()
@@ -22,8 +31,8 @@ class ProgramGenerator(object):
                 observational_equivalence.addEquivalentClass(program)
                 yield program
         observational_equivalence.moveNextHeightPrograms()
-        for height in range(1, self._max_height):
-            self._curr_height = height
+        for height in range(1, self._max_height + 1):
+            self._current_height = height
             for arity, functions in zip(range(1, len(self._search_space) + 1), self._search_space[1:]):
                 for func in functions:
                     last_height_programs = observational_equivalence.getLastHeightPrograms()
@@ -35,6 +44,7 @@ class ProgramGenerator(object):
                     for children in children_list:
                         try:
                             program = func(children=children, assignments=assignments)
+                            self._program_counter += 1
                             if not observational_equivalence.isObservationallyEquivalent(program):
                                 observational_equivalence.addEquivalentClass(program)
                                 yield program

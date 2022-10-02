@@ -6,5 +6,5 @@ Examples5,z // y
 metric,DefaultMetric
 tactic,match
 tactic-parameter,0
-max-height,3
-description,"This is a sanity benchmark, testing integer expression synthesis with the default metric."
+max-height,2
+description,"This is a sanity benchmark, testing integer expression synthesis with DefaultMetric."

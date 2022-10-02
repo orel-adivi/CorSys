@@ -17,8 +17,10 @@ class CalculationMetric(Metric):
     @overrides
     def intDistance(self, actual: int, expected: int, penalty_off_by_one: float = 0.25,
                     penalty_units: float = 0.5) -> float:
-        actual_list = list(str(actual))
-        expected_list = list(str(expected))
+        if actual * expected < 0:
+            return 1.0
+        actual_list = list(str(abs(actual)))
+        expected_list = list(str(abs(expected)))
         max_len = max(len(actual_list), len(expected_list))
         actual_list_padded = [0] * (max_len - len(actual_list)) + actual_list
         expected_list_padded = [0] * (max_len - len(expected_list)) + expected_list

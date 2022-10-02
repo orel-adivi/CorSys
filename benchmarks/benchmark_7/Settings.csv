@@ -1,0 +1,10 @@
+Examples1,sorted(y)[-1]
+Examples2,x + y
+Examples3,y[0] + x[-1]
+Examples4,x[None:None:-1] + y[None:None:-1]
+Examples5,x[None:None:2] + y[None:None:-1]
+metric,LevenshteinMetric
+metric-parameter,False
+tactic,height
+max-height,2
+description,"This is a typo benchmark, testing string expression synthesis with LevenshteinMetric."

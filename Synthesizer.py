@@ -69,6 +69,8 @@ def main() -> None:
                            help='the parameter for the tactic', dest='tactic_parameter')
     cl_parser.add_argument('-mh', '--max-height', action='store', type=int, default=5,
                            help='the max height for the synthesizer to search (default = 5)', dest='max_height')
+    cl_parser.add_argument('--statistics', action='store_const', const=True, default=False,
+                           help='whether to present statistics', dest='statistics')
     arguments = cl_parser.parse_args()
 
     input_output_pairs = InputOutputPairReader.readCSV(arguments.input_output_file)
@@ -104,6 +106,10 @@ def main() -> None:
         result = [result]
     for program in result:
         print(ast.unparse(program))
+
+    if arguments.statistics:
+        print(f'\nThe synthesizer searched {generator.program_counter} programs '
+              f'up to height #{generator.current_height}.')
 
 
 if __name__ == '__main__':

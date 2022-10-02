@@ -3,7 +3,6 @@
 #   @date : 28 September 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
-import time
 import pathlib
 
 from src.synthesizer.ProgramGenerator import ProgramGenerator
@@ -69,9 +68,9 @@ class BestEffortProgramGenerator(ProgramGenerator):
         best_programs = [None]
         best_scores = [len(evaluations) + 1]
         for program in self.enumerate(assignments=assignments):
-            if len(best_programs) < self._curr_height + 1:
-                best_programs += [None] * ((self._curr_height + 1) - len(best_programs))
-                best_scores = [len(evaluations) + 1] * ((self._curr_height + 1) - len(best_scores))
+            if len(best_programs) < self._current_height + 1:
+                best_programs += [None] * ((self._current_height + 1) - len(best_programs))
+                best_scores = [len(evaluations) + 1] * ((self._current_height + 1) - len(best_scores))
             curr_score = BestEffortProgramGenerator.__get_distance(actual=program.results,
                                                                    expected=evaluations,
                                                                    metric=metric)
@@ -88,7 +87,7 @@ class BestEffortProgramGenerator(ProgramGenerator):
             curr_score = BestEffortProgramGenerator.__get_distance(actual=program.results,
                                                                    expected=evaluations,
                                                                    metric=metric)
-            curr_score *= penalty ** self._curr_height
+            curr_score *= penalty ** self._current_height
             if curr_score < best_score:
                 best_program = program
                 best_score = curr_score

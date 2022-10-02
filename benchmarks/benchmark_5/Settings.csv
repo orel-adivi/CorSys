@@ -4,7 +4,7 @@ Examples3,-(z / x)
 Examples4,x * z + y / z
 Examples5,z ** y
 metric,NormalMetric
+metric-parameter,1.0
 tactic,height
-tactic-parameter,1.0
-max-height,3
-description,"This is a numerical error benchmark, testing float expression synthesis with the normal metric."
+max-height,2
+description,"This is a numerical error benchmark, testing float expression synthesis with NormalMetric."

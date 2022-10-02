@@ -1,0 +1,10 @@
+Examples1,x + y + z
+Examples2,y + 1 + (1 - x)
+Examples3,-z
+Examples4,x * z + y * z
+Examples5,z // y
+metric,CalculationMetric
+metric-parameter,filename
+tactic,height
+max-height,2
+description,"This is a calculation error benchmark, testing integer expression synthesis with CalculationMetric."

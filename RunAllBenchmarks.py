@@ -70,6 +70,7 @@ def main():
                 print(f'[NOT MATCH] Ran {examples_path.stem} and got a different output'
                       f' (in {end_time - start_time} s):')
                 print(output)
+                print(f'[EXPECTED: {settings[examples_path.stem]} ]')
             else:
                 assert False
     print('\n======================================================================')

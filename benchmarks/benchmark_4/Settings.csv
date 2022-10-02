@@ -6,5 +6,5 @@ Examples5,x[2:None:None] + y[-1:None:None]
 metric,DefaultMetric
 tactic,match
 tactic-parameter,0
-max-height,3
-description,"This benchmark tests list-related expression synthesis with the default metric."
+max-height,2
+description,"This benchmark tests list-related expression synthesis with DefaultMetric."
