@@ -6,6 +6,7 @@
 from overrides import overrides
 import numpy as np
 import scipy
+import warnings
 
 from src.metrics.Metric import Metric
 
@@ -62,7 +63,9 @@ class VectorMetric(Metric):
         min_length = min(len(actual), len(expected))
         max_length = max(len(actual), len(expected))
         if min_length > 0:
-            shared_dist = (self.__func(actual[0:min_length], expected[0:min_length]) * min_length)
+            with warnings.catch_warnings():
+                warnings.simplefilter(action='ignore', category=FutureWarning)
+                shared_dist = min_length * self.__func(actual[0:min_length], expected[0:min_length])
         else:
             shared_dist = 0
         if not self.__normalize:

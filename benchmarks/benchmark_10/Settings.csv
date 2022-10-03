@@ -1,0 +1,9 @@
+Examples1,sorted(x) + [0]
+Examples2,y + x
+Examples3,x[None:None:-1]
+Examples4,x[None:None:2]
+Examples5,x[1:None:None] + y[-1:None:None]
+metric,HammingMetric
+tactic,height
+max-height,2
+description,"This is a list-element typo benchmark, testing list expression synthesis with HammingMetric."
