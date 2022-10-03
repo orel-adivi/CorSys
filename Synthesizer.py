@@ -65,7 +65,7 @@ def main() -> None:
                            choices=['match', 'accuracy', 'height', 'top', 'best_by_height', 'penalized_height',
                                     'interrupt'],
                            help='the tactic for the synthesizer (default = \'height\')', dest='tactic')
-    cl_parser.add_argument('-tp', '--tactic-parameter', action='store', type=str, default='',
+    cl_parser.add_argument('-tp', '--tactic-parameter', action='store', type=str, default='0',
                            help='the parameter for the tactic', dest='tactic_parameter')
     cl_parser.add_argument('-mh', '--max-height', action='store', type=int, default=2,
                            help='the max height for the synthesizer to search (default = 2)', dest='max_height')
