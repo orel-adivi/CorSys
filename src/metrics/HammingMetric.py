@@ -17,3 +17,9 @@ class HammingMetric(VectorMetric):
     @overrides
     def strDistance(self, actual: str, expected: str) -> float:
         return self.listDistance(actual=list(actual), expected=list(expected))
+
+
+if __name__ == '__main__':
+    metric = HammingMetric()
+    print(metric.strDistance('abc', 'abd'))
+    print(metric.listDistance(['a', 'b', 'c'], ['a', 'bb', 'c']))
