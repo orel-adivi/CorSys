@@ -22,3 +22,6 @@
 20) write webpage documentation
 21) write pdf file for documentation
 22) fix photos
+
+pypy
+dependencies
