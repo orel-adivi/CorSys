@@ -51,7 +51,7 @@ class ProgramGenerator(object):
         """
         return self._program_counter
 
-    def enumerate(self, assignments: list[dict]):
+    def enumerate(self, assignments: list[dict]):   # noqa: C901
         """
         Generate programs contained in the generator's search space, from programs of height 1 up to the maximal height
         given at initialization.

@@ -5,6 +5,7 @@
 #
 import ast
 from typing import Callable
+from itertools import chain
 
 from src.objects.Expression import Expression
 
@@ -271,7 +272,7 @@ class ExpressionGenerator(object):
         @staticmethod
         def generateIndexCallNode(children: list[Expression], assignments: list[dict]):
             return ExpressionGenerator.Functions.__generateFunctionCallNode(
-                func=lambda: ast.Attribute(value=children[0], attr='index', ctx=ast.Load()),
+                func=lambda: ast.Attribute(value=children[0].node, attr='index', ctx=ast.Load()),
                 args=lambda: [children[1].node],
                 keywords=lambda: [],
                 value_function=lambda: [children[0].value[i].index(children[1].value[i])
@@ -302,23 +303,100 @@ class ExpressionGenerator(object):
                 value_function=lambda: [list(iterable_node.value[i]) for i in range(len(assignments))]
             )
 
-        # todo
-        """
-        count
-        capitlize
-        casefold
-        join
-        lower
-        title
-        upper
-        abs
-        """
+        @staticmethod
+        def generateCountCallNode(children: list[Expression], assignments: list[dict]):
+            return ExpressionGenerator.Functions.__generateFunctionCallNode(
+                func=lambda: ast.Attribute(value=children[0].node, attr='count', ctx=ast.Load()),
+                args=lambda: [children[1].node],
+                keywords=lambda: [],
+                value_function=lambda: [children[0].value[i].count(children[1].value[i])
+                                        for i in range(len(assignments))]
+            )
 
-    class General(object):
-        pass
+        @staticmethod
+        def generateJoinCallNode(children: list[Expression], assignments: list[dict]):
+            return ExpressionGenerator.Functions.__generateFunctionCallNode(
+                func=lambda: ast.Attribute(value=children[0].node, attr='join', ctx=ast.Load()),
+                args=lambda: [children[1].node],
+                keywords=lambda: [],
+                value_function=lambda: [children[0].value[i].join(children[1].value[i])
+                                        for i in range(len(assignments))]
+            )
 
+        @staticmethod
+        def generateCapitalizeCallNode(children: list[Expression], assignments: list[dict]):
+            return ExpressionGenerator.Functions.__generateFunctionCallNode(
+                func=lambda: ast.Attribute(value=children[0].node, attr='capitalize', ctx=ast.Load()),
+                args=lambda: [],
+                keywords=lambda: [],
+                value_function=lambda: [children[0].value[i].capitalize()
+                                        for i in range(len(assignments))]
+            )
 
-if __name__ == "__main__":
-    exp = ExpressionGenerator.Terminal.generateLiteralNode(1, [], [{'x': 1}])
-    exp1 = ExpressionGenerator.UnaryOperations.generateInverseNode([exp], [{'x': 1}])
-    print(exp1)
+        @staticmethod
+        def generateCasefoldCallNode(children: list[Expression], assignments: list[dict]):
+            return ExpressionGenerator.Functions.__generateFunctionCallNode(
+                func=lambda: ast.Attribute(value=children[0].node, attr='casefold', ctx=ast.Load()),
+                args=lambda: [],
+                keywords=lambda: [],
+                value_function=lambda: [children[0].value[i].casefold()
+                                        for i in range(len(assignments))]
+            )
+
+        @staticmethod
+        def generateLowerCallNode(children: list[Expression], assignments: list[dict]):
+            return ExpressionGenerator.Functions.__generateFunctionCallNode(
+                func=lambda: ast.Attribute(value=children[0].node, attr='lower', ctx=ast.Load()),
+                args=lambda: [],
+                keywords=lambda: [],
+                value_function=lambda: [children[0].value[i].lower()
+                                        for i in range(len(assignments))]
+            )
+
+        @staticmethod
+        def generateTitleCallNode(children: list[Expression], assignments: list[dict]):
+            return ExpressionGenerator.Functions.__generateFunctionCallNode(
+                func=lambda: ast.Attribute(value=children[0].node, attr='title', ctx=ast.Load()),
+                args=lambda: [],
+                keywords=lambda: [],
+                value_function=lambda: [children[0].value[i].title()
+                                        for i in range(len(assignments))]
+            )
+
+        @staticmethod
+        def generateUpperCallNode(children: list[Expression], assignments: list[dict]):
+            return ExpressionGenerator.Functions.__generateFunctionCallNode(
+                func=lambda: ast.Attribute(value=children[0].node, attr='upper', ctx=ast.Load()),
+                args=lambda: [],
+                keywords=lambda: [],
+                value_function=lambda: [children[0].value[i].upper()
+                                        for i in range(len(assignments))]
+            )
+
+        @staticmethod
+        def generateAbsCallNode(children: list[Expression], assignments: list[dict]):
+            return ExpressionGenerator.Functions.__generateFunctionCallNode(
+                func=lambda: ast.Name(id='abs', ctx=ast.Load()),
+                args=lambda: [child.node for child in children],
+                keywords=lambda: [],
+                value_function=lambda: [abs(children[0].value[i]) for i in range(len(assignments))]
+            )
+
+    class Generic(object):
+
+        @staticmethod
+        def __generateAstForGenericNode(children: list[Expression], expr: str):
+            for i in range(len(children)):
+                expr = expr.replace(f'EXP{i + 1}', ast.unparse(children[i].node))
+            return ast.parse(expr)
+
+        @staticmethod
+        def generateGenericNode(children: list[Expression], assignments: list[dict], expr: str):
+            return Expression(
+                node_function=lambda: ExpressionGenerator.Generic.__generateAstForGenericNode(children, expr),
+                value_function=lambda:
+                    [eval(expr, dict(chain.from_iterable(
+                        d.items() for d in (assignments[i],
+                                            {f'EXP{j + 1}': children[j].value[i] for j in range(len(children))}))))
+                     for i in range(len(assignments))]
+            )

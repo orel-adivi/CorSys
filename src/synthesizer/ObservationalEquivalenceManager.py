@@ -58,7 +58,7 @@ class ObservationalEquivalenceManager(object):
         :param program: A program representing the new equivalence class.
         :return: None.
         """
-        assert(not self.isObservationallyEquivalent(program))
+        assert not self.isObservationallyEquivalent(program)
         self._equivalence_classes[ObservationalEquivalenceManager.__generateKey(program.value)] = program
         self._program_stack[-1].append(program)
 
