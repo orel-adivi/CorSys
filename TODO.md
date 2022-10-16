@@ -1,27 +1,23 @@
 # Todo:
 1) AstNodes.py - add functionality (operators + eval)
+2) update operation dictionary
+3) add grammar file examples
+4) add input-output file examples
+5) fix CI - build
 
-2) add weighted metric (?)
-3) search space reader - add functionality + support txt
-4) input-output reader - add functionality
-5) metric reader
-6) add grammar file examples
-7) add input-output file examples
-8) update benchmarks (informative examples) + eval + weighted metric + grammar files
-9) system tests
-10) write README.md
+6) search space reader - add functionality + support txt
+7) metric reader
+8) add weighted metric (?)
+9) update benchmarks (informative examples) + eval + weighted metric + grammar files
 
-11) test all synthesizer folder
-12) add comments & lint for all synthesizer folder
-13) test all metrics folder
-14) add comments & lint for all metrics folder
+10) fix photos
+11) write README.md + update webpage
+12) write final presentation
+
+13) test all synthesizer folder
+14) test all metrics folder
 15) test all io folder
-16) add comments & lint for all io folder
-17) small utils: PI calculator (maybe benchmarks ?), program minimizer (counter example ?), game man vs. synthesizer
-18) util tests
-19) fix CI - build, lint
-20) write webpage documentation
-21) write pdf file for documentation
-22) fix photos
+16) test all object folder
+17) add comments & lint for all
 
 pypy
