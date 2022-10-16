@@ -92,7 +92,8 @@ class CalculationMetric(Metric):
         actual_list_whole_padded = ['0'] * (max_len_whole - len(actual_list_whole)) + actual_list_whole
         expected_list_whole_padded = ['0'] * (max_len_whole - len(expected_list_whole)) + expected_list_whole
         actual_list_fraction_padded = actual_list_fraction + ['0'] * (max_len_fraction - len(actual_list_fraction))
-        expected_list_fraction_padded = expected_list_fraction + ['0'] * (max_len_fraction - len(expected_list_fraction))
+        expected_list_fraction_padded = expected_list_fraction + ['0'] * (max_len_fraction -
+                                                                          len(expected_list_fraction))
         actual_equivalent_int = int(''.join(actual_list_whole_padded) + ''.join(actual_list_fraction_padded))
         expected_equivalent_int = int(''.join(expected_list_whole_padded) + ''.join(expected_list_fraction_padded))
         return self.intDistance(actual=actual_equivalent_int, expected=expected_equivalent_int,

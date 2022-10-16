@@ -46,8 +46,8 @@ class KeyboardMetric(Metric):
         :param expected: Second letter.
         :return: The relative keyboard distance between actual and expected.
         """
-        return abs(KeyboardMetric.LETTER_MAPPING[actual] - KeyboardMetric.LETTER_MAPPING[expected]) * \
-               KeyboardMetric.SCALE_PARAMETER
+        return abs(KeyboardMetric.LETTER_MAPPING[actual] -
+                   KeyboardMetric.LETTER_MAPPING[expected]) * KeyboardMetric.SCALE_PARAMETER
 
     @overrides
     def __init__(self) -> None:

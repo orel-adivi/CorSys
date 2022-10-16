@@ -1,5 +1,6 @@
 # Todo:
-1) AstNodes.py - add functionality (operators + eval) & change design
+1) AstNodes.py - add functionality (operators + eval)
+
 2) add weighted metric (?)
 3) search space reader - add functionality + support txt
 4) input-output reader - add functionality

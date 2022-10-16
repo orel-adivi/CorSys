@@ -105,6 +105,7 @@ class LevenshteinMetric(Metric):
 
         :param actual: Float value returned by the synthesized program.
         :param expected: Float value received as the desired output.
+        :param EPS: This value is ignored.
         :return: The distance between the floats actual and expected according to the Levenshtein metric.
         """
         return self.strDistance(actual=str(actual), expected=str(expected))

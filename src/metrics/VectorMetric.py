@@ -76,6 +76,7 @@ class VectorMetric(Metric):
 
         :param actual: Float returned by the synthesized program.
         :param expected: Float received as the desired output.
+        :param EPS: This value is ignored.
         :return: The distance between the floats actual and expected according to the chosen vector metric.
         """
         actual_list_whole = list(str(actual).split('.')[0])
@@ -87,8 +88,8 @@ class VectorMetric(Metric):
         expected_list_whole_padded = ['0'] * (max_len_whole - len(expected_list_whole)) + expected_list_whole
         max_len_fraction = max(len(actual_list_fraction), len(expected_list_fraction))
         actual_list_fraction_padded = actual_list_fraction + ['0'] * (max_len_fraction - len(actual_list_fraction))
-        expected_list_fraction_padded = expected_list_fraction + \
-                                        ['0'] * (max_len_fraction - len(expected_list_fraction))
+        expected_list_fraction_padded = expected_list_fraction + ['0'] * \
+            (max_len_fraction - len(expected_list_fraction))
         return self.listDistance(actual=actual_list_whole_padded + actual_list_fraction_padded,
                                  expected=expected_list_whole_padded + expected_list_fraction_padded)
 
