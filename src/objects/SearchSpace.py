@@ -5,7 +5,7 @@
 #
 from functools import partial
 
-from src.synthesizer.ExpressionGenerator import *  # todo
+from src.synthesizer.ExpressionGenerator import ExpressionGenerator
 
 
 class SearchSpace(object):
@@ -24,30 +24,30 @@ class SearchSpace(object):
     OPERATION_DICT = [
         {},
         {
-            '-': generateInverseNode,
-            '[]': generateListNode,
-            'len': generateLenCallNode,
-            'sorted': generateSortedListNode,
-            'reversed': generateReversedListNode
+            '-': ExpressionGenerator.UnaryOperations.generateInverseNode,
+            '[]': ExpressionGenerator.Subscripting.generateListNode,
+            'len': ExpressionGenerator.Functions.generateLenCallNode,
+            'sorted': ExpressionGenerator.Functions.generateSortedListNode,
+            'reversed': ExpressionGenerator.Functions.generateReversedListNode
         },
         {
-            '+': generateAdditionNode,
-            '-': generateSubtractionNode,
-            '*': generateMultiplicationNode,
-            '/': generateDivisionNode,
-            '//': generateFloorDivisionNode,
-            '%': generateModuloNode,
-            '**': generatePowerNode,
-            '[]': generateListNode,
-            'subscript': generateSubscriptListNode,
-            'index': generateIndexCallNode,
+            '+': ExpressionGenerator.BinaryOperations.generateAdditionNode,
+            '-': ExpressionGenerator.BinaryOperations.generateSubtractionNode,
+            '*': ExpressionGenerator.BinaryOperations.generateMultiplicationNode,
+            '/': ExpressionGenerator.BinaryOperations.generateDivisionNode,
+            '//': ExpressionGenerator.BinaryOperations.generateFloorDivisionNode,
+            '%': ExpressionGenerator.BinaryOperations.generateModuloNode,
+            '**': ExpressionGenerator.BinaryOperations.generatePowerNode,
+            '[]': ExpressionGenerator.Subscripting.generateListNode,
+            'subscript': ExpressionGenerator.Subscripting.generateSubscriptListNode,
+            'index': ExpressionGenerator.Functions.generateIndexCallNode,
         },
         {
-            '[]': generateListNode
+            '[]': ExpressionGenerator.Subscripting.generateListNode
         },
         {
-            '[]': generateListNode,
-            'slice': generateSliceListNode
+            '[]': ExpressionGenerator.Subscripting.generateListNode,
+            'slice': ExpressionGenerator.Subscripting.generateSliceListNode
         }
     ]
 
@@ -73,7 +73,8 @@ class SearchSpace(object):
         :param variables: List of symbols to be added.
         :return: None.
         """
-        self._symbols[0] = [partial(generateVariableNode, name=variable) for variable in variables] + self._symbols[0]
+        self._symbols[0] = [partial(ExpressionGenerator.Terminal.generateVariableNode, name=variable)
+                            for variable in variables] + self._symbols[0]
 
     def addLiterals(self, literals: list[object]) -> None:
         """
@@ -82,7 +83,8 @@ class SearchSpace(object):
         :param literals: List of symbols to be added.
         :return: None.
         """
-        self._symbols[0] += [partial(generateLiteralNode, value=literal) for literal in literals]
+        self._symbols[0] += [partial(ExpressionGenerator.Terminal.generateLiteralNode, value=literal)
+                             for literal in literals]
 
     def addFunction(self, identifier: str, arity: int) -> None:
         """

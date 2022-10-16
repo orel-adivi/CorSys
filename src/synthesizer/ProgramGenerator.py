@@ -103,5 +103,5 @@ class ProgramGenerator(object):
         :return: Program matching the given input-output pairs.
         """
         for program in self.enumerate(assignments=assignments):
-            if program.results == evaluations:
+            if program.value == evaluations:
                 return program

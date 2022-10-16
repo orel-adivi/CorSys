@@ -49,7 +49,7 @@ class ObservationalEquivalenceManager(object):
         :param program: New program to be checked.
         :return: True if the program is equivalent to a previous one and otherwise False.
         """
-        return ObservationalEquivalenceManager.__generateKey(program.results) in self._equivalence_classes
+        return ObservationalEquivalenceManager.__generateKey(program.value) in self._equivalence_classes
 
     def addEquivalentClass(self, program: ast) -> None:
         """
@@ -59,7 +59,7 @@ class ObservationalEquivalenceManager(object):
         :return: None.
         """
         assert(not self.isObservationallyEquivalent(program))
-        self._equivalence_classes[ObservationalEquivalenceManager.__generateKey(program.results)] = program
+        self._equivalence_classes[ObservationalEquivalenceManager.__generateKey(program.value)] = program
         self._program_stack[-1].append(program)
 
     def getAllPreviousHeightPrograms(self) -> list:

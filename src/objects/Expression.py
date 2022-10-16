@@ -18,33 +18,14 @@ class Expression(object):
 
     """
 
-    class InvalidExpressionError(Exception):
-        """
-        This class is used for indicating invalid expression object generation.
-        """
-        pass
-
-    __VALUE_ERROR = InvalidExpressionError("The Expression object value is not valid")
-
     def __init__(self, node_function: Callable, value_function: Callable) -> None:
         """
-        Initialize an Expression object. In case of invalid value, an InvalidExpressionError is raised.
+        Initialize an Expression object.
 
         :param node_function: the function for evaluation of the node.
         :param value_function: the function for evaluation of the value.
         """
-        try:
-            self.__value = value_function()
-        except ArithmeticError:
-            raise
-        except BufferError:
-            raise Expression.__VALUE_ERROR
-        except LookupError:
-            raise Expression.__VALUE_ERROR
-        except TypeError:
-            raise Expression.__VALUE_ERROR
-        except ValueError:
-            raise Expression.__VALUE_ERROR
+        self.__value = value_function()
         self.__node_function = node_function
         self.__node = None
         self.__node_evaluated = False

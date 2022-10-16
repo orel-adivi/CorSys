@@ -69,7 +69,7 @@ class BestEffortProgramGenerator(ProgramGenerator):
         :return: The first matching program.
         """
         for program in self.enumerate(assignments=assignments):
-            if BestEffortProgramGenerator.__get_distance(actual=program.results,
+            if BestEffortProgramGenerator.__get_distance(actual=program.value,
                                                          expected=evaluations,
                                                          metric=metric) <= error_sum:
                 return program
@@ -87,7 +87,7 @@ class BestEffortProgramGenerator(ProgramGenerator):
         :return: The first matching program.
         """
         for program in self.enumerate(assignments=assignments):
-            if BestEffortProgramGenerator.__get_distance(actual=program.results,
+            if BestEffortProgramGenerator.__get_distance(actual=program.value,
                                                          expected=evaluations,
                                                          metric=metric) <= error_rate * len(evaluations):
                 return program
@@ -106,7 +106,7 @@ class BestEffortProgramGenerator(ProgramGenerator):
         best_program = None
         best_score = len(evaluations) + 1
         for program in self.enumerate(assignments=assignments):
-            curr_score = BestEffortProgramGenerator.__get_distance(actual=program.results,
+            curr_score = BestEffortProgramGenerator.__get_distance(actual=program.value,
                                                                    expected=evaluations,
                                                                    metric=metric)
             if curr_score < best_score:
@@ -128,7 +128,7 @@ class BestEffortProgramGenerator(ProgramGenerator):
         """
         best_programs = []
         for program in self.enumerate(assignments=assignments):
-            curr_score = BestEffortProgramGenerator.__get_distance(actual=program.results,
+            curr_score = BestEffortProgramGenerator.__get_distance(actual=program.value,
                                                                    expected=evaluations,
                                                                    metric=metric)
             if len(best_programs) < programs or best_programs[-1][1] > curr_score:
@@ -154,7 +154,7 @@ class BestEffortProgramGenerator(ProgramGenerator):
             if len(best_programs) < self._current_height + 1:
                 best_programs += [None] * ((self._current_height + 1) - len(best_programs))
                 best_scores = [len(evaluations) + 1] * ((self._current_height + 1) - len(best_scores))
-            curr_score = BestEffortProgramGenerator.__get_distance(actual=program.results,
+            curr_score = BestEffortProgramGenerator.__get_distance(actual=program.value,
                                                                    expected=evaluations,
                                                                    metric=metric)
             if curr_score < best_scores[-1]:
@@ -178,7 +178,7 @@ class BestEffortProgramGenerator(ProgramGenerator):
         best_program = None
         best_score = (len(evaluations) + 1) * (penalty ** self._max_height)
         for program in self.enumerate(assignments=assignments):
-            curr_score = BestEffortProgramGenerator.__get_distance(actual=program.results,
+            curr_score = BestEffortProgramGenerator.__get_distance(actual=program.value,
                                                                    expected=evaluations,
                                                                    metric=metric)
             curr_score *= penalty ** self._current_height
@@ -202,7 +202,7 @@ class BestEffortProgramGenerator(ProgramGenerator):
         best_score = len(evaluations) + 1
         try:
             for program in self.enumerate(assignments=assignments):
-                curr_score = BestEffortProgramGenerator.__get_distance(actual=program.results,
+                curr_score = BestEffortProgramGenerator.__get_distance(actual=program.value,
                                                                        expected=evaluations,
                                                                        metric=metric)
                 if curr_score < best_score:
