@@ -11,7 +11,7 @@ from functools import partial
 from src.io.InputOutputPairReader import InputOutputPairReader
 from src.io.SearchSpaceReader import SearchSpaceReader
 
-from src.metrics.Metric import Metric
+from src.objects.Metric import Metric
 from src.metrics.DefaultMetric import DefaultMetric
 from src.metrics.NormalMetric import NormalMetric
 from src.metrics.CalculationMetric import CalculationMetric

@@ -5,7 +5,7 @@
 #
 from overrides import overrides
 
-from src.metrics.Metric import Metric
+from src.objects.Metric import Metric
 from src.metrics.DefaultMetric import DefaultMetric
 from src.metrics.NormalMetric import NormalMetric
 from src.metrics.CalculationMetric import CalculationMetric

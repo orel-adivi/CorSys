@@ -6,7 +6,7 @@
 from overrides import overrides
 import numpy as np
 
-from src.metrics.Metric import Metric
+from src.objects.Metric import Metric
 
 
 class LevenshteinMetric(Metric):

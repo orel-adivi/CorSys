@@ -5,7 +5,7 @@
 #
 from overrides import overrides
 
-from src.metrics.Metric import Metric
+from src.objects.Metric import Metric
 
 
 class PermutationMetric(Metric):

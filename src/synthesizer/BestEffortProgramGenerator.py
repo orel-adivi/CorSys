@@ -4,7 +4,7 @@
 #   @authors : Orel Adivi and Daniel Noor
 #
 from src.synthesizer.ProgramGenerator import ProgramGenerator
-from src.metrics.Metric import Metric
+from src.objects.Metric import Metric
 from src.metrics.DefaultMetric import DefaultMetric
 
 

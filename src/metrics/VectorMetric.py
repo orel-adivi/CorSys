@@ -8,7 +8,7 @@ import numpy as np
 import scipy
 import warnings
 
-from src.metrics.Metric import Metric
+from src.objects.Metric import Metric
 
 
 class VectorMetric(Metric):

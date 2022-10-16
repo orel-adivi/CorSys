@@ -5,7 +5,7 @@
 #
 from functools import partial
 
-from src.synthesizer.AstNodes import *  # todo
+from src.synthesizer.ExpressionGenerator import *  # todo
 
 
 class SearchSpace(object):

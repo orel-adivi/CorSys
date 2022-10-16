@@ -6,7 +6,7 @@
 import csv
 from pathlib import Path
 
-from src.io.SearchSpace import SearchSpace
+from src.objects.SearchSpace import SearchSpace
 
 
 class SearchSpaceReader(object):

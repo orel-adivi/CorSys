@@ -6,7 +6,7 @@
 import csv
 from pathlib import Path
 
-from src.io.InputOutputPairs import InputOutputPairs
+from src.objects.InputOutputPairs import InputOutputPairs
 
 
 class InputOutputPairReader(object):

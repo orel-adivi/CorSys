@@ -7,7 +7,7 @@ from overrides import overrides
 import numpy as np
 import scipy.stats
 
-from src.metrics.Metric import Metric
+from src.objects.Metric import Metric
 
 
 class NormalMetric(Metric):
