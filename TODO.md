@@ -24,4 +24,3 @@
 22) fix photos
 
 pypy
-dependencies

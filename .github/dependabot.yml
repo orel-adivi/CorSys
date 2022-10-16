@@ -3,8 +3,7 @@
 #   @date : 16 October 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
-# Dependabot
-name: Dependabot - Security
+# Dependabot - Security
 
 version: 2
 updates:
