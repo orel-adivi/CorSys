@@ -1,6 +1,6 @@
 #
 #   @file : RunAllBenchmarks.py
-#   @date : 30 September 2022
+#   @date : 16 October 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
 import csv
@@ -14,7 +14,16 @@ SYNTHESIZER = Path('Synthesizer.py')
 BENCHMARKS = Path('benchmarks')
 
 
-def run_test(grammar_path: Path, examples_path: Path, settings: dict[str, str]):
+def run_test(grammar_path: Path, examples_path: Path, settings: dict[str, str]) -> (str, str):
+    """
+    Run a synthesizer benchmark.
+
+    :param grammar_path: Path to the grammar
+    :param examples_path: Path to the input-output examples
+    :param settings: Path to the settings, which contain expected outputs, metric, tactic (which method to use from
+    BestEffortProgramGenerator), maximal search height
+    :return: Tuple of the benchmark output (generated programs) and errors
+    """
     cmd = ["python", str(SYNTHESIZER)]
     cmd += ["-io", str(examples_path)]
     cmd += ["-s", str(grammar_path)]
@@ -34,7 +43,13 @@ def run_test(grammar_path: Path, examples_path: Path, settings: dict[str, str]):
     return output, error
 
 
-def main():
+def main() -> None:
+    """
+    If no command line arguments were received , run all benchmarks and print the test results. Otherwise, run only the
+    benchmarks received as arguments.
+
+    :return: None.
+    """
     run_counter, success_counter = 0, 0
     if len(sys.argv) > 1:
         print('RUNNING SELECTED BENCHMARKS OF CorSys:')
@@ -91,4 +106,7 @@ def main():
 
 
 if __name__ == '__main__':
+    """
+    If this file is run as the main file, it calls main function.
+    """
     main()

@@ -1,6 +1,6 @@
 #
 #   @file : CalculationMetric.py
-#   @date : 25 September 2022
+#   @date : 16 October 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
 from overrides import overrides
@@ -9,14 +9,42 @@ from src.metrics.Metric import Metric
 
 
 class CalculationMetric(Metric):
+    """
+    The CalculationMetric class implements the calculation metric, which considers two values closer if the differences
+    between them can be explained by manual calculation mistakes.
+
+    Public methods:
+        - __init__ - Initialize a calculation metric object.
+        - intDistance - Compute the distance between two integers while considering calculation mistakes.
+        - floatDistance - Compute the distance between two floats while considering calculation mistakes.
+        - strDistance - Compute the distance between two strings.
+        - listDistance - Compute the distance between two lists.
+        - distance - Compute the distance between any two values.
+    """
 
     @overrides
-    def __init__(self):
+    def __init__(self) -> None:
+        """
+        Initialize a calculation metric object.
+        """
         super().__init__()
 
     @overrides
     def intDistance(self, actual: int, expected: int, penalty_off_by_one: float = 0.25,
                     penalty_units: float = 0.5) -> float:
+        """
+        Compute the distance between two integer values according to the calculation metric, which takes into accounts
+        mistakes made while performing calculations manually. A "penalty" is given for an error of -1/+1 in each digit.
+        A larger penalty is given for such an error in the units digit.
+        The distance is the maximum between the sum of all penalties and 1. A distance of 1 is also returned for two
+        values with different signs.
+
+        :param actual: Integer value returned by the synthesized program.
+        :param expected: Integer value received as the desired output.
+        :param penalty_off_by_one: Penalty given for substituting digit d with d-1 or d+1.
+        :param penalty_units: Penalty given for substituting the units digit d with d-1 or d+1.
+        :return: The distance between the integers actual and expected according to the calculation metric.
+        """
         if actual * expected < 0:
             return 1.0
         actual_list = list(str(abs(actual)))
@@ -41,6 +69,21 @@ class CalculationMetric(Metric):
     @overrides
     def floatDistance(self, actual: float, expected: float, EPS: float = 1e-3, STD_DEV: float = 1.0,
                       penalty_off_by_one: float = 0.25, penalty_right_digit: float = 0.5) -> float:
+        """
+        Compute the distance between two float values according to the calculation metric, which takes into accounts
+        mistakes made while performing calculations manually. A "penalty" is given for an error of -1/+1 in each digit.
+        A larger penalty is given for such an error in the rightmost digit (including digits after the decimal point).
+        The distance is the maximum between the sum of all penalties and 1. A distance of 1 is also returned for two
+        values with different signs.
+
+        :param actual: Float value returned by the synthesized program.
+        :param expected: Float value received as the desired output.
+        :param EPS: Unused in this metric.
+        :param STD_DEV: Unused in this metric.
+        :param penalty_off_by_one: Penalty given for substituting digit d with d-1 or d+1.
+        :param penalty_right_digit: Penalty given for substituting the rightmost digit d with d-1 or d+1.
+        :return: The distance between the floats actual and expected according to the calculation metric.
+        """
         actual_list_whole, actual_list_fraction = list(str(actual).split('.')[0]), list(str(actual).split('.')[1])
         expected_list_whole = list(str(expected).split('.')[0])
         expected_list_fraction = list(str(expected).split('.')[1])

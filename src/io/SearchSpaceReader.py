@@ -1,6 +1,6 @@
 #
 #   @file : SearchSpaceReader.py
-#   @date : 28 September 2022
+#   @date : 16 October 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
 import csv
@@ -10,9 +10,22 @@ from src.io.SearchSpace import SearchSpace
 
 
 class SearchSpaceReader(object):
+    """
+    A class which allows conversion of a search space for the synthesizer (variables, literals and functions allowed in
+    the program) from a CSV file to a SearchSpace object.
+
+    Public method:
+        - readCSV - Convert a csv containing symbols to a SearchSpace object.
+    """
 
     @staticmethod
     def readCSV(root: Path) -> SearchSpace:
+        """
+        Read a csv containing variables, literals and functions and converts it to a SearchSpace object.
+
+        :param root: Path of the csv file to read.
+        :return: SearchSpace object containing the information from the CSV file.
+        """
         with root.open() as file:
             file_content = list(csv.reader(file))
         literals = [eval(literal) for literal in file_content[0] if literal]
@@ -27,11 +40,6 @@ class SearchSpaceReader(object):
 
     # todo - ready to use
 
-
-if __name__ == "__main__":
-    file1 = Path('..\\..\\utils\\grammars\\CsvGrammar.csv')
-    res = SearchSpaceReader.readCSV(file1)
-    print(res.symbols)
 
 # --------------------
 #

@@ -1,29 +1,73 @@
 #
 #   @file : BestEffortProgramGenerator.py
-#   @date : 28 September 2022
+#   @date : 16 October 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
-import pathlib
-
 from src.synthesizer.ProgramGenerator import ProgramGenerator
-from src.io.SearchSpaceReader import SearchSpaceReader
 from src.metrics.Metric import Metric
 from src.metrics.DefaultMetric import DefaultMetric
 
 
 class BestEffortProgramGenerator(ProgramGenerator):
+    """
+    This class implements the best effort program generator, which finds a program that is a "close enough" match to the
+    input-output examples according to a chosen metric.
 
-    def __init__(self, search_space: list[list], max_height: int):
+    Public methods:
+        - current_height - Checks the current height of programs being generated
+        - program_counter - Checks how many programs have been generated
+        - enumerate - Generates programs contained in the generator's search space
+        - findProgram - Finds a program precisely matching all the given input-output examples
+        - findBestEffortMatchProgram - Finds a program matching the given input-output examples while allowing a limited
+          number of mistakes
+        - findBestEffortAccuracyProgram - Finds a program matching the given input-output examples while allowing a
+          limited error rate
+        - findBestEffortByHeightProgram - Finds a program best matching the given input-output examples up to the
+          maximal program search height
+        - findBestEffortPrograms - Finds a chosen number of programs best matching the given input-output examples
+        - findBestEffortByHeightPrograms - For each search height finds the program best matching the given input-output
+          examples
+       -  findBestEffortPrioritizingHeightProgram - Finds a program best matching the given input-output examples while
+          prioritizing smaller heights
+        - findBestEffortUntilInterruptProgram - Searches a program best matching the given input-output examples until
+          receiving a keyboard interrupt
+    """
+
+    def __init__(self, search_space: list[list], max_height: int) -> None:
+        """
+        Initialize a BestEffortProgramGenerator object.
+
+        :param search_space: The search space to be used by the generator.
+        :param max_height: Maximal height of generated programs.
+        """
         super().__init__(search_space=search_space, max_height=max_height)
 
     @staticmethod
     def __get_distance(actual: list, expected: list, metric: Metric):
+        """
+        Compute the total distance between a program's results and the expected outputs, according to a given metric.
+
+        :param actual: List of a program's results
+        :param expected: List of expected outputs
+        :param metric: Chosen metric
+        :return: Sum of distances between each result to and the expected output
+        """
         res = [metric.distance(actual=actual_example, expected=expected_example)
                for actual_example, expected_example in zip(actual, expected)]
         return sum(res)
 
     def findBestEffortMatchProgram(self, assignments: list[dict], evaluations: list, error_sum: int,
                                    metric: Metric = DefaultMetric()):
+        """
+        Find a program whose results given the input examples have a distance of at most error_sum to the output
+        examples according to the chosen metric.
+
+        :param assignments: Input examples (variables and their assigned values).
+        :param evaluations: Output examples.
+        :param error_sum: Maximal allowed distance between the program's results and the expected outputs.
+        :param metric: Chosen metric.
+        :return: The first matching program.
+        """
         for program in self.enumerate(assignments=assignments):
             if BestEffortProgramGenerator.__get_distance(actual=program.results,
                                                          expected=evaluations,
@@ -32,6 +76,16 @@ class BestEffortProgramGenerator(ProgramGenerator):
 
     def findBestEffortAccuracyProgram(self, assignments: list[dict], evaluations: list, error_rate: float,
                                       metric: Metric = DefaultMetric()):
+        """
+        Find a program which has an error rate of at most error_rate on the input-output examples, according to the
+        chosen metric.
+
+        :param assignments: Input examples (variables and their assigned values).
+        :param evaluations: Output examples.
+        :param error_rate: Maximal allowed error_rate of the program.
+        :param metric: Chosen metric.
+        :return: The first matching program.
+        """
         for program in self.enumerate(assignments=assignments):
             if BestEffortProgramGenerator.__get_distance(actual=program.results,
                                                          expected=evaluations,
@@ -40,6 +94,15 @@ class BestEffortProgramGenerator(ProgramGenerator):
 
     def findBestEffortByHeightProgram(self, assignments: list[dict], evaluations: list,
                                       metric: Metric = DefaultMetric()):
+        """
+        Find the program which has the smallest distance between the results on the given input and the outputs. Only
+        searches programs up to the maximal search height of the generator object.
+
+        :param assignments: Input examples (variables and their assigned values).
+        :param evaluations: Output examples.
+        :param metric: Chosen metric.
+        :return: The best program (the least distance between results and given outputs).
+        """
         best_program = None
         best_score = len(evaluations) + 1
         for program in self.enumerate(assignments=assignments):
@@ -53,6 +116,16 @@ class BestEffortProgramGenerator(ProgramGenerator):
 
     def findBestEffortPrograms(self, assignments: list[dict], evaluations: list, programs: int = 5,
                                metric: Metric = DefaultMetric()):
+        """
+        Find a chosen number of programs which have the smallest distances between the results on the given input and
+        the outputs.
+
+        :param assignments: Input examples (variables and their assigned values).
+        :param evaluations: Output examples.
+        :param programs: Maximal number of programs to return.
+        :param metric: Chosen metric.
+        :return: A list of the best programs (the least distance between results and given outputs).
+        """
         best_programs = []
         for program in self.enumerate(assignments=assignments):
             curr_score = BestEffortProgramGenerator.__get_distance(actual=program.results,
@@ -65,6 +138,16 @@ class BestEffortProgramGenerator(ProgramGenerator):
 
     def findBestEffortByHeightPrograms(self, assignments: list[dict], evaluations: list,
                                        metric: Metric = DefaultMetric()):
+        """
+        For each possible height in the search space, find the program of said height which has the smallest distance
+        between the results on the given input and the outputs.
+
+        :param assignments: Input examples (variables and their assigned values).
+        :param evaluations: Output examples.
+        :param metric: Chosen metric.
+        :return: A list containing the best program for each height (the least distance between results and given
+        outputs).
+        """
         best_programs = [None]
         best_scores = [len(evaluations) + 1]
         for program in self.enumerate(assignments=assignments):
@@ -81,6 +164,17 @@ class BestEffortProgramGenerator(ProgramGenerator):
 
     def findBestEffortPrioritizingHeightProgram(self, assignments: list[dict], evaluations: list, penalty: float = 0.75,
                                                 metric: Metric = DefaultMetric()):
+        """
+        Find the program which has the smallest distance between the results on the given input and the outputs, while
+        taking height into account. A distance "penalty" is given to each program based on its height, meaning a program
+        with a smaller height will be prioritized.
+
+        :param assignments: Input examples (variables and their assigned values).
+        :param evaluations: Output examples.
+        :param penalty: height penalty.
+        :param metric: Chosen metric.
+        :return: The best program (the least distance between results and given outputs after penalty).
+        """
         best_program = None
         best_score = (len(evaluations) + 1) * (penalty ** self._max_height)
         for program in self.enumerate(assignments=assignments):
@@ -95,6 +189,15 @@ class BestEffortProgramGenerator(ProgramGenerator):
 
     def findBestEffortUntilInterruptProgram(self, assignments: list[dict], evaluations: list,
                                             metric: Metric = DefaultMetric()):
+        """
+        Search the program which has the smallest distance between the results on the given input and the outputs,
+        upon a keyboard interrupt returns the best program found thus far.
+
+        :param assignments: Input examples (variables and their assigned values).
+        :param evaluations: Output examples.
+        :param metric: Chosen metric.
+        :return: The best program found until interrupt (least distance between results and given outputs).
+        """
         best_program = None
         best_score = len(evaluations) + 1
         try:
@@ -108,22 +211,3 @@ class BestEffortProgramGenerator(ProgramGenerator):
         except KeyboardInterrupt:
             pass
         return best_program
-
-
-if __name__ == '__main__':
-    import ast
-    inputs = [{'x': 1, 'y': 2, 'z': 3}, {'x': 2, 'y': 4, 'z': 5}, {'x': 11, 'y': 22, 'z': 3},
-              {'x': 0, 'y': -1, 'z': 0}, {'x': 11, 'y': 22, 'z': 4}]
-    outputs = list(map(lambda env: env['x'] + env['y'] + env['z'], inputs))
-    outputs[-1] -= 1
-    search_space1 = SearchSpaceReader.readCSV(pathlib.Path('../../utils/grammars/CsvGrammar.csv')).symbols
-    generator = BestEffortProgramGenerator(search_space1, 3)
-    # result = generator.findBestEffortAccuracyProgram(inputs, outputs, 0.2)
-    # print(ast.unparse(result))
-    # result = generator.findBestEffortPrograms(inputs, outputs)
-    result = generator.findBestEffortByHeightPrograms(inputs, outputs)
-    for res in result:
-        print(ast.unparse(res))
-    # result = generator.findBestEffortPrioritizingHeightProgram(inputs, outputs, 2)
-    # result = generator.findBestEffortUntilInterruptProgram(inputs, outputs)
-    # print(ast.unparse(result))

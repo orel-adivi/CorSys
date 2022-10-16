@@ -1,6 +1,6 @@
 #
 #   @file : Synthesizer.py
-#   @date : 28 September 2022
+#   @date : 16 October 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
 import ast
@@ -28,6 +28,13 @@ from src.synthesizer.BestEffortProgramGenerator import BestEffortProgramGenerato
 
 
 def get_metric(metric_name: str, metric_parameter: str) -> Metric:
+    """
+    Convert metric name and parameter from string form to a metric object.
+
+    :param metric_name: Metric name is string form
+    :param metric_parameter: Metric parameter (if there is one) in string form
+    :return: A metric object
+    """
     metrics = {
         'DefaultMetric': lambda: DefaultMetric(),
         'NormalMetric': lambda: NormalMetric(),     # todo support change std
@@ -45,6 +52,11 @@ def get_metric(metric_name: str, metric_parameter: str) -> Metric:
 
 
 def main() -> None:
+    """
+    Parse command line arguments and run the synthesizer based on the given parameters.
+
+    :return: None
+    """
     cl_parser = argparse.ArgumentParser(description='CorSys - Synthesizing best-effort python expressions while'
                                                     'weighting the chance for mistakes in given user outputs.',
                                         epilog='For help with the synthesizer please read SUPPORT.md .',
@@ -114,4 +126,7 @@ def main() -> None:
 
 
 if __name__ == '__main__':
+    """
+    If this file is run as the main file, it calls main function.
+    """
     main()

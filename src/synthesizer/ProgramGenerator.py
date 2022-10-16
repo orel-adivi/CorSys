@@ -1,6 +1,6 @@
 #
 #   @file : ProgramGenerator.py
-#   @date : 22 September 2022
+#   @date : 16 October 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
 from itertools import product
@@ -9,8 +9,25 @@ from src.synthesizer.ObservationalEquivalenceManager import ObservationalEquival
 
 
 class ProgramGenerator(object):
+    """
+    This class implements the basic program generator, which finds a program that precisely matches every given
+    input-output example.
+
+    Public methods:
+        - __init__ - Initialize a ProgramGenerator object.
+        - current_height - Return the current height of programs being generated.
+        - program_counter - Return how many programs have been generated.
+        - enumerate - Generate programs contained in the generator's search space.
+        - findProgram - Find a program matching the given input-output examples.
+    """
 
     def __init__(self, search_space: list[list], max_height: int):
+        """
+        Initialize a ProgramGenerator object.
+
+        :param search_space: The search space to be used by the generator.
+        :param max_height: Maximal height of generated programs.
+        """
         self._search_space = search_space
         self._max_height = max_height
         self._current_height = 0
@@ -18,13 +35,30 @@ class ProgramGenerator(object):
 
     @property
     def current_height(self) -> int:
+        """
+        Return the current height of programs being generated.
+
+        :return: The current height.
+        """
         return self._current_height
 
     @property
     def program_counter(self) -> int:
+        """
+        Return how many programs have been generated.
+
+        :return: The number of programs have been generated so far.
+        """
         return self._program_counter
 
     def enumerate(self, assignments: list[dict]):
+        """
+        Generate programs contained in the generator's search space, from programs of height 1 up to the maximal height
+        given at initialization.
+
+        :param assignments: Input examples (variables and their assigned values).
+        :return: Synthesized programs (using yield, not return).
+        """
         observational_equivalence = ObservationalEquivalenceManager()
         for program in [func(children=[], assignments=assignments) for func in self._search_space[0]]:
             if not observational_equivalence.isObservationallyEquivalent(program):
@@ -61,6 +95,13 @@ class ProgramGenerator(object):
             observational_equivalence.moveNextHeightPrograms()
 
     def findProgram(self, assignments: list[dict], evaluations: list):
+        """
+        Find a program matching the given input-output examples.
+
+        :param assignments: Input examples (variables and their assigned values).
+        :param evaluations: Output examples.
+        :return: Program matching the given input-output pairs.
+        """
         for program in self.enumerate(assignments=assignments):
             if program.results == evaluations:
                 return program
