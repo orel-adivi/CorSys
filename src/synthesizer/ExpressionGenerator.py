@@ -31,14 +31,15 @@ class ExpressionGenerator(object):
     class UnaryOperations(object):
 
         @staticmethod
-        def __generateUnaryOperationNode(children: list[Expression], operation: ast, value_function: Callable):
+        def __generateUnaryOperationNode(children: list[Expression], operation: ast, value_function: Callable) -> \
+                Expression:
             return Expression(
                 node_function=lambda: ast.UnaryOp(operation, children[0].node),
                 value_function=value_function
             )
 
         @staticmethod
-        def generatePlusNode(children: list[Expression], assignments: list[dict]):
+        def generatePlusNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.UnaryOperations.__generateUnaryOperationNode(
                 children=children,
                 operation=ast.UAdd(),
@@ -46,7 +47,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateInverseNode(children: list[Expression], assignments: list[dict]):
+        def generateInverseNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.UnaryOperations.__generateUnaryOperationNode(
                 children=children,
                 operation=ast.USub(),
@@ -54,7 +55,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateLogicalNotNode(children: list[Expression], assignments: list[dict]):
+        def generateLogicalNotNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.UnaryOperations.__generateUnaryOperationNode(
                 children=children,
                 operation=ast.Not(),
@@ -62,7 +63,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateBitwiseNotNode(children: list[Expression], assignments: list[dict]):
+        def generateBitwiseNotNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.UnaryOperations.__generateUnaryOperationNode(
                 children=children,
                 operation=ast.Invert(),
@@ -72,14 +73,15 @@ class ExpressionGenerator(object):
     class BinaryOperations(object):
 
         @staticmethod
-        def __generateBinaryOperationNode(children: list[Expression], operation: ast, value_function: Callable):
+        def __generateBinaryOperationNode(children: list[Expression], operation: ast, value_function: Callable) -> \
+                Expression:
             return Expression(
                 node_function=lambda: ast.BinOp(children[0].node, operation, children[1].node),
                 value_function=value_function
             )
 
         @staticmethod
-        def generateAdditionNode(children: list[Expression], assignments: list[dict]):
+        def generateAdditionNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.BinaryOperations.__generateBinaryOperationNode(
                 children=children,
                 operation=ast.Add(),
@@ -88,7 +90,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateSubtractionNode(children: list[Expression], assignments: list[dict]):
+        def generateSubtractionNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.BinaryOperations.__generateBinaryOperationNode(
                 children=children,
                 operation=ast.Sub(),
@@ -97,7 +99,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateMultiplicationNode(children: list[Expression], assignments: list[dict]):
+        def generateMultiplicationNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.BinaryOperations.__generateBinaryOperationNode(
                 children=children,
                 operation=ast.Mult(),
@@ -106,7 +108,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateDivisionNode(children: list[Expression], assignments: list[dict]):
+        def generateDivisionNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.BinaryOperations.__generateBinaryOperationNode(
                 children=children,
                 operation=ast.Div(),
@@ -115,7 +117,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateFloorDivisionNode(children: list[Expression], assignments: list[dict]):
+        def generateFloorDivisionNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.BinaryOperations.__generateBinaryOperationNode(
                 children=children,
                 operation=ast.FloorDiv(),
@@ -124,7 +126,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateModuloNode(children: list[Expression], assignments: list[dict]):
+        def generateModuloNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.BinaryOperations.__generateBinaryOperationNode(
                 children=children,
                 operation=ast.Mod(),
@@ -133,7 +135,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generatePowerNode(children: list[Expression], assignments: list[dict]):
+        def generatePowerNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.BinaryOperations.__generateBinaryOperationNode(
                 children=children,
                 operation=ast.Pow(),
@@ -142,7 +144,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateLeftShiftNode(children: list[Expression], assignments: list[dict]):
+        def generateLeftShiftNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.BinaryOperations.__generateBinaryOperationNode(
                 children=children,
                 operation=ast.LShift(),
@@ -151,7 +153,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateRightShiftNode(children: list[Expression], assignments: list[dict]):
+        def generateRightShiftNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.BinaryOperations.__generateBinaryOperationNode(
                 children=children,
                 operation=ast.RShift(),
@@ -160,7 +162,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateBitwiseOrNode(children: list[Expression], assignments: list[dict]):
+        def generateBitwiseOrNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.BinaryOperations.__generateBinaryOperationNode(
                 children=children,
                 operation=ast.BitOr(),
@@ -169,7 +171,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateBitwiseXorNode(children: list[Expression], assignments: list[dict]):
+        def generateBitwiseXorNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.BinaryOperations.__generateBinaryOperationNode(
                 children=children,
                 operation=ast.BitXor(),
@@ -178,7 +180,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateBitwiseAndNode(children: list[Expression], assignments: list[dict]):
+        def generateBitwiseAndNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.BinaryOperations.__generateBinaryOperationNode(
                 children=children,
                 operation=ast.BitAnd(),
@@ -187,7 +189,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateMatrixMultiplicationNode(children: list[Expression], assignments: list[dict]):
+        def generateMatrixMultiplicationNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.BinaryOperations.__generateBinaryOperationNode(
                 children=children,
                 operation=ast.MatMult(),
@@ -198,14 +200,15 @@ class ExpressionGenerator(object):
     class BooleanOperations(object):
 
         @staticmethod
-        def __generateBooleanOperationNode(children: list[Expression], operation: ast, value_function: Callable):
+        def __generateBooleanOperationNode(children: list[Expression], operation: ast, value_function: Callable) -> \
+                Expression:
             return Expression(
                 node_function=lambda: ast.BoolOp(operation, [children[0].node, children[1].node]),
                 value_function=value_function
             )
 
         @staticmethod
-        def generateLogicalAndNode(children: list[Expression], assignments: list[dict]):
+        def generateLogicalAndNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.BooleanOperations.__generateBooleanOperationNode(
                 children=children,
                 operation=ast.And(),
@@ -214,7 +217,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateLogicalOrNode(children: list[Expression], assignments: list[dict]):
+        def generateLogicalOrNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.BooleanOperations.__generateBooleanOperationNode(
                 children=children,
                 operation=ast.Or(),
@@ -225,21 +228,21 @@ class ExpressionGenerator(object):
     class Subscripting(object):
 
         @staticmethod
-        def generateListNode(children: list[Expression], assignments: list[dict]):
+        def generateListNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return Expression(
                 node_function=lambda: ast.List(elts=[child.node for child in children], ctx=ast.Load()),
                 value_function=lambda: [[child.value[i] for child in children] for i in range(len(assignments))]
             )
 
         @staticmethod
-        def generateSubscriptListNode(children: list[Expression], assignments: list[dict]):
+        def generateSubscriptListNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return Expression(
                 node_function=lambda: ast.Subscript(value=children[0].node, slice=children[1].node, ctx=ast.Load()),
                 value_function=lambda: [(children[0].value[i])[children[1].value[i]] for i in range(len(assignments))]
             )
 
         @staticmethod
-        def generateSliceListNode(children: list[Expression], assignments: list[dict]):
+        def generateSliceListNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return Expression(
                 node_function=lambda: ast.Subscript(value=children[0].node,
                                                     slice=ast.Slice(lower=children[1].node,
@@ -254,14 +257,15 @@ class ExpressionGenerator(object):
     class Functions(object):
 
         @staticmethod
-        def __generateFunctionCallNode(func: Callable, args: Callable, keywords: Callable, value_function: Callable):
+        def __generateFunctionCallNode(func: Callable, args: Callable, keywords: Callable, value_function: Callable) ->\
+                Expression:
             return Expression(
                 node_function=lambda: ast.Call(func=func(), args=args(), keywords=keywords()),
                 value_function=value_function
             )
 
         @staticmethod
-        def generateLenCallNode(children: list[Expression], assignments: list[dict]):
+        def generateLenCallNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.Functions.__generateFunctionCallNode(
                 func=lambda: ast.Name(id='len', ctx=ast.Load()),
                 args=lambda: [child.node for child in children],
@@ -270,7 +274,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateIndexCallNode(children: list[Expression], assignments: list[dict]):
+        def generateIndexCallNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.Functions.__generateFunctionCallNode(
                 func=lambda: ast.Attribute(value=children[0].node, attr='index', ctx=ast.Load()),
                 args=lambda: [children[1].node],
@@ -280,7 +284,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateSortedListNode(children: list[Expression], assignments: list[dict]):
+        def generateSortedListNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.Functions.__generateFunctionCallNode(
                 func=lambda: ast.Name(id='sorted', ctx=ast.Load()),
                 args=lambda: [child.node for child in children],
@@ -289,7 +293,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateReversedListNode(children: list[Expression], assignments: list[dict]):
+        def generateReversedListNode(children: list[Expression], assignments: list[dict]) -> Expression:
             iterable_node = ExpressionGenerator.Functions.__generateFunctionCallNode(
                 func=lambda: ast.Name(id='reversed', ctx=ast.Load()),
                 args=lambda: [child.node for child in children],
@@ -304,7 +308,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateCountCallNode(children: list[Expression], assignments: list[dict]):
+        def generateCountCallNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.Functions.__generateFunctionCallNode(
                 func=lambda: ast.Attribute(value=children[0].node, attr='count', ctx=ast.Load()),
                 args=lambda: [children[1].node],
@@ -314,7 +318,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateJoinCallNode(children: list[Expression], assignments: list[dict]):
+        def generateJoinCallNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.Functions.__generateFunctionCallNode(
                 func=lambda: ast.Attribute(value=children[0].node, attr='join', ctx=ast.Load()),
                 args=lambda: [children[1].node],
@@ -324,7 +328,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateCapitalizeCallNode(children: list[Expression], assignments: list[dict]):
+        def generateCapitalizeCallNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.Functions.__generateFunctionCallNode(
                 func=lambda: ast.Attribute(value=children[0].node, attr='capitalize', ctx=ast.Load()),
                 args=lambda: [],
@@ -334,7 +338,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateCasefoldCallNode(children: list[Expression], assignments: list[dict]):
+        def generateCasefoldCallNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.Functions.__generateFunctionCallNode(
                 func=lambda: ast.Attribute(value=children[0].node, attr='casefold', ctx=ast.Load()),
                 args=lambda: [],
@@ -344,7 +348,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateLowerCallNode(children: list[Expression], assignments: list[dict]):
+        def generateLowerCallNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.Functions.__generateFunctionCallNode(
                 func=lambda: ast.Attribute(value=children[0].node, attr='lower', ctx=ast.Load()),
                 args=lambda: [],
@@ -354,7 +358,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateTitleCallNode(children: list[Expression], assignments: list[dict]):
+        def generateTitleCallNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.Functions.__generateFunctionCallNode(
                 func=lambda: ast.Attribute(value=children[0].node, attr='title', ctx=ast.Load()),
                 args=lambda: [],
@@ -364,7 +368,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateUpperCallNode(children: list[Expression], assignments: list[dict]):
+        def generateUpperCallNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.Functions.__generateFunctionCallNode(
                 func=lambda: ast.Attribute(value=children[0].node, attr='upper', ctx=ast.Load()),
                 args=lambda: [],
@@ -374,7 +378,7 @@ class ExpressionGenerator(object):
             )
 
         @staticmethod
-        def generateAbsCallNode(children: list[Expression], assignments: list[dict]):
+        def generateAbsCallNode(children: list[Expression], assignments: list[dict]) -> Expression:
             return ExpressionGenerator.Functions.__generateFunctionCallNode(
                 func=lambda: ast.Name(id='abs', ctx=ast.Load()),
                 args=lambda: [child.node for child in children],
@@ -385,13 +389,13 @@ class ExpressionGenerator(object):
     class Generic(object):
 
         @staticmethod
-        def __generateAstForGenericNode(children: list[Expression], expr: str):
+        def __generateAstForGenericNode(children: list[Expression], expr: str) -> ast:
             for i in range(len(children)):
-                expr = expr.replace(f'EXP{i + 1}', ast.unparse(children[i].node))
+                expr = expr.replace(f'EXP{i + 1}', f'({ast.unparse(children[i].node)})')
             return ast.parse(expr)
 
         @staticmethod
-        def generateGenericNode(children: list[Expression], assignments: list[dict], expr: str):
+        def generateGenericNode(children: list[Expression], assignments: list[dict], expr: str) -> Expression:
             return Expression(
                 node_function=lambda: ExpressionGenerator.Generic.__generateAstForGenericNode(children, expr),
                 value_function=lambda:
