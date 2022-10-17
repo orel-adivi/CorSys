@@ -1,6 +1,6 @@
 #
 #   @file : Synthesizer.py
-#   @date : 16 October 2022
+#   @date : 18 October 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
 import ast
@@ -88,7 +88,7 @@ def main() -> None:
     input_output_pairs = InputOutputPairReader.readCSV(arguments.input_output_file)
     inputs = input_output_pairs.inputs
     outputs = input_output_pairs.outputs
-    search_space = SearchSpaceReader.readCSV(arguments.search_space_file).symbols
+    search_space = SearchSpaceReader.readCSV(arguments.search_space_file)
     metric = get_metric(arguments.metric, arguments.metric_parameter)
     generator = BestEffortProgramGenerator(search_space, arguments.max_height)
 

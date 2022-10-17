@@ -69,3 +69,7 @@ ci
 
 next
 small utils: program minimizer (counter example ?), game man vs. synthesizer
+unittests
+pypy
+weighted metric
+constant diff keyboard

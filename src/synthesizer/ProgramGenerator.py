@@ -1,10 +1,11 @@
 #
 #   @file : ProgramGenerator.py
-#   @date : 16 October 2022
+#   @date : 18 October 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
 from itertools import product
 
+from src.objects.SearchSpace import SearchSpace
 from src.synthesizer.ObservationalEquivalenceManager import ObservationalEquivalenceManager
 
 
@@ -21,14 +22,14 @@ class ProgramGenerator(object):
         - findProgram - Find a program matching the given input-output examples.
     """
 
-    def __init__(self, search_space: list[list], max_height: int):
+    def __init__(self, search_space: SearchSpace, max_height: int):
         """
         Initialize a ProgramGenerator object.
 
         :param search_space: The search space to be used by the generator.
         :param max_height: Maximal height of generated programs.
         """
-        self._search_space = search_space
+        self._search_space = search_space.symbols
         self._max_height = max_height
         self._current_height = 0
         self._program_counter = 0
