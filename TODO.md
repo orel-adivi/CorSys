@@ -1,6 +1,4 @@
 # Todo:
-- AstNodes.py - documentation
-
 1) add grammar file examples
 2) add input-output file examples
 3) fix CI - build

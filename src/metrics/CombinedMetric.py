@@ -1,6 +1,6 @@
 #
 #   @file : CombinedMetric.py
-#   @date : 16 October 2022
+#   @date : 17 October 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
 from overrides import overrides
@@ -112,12 +112,3 @@ class CombinedMetric(DefaultMetric, NormalMetric, CalculationMetric, HammingMetr
         :return: The distance between the lists actual and expected.
         """
         return self.__list_metric_class.listDistance(self, actual=actual, expected=expected, *args, *kwargs)
-
-
-if __name__ == "__main__":
-    metric = CombinedMetric(int_metric='CalculationMetric', float_metric='NormalMetric', str_metric='LevenshteinMetric',
-                            list_metric='PermutationMetric')
-    print(metric.intDistance(0, 1))
-    print(metric.floatDistance(0.0, 1.0))
-    print(metric.strDistance('hello', 'hi'))
-    print(metric.listDistance(['a', 'b'], ['b', 'a']))

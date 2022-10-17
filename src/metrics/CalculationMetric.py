@@ -1,6 +1,6 @@
 #
 #   @file : CalculationMetric.py
-#   @date : 16 October 2022
+#   @date : 17 October 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
 from overrides import overrides
@@ -98,22 +98,3 @@ class CalculationMetric(Metric):
         expected_equivalent_int = int(''.join(expected_list_whole_padded) + ''.join(expected_list_fraction_padded))
         return self.intDistance(actual=actual_equivalent_int, expected=expected_equivalent_int,
                                 penalty_off_by_one=penalty_off_by_one, penalty_units=penalty_right_digit)
-
-
-if __name__ == "__main__":
-    metric = CalculationMetric()
-    print(metric.intDistance(0, 5))
-    print(metric.intDistance(0, 1))
-    print(metric.intDistance(0, 0))
-    print(metric.intDistance(10, 11))
-    print(metric.intDistance(21, 11))
-    print(metric.intDistance(1121, 11))
-    print()
-    print(metric.floatDistance(0.0, 0.5))
-    print(metric.floatDistance(0.0, 0.1))
-    print(metric.floatDistance(1.0, 0.0))
-    print(metric.floatDistance(0.0, 0.0))
-    print(metric.floatDistance(1.0, 1.1))
-    print(metric.floatDistance(0.1, 0.11))
-    print(metric.floatDistance(0.21, 0.11))
-    print(metric.floatDistance(0.21, 11.11))

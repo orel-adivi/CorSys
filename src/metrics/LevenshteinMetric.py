@@ -1,6 +1,6 @@
 #
 #   @file : LevenshteinMetric.py
-#   @date : 16 October 2022
+#   @date : 17 October 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
 from overrides import overrides
@@ -123,15 +123,3 @@ class LevenshteinMetric(Metric):
         if actual == expected == "":
             return 0.0
         return self.__solver(actual=actual, expected=expected) / max(len(actual), len(expected))
-
-
-if __name__ == "__main__":
-    metric1, metric2 = LevenshteinMetric(), LevenshteinMetric(solve_recursively=True)
-    print(metric1.distance("kelm", "hello"), metric2.distance("kelm", "hello"))
-    print(metric1.distance("hello", "hello"), metric2.distance("hello", "hello"))
-    print(metric1.distance("hello", "hellow"), metric2.distance("hello", "hellow"))
-    print(metric1.distance("hello", "helo"), metric2.distance("hello", "helo"))
-    print(metric1.distance("hello", "abcde"), metric2.distance("hello", "abcde"))
-    print(metric1.distance("", "hello"), metric2.distance("", "hello"))
-    print(metric1.distance("hello", ""), metric2.distance("hello", ""))
-    print(metric1.distance("", ""), metric2.distance("", ""))
