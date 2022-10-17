@@ -117,7 +117,10 @@ def main() -> None:
     if not isinstance(result, list):
         result = [result]
     for program in result:
-        print(ast.unparse(program.node))
+        if program is None:
+            print('No valid program was found.')
+        else:
+            print(ast.unparse(program.node))
 
     if arguments.statistics:
         print('')

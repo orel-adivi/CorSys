@@ -1,12 +1,8 @@
 # Todo:
-1) add grammar file examples
-2) add input-output file examples
-3) fix CI - build
+1) search space reader - add functionality + support txt
+2) metric reader
+3) update benchmarks (informative examples) + eval + grammar files
 
-4) search space reader - add functionality + support txt
-5) metric reader
-6) update benchmarks (informative examples) + eval + grammar files
-
-7) fix photos
-8) write README.md + update webpage
-9) write final presentation
+4) fix photos
+5) write README.md + update webpage
+6) write final presentation
