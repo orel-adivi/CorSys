@@ -13,7 +13,7 @@
 
 ![thumbnail](/docs/thumbnail.png)
 
-## About the project
+## About the Project
 
 Software synthesis with correction of strings and number literals to account for user errors.
 
