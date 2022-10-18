@@ -6,19 +6,19 @@ DESCRIPTION: This is a sanity benchmark, testing integer expression synthesis wi
 
 Running tests:
 ----------------------------------------------------------------------
-Ran Examples1 successfully (in 0.8906571865081787 s):
+Ran Examples1 successfully (in 2.937493324279785 s):
 x + y + z
 ----------------------------------------------------------------------
-Ran Examples2 successfully (in 0.9576449394226074 s):
+Ran Examples2 successfully (in 0.9052567481994629 s):
 y + 1 + (1 - x)
 ----------------------------------------------------------------------
-Ran Examples3 successfully (in 0.94712233543396 s):
+Ran Examples3 successfully (in 0.8598103523254395 s):
 -z
 ----------------------------------------------------------------------
-Ran Examples4 successfully (in 0.9062769412994385 s):
+Ran Examples4 successfully (in 0.8906219005584717 s):
 x * z + y * z
 ----------------------------------------------------------------------
-Ran Examples5 successfully (in 0.8648080825805664 s):
+Ran Examples5 successfully (in 0.925431489944458 s):
 z // y
 
 ======================================================================
@@ -27,19 +27,19 @@ DESCRIPTION: This benchmark tests float expression synthesis with DefaultMetric.
 
 Running tests:
 ----------------------------------------------------------------------
-Ran Examples1 successfully (in 0.9684615135192871 s):
+Ran Examples1 successfully (in 0.9062519073486328 s):
 x + y + z
 ----------------------------------------------------------------------
-Ran Examples2 successfully (in 0.9062981605529785 s):
+Ran Examples2 successfully (in 0.9113004207611084 s):
 y + 1 + (1 - x)
 ----------------------------------------------------------------------
-Ran Examples3 successfully (in 0.8437943458557129 s):
+Ran Examples3 successfully (in 0.9235506057739258 s):
 -(z / x)
 ----------------------------------------------------------------------
-Ran Examples4 successfully (in 0.8750450611114502 s):
+Ran Examples4 successfully (in 0.9062368869781494 s):
 x * z + y / z
 ----------------------------------------------------------------------
-Ran Examples5 successfully (in 0.8906586170196533 s):
+Ran Examples5 successfully (in 0.9764587879180908 s):
 z ** y
 
 ======================================================================
@@ -48,19 +48,19 @@ DESCRIPTION: This benchmark tests string-related expression synthesis with Defau
 
 Running tests:
 ----------------------------------------------------------------------
-Ran Examples1 successfully (in 0.9781880378723145 s):
+Ran Examples1 successfully (in 0.9785370826721191 s):
 sorted(y)[-1]
 ----------------------------------------------------------------------
-Ran Examples2 successfully (in 0.9073305130004883 s):
+Ran Examples2 successfully (in 0.8849425315856934 s):
 len(x) + -1
 ----------------------------------------------------------------------
-Ran Examples3 successfully (in 0.9233112335205078 s):
+Ran Examples3 successfully (in 0.9346461296081543 s):
 y[0] + x[-1]
 ----------------------------------------------------------------------
-Ran Examples4 successfully (in 0.969125509262085 s):
+Ran Examples4 successfully (in 0.9044749736785889 s):
 x[None:None:-1] + y[None:None:-1]
 ----------------------------------------------------------------------
-Ran Examples5 successfully (in 0.953195333480835 s):
+Ran Examples5 successfully (in 0.882199764251709 s):
 sorted(x + y)
 
 ======================================================================
@@ -69,19 +69,19 @@ DESCRIPTION: This benchmark tests list-related expression synthesis with Default
 
 Running tests:
 ----------------------------------------------------------------------
-Ran Examples1 successfully (in 0.8917181491851807 s):
+Ran Examples1 successfully (in 0.8750019073486328 s):
 sorted(x) + [0]
 ----------------------------------------------------------------------
-Ran Examples2 successfully (in 0.8916873931884766 s):
+Ran Examples2 successfully (in 1.056614637374878 s):
 len(x + y)
 ----------------------------------------------------------------------
-Ran Examples3 successfully (in 0.8770956993103027 s):
+Ran Examples3 successfully (in 1.044541835784912 s):
 x[None:None:-1]
 ----------------------------------------------------------------------
-Ran Examples4 successfully (in 0.87506103515625 s):
-x[None:None:2]
+Ran Examples4 successfully (in 0.9486982822418213 s):
+[val * 2 for val in x if not val % 2]
 ----------------------------------------------------------------------
-Ran Examples5 successfully (in 0.9389052391052246 s):
+Ran Examples5 successfully (in 0.9433376789093018 s):
 x[2:None:None] + y[-1:None:None]
 
 ======================================================================
@@ -90,19 +90,19 @@ DESCRIPTION: This is a numerical error benchmark, testing float expression synth
 
 Running tests:
 ----------------------------------------------------------------------
-Ran Examples1 successfully (in 5.398204326629639 s):
+Ran Examples1 successfully (in 5.269817352294922 s):
 x + y + z
 ----------------------------------------------------------------------
-Ran Examples2 successfully (in 5.780953407287598 s):
+Ran Examples2 successfully (in 6.142568111419678 s):
 y + 1.0 + (1.0 - x)
 ----------------------------------------------------------------------
-Ran Examples3 successfully (in 6.092777490615845 s):
+Ran Examples3 successfully (in 6.021486759185791 s):
 -(z / x)
 ----------------------------------------------------------------------
-Ran Examples4 successfully (in 5.716940641403198 s):
+Ran Examples4 successfully (in 5.926656484603882 s):
 x * z + y / z
 ----------------------------------------------------------------------
-Ran Examples5 successfully (in 7.225690126419067 s):
+Ran Examples5 successfully (in 8.096912860870361 s):
 z ** y
 
 ======================================================================
@@ -111,19 +111,19 @@ DESCRIPTION: This is a calculation error benchmark, testing integer expression s
 
 Running tests:
 ----------------------------------------------------------------------
-Ran Examples1 successfully (in 0.9492378234863281 s):
+Ran Examples1 successfully (in 1.0248386859893799 s):
 x + y + z
 ----------------------------------------------------------------------
-Ran Examples2 successfully (in 0.9531607627868652 s):
+Ran Examples2 successfully (in 1.1288247108459473 s):
 y + 1 + (1 - x)
 ----------------------------------------------------------------------
-Ran Examples3 successfully (in 0.9375629425048828 s):
+Ran Examples3 successfully (in 1.1383965015411377 s):
 -z
 ----------------------------------------------------------------------
-Ran Examples4 successfully (in 0.9687809944152832 s):
+Ran Examples4 successfully (in 1.016275405883789 s):
 x * z + y * z
 ----------------------------------------------------------------------
-Ran Examples5 successfully (in 0.9688243865966797 s):
+Ran Examples5 successfully (in 0.9904873371124268 s):
 z // y
 
 ======================================================================
@@ -132,19 +132,19 @@ DESCRIPTION: This is a typo benchmark, testing string expression synthesis with 
 
 Running tests:
 ----------------------------------------------------------------------
-Ran Examples1 successfully (in 73.66279244422913 s):
+Ran Examples1 successfully (in 74.47368860244751 s):
 sorted(y)[-1]
 ----------------------------------------------------------------------
-Ran Examples2 successfully (in 75.67328357696533 s):
+Ran Examples2 successfully (in 70.53303503990173 s):
 x + y
 ----------------------------------------------------------------------
-Ran Examples3 successfully (in 72.35257744789124 s):
+Ran Examples3 successfully (in 70.28949427604675 s):
 y[0] + x[-1]
 ----------------------------------------------------------------------
-Ran Examples4 successfully (in 74.87199878692627 s):
+Ran Examples4 successfully (in 71.31552839279175 s):
 x[None:None:-1] + y[None:None:-1]
 ----------------------------------------------------------------------
-Ran Examples5 successfully (in 77.2252550125122 s):
+Ran Examples5 successfully (in 73.82918381690979 s):
 x[None:None:2] + y[None:None:-1]
 
 ======================================================================
@@ -153,19 +153,19 @@ DESCRIPTION: This is a typo benchmark, testing string expression synthesis with 
 
 Running tests:
 ----------------------------------------------------------------------
-Ran Examples1 successfully (in 76.37368702888489 s):
+Ran Examples1 successfully (in 69.93228268623352 s):
 sorted(y)[-1]
 ----------------------------------------------------------------------
-Ran Examples2 successfully (in 72.98067331314087 s):
+Ran Examples2 successfully (in 78.89371705055237 s):
 x + y
 ----------------------------------------------------------------------
-Ran Examples3 successfully (in 73.68146085739136 s):
+Ran Examples3 successfully (in 71.13693809509277 s):
 y[0] + x[-1]
 ----------------------------------------------------------------------
-Ran Examples4 successfully (in 75.60789799690247 s):
+Ran Examples4 successfully (in 70.2039008140564 s):
 x[None:None:-1] + y[None:None:-1]
 ----------------------------------------------------------------------
-Ran Examples5 successfully (in 71.72742819786072 s):
+Ran Examples5 successfully (in 70.10913920402527 s):
 x[None:None:2] + y[None:None:-1]
 
 ======================================================================
@@ -174,19 +174,19 @@ DESCRIPTION: This is a typo benchmark, testing string expression synthesis with 
 
 Running tests:
 ----------------------------------------------------------------------
-Ran Examples1 successfully (in 73.39919304847717 s):
+Ran Examples1 successfully (in 83.30437469482422 s):
 x[2:-1:None]
 ----------------------------------------------------------------------
-Ran Examples2 successfully (in 73.0282530784607 s):
+Ran Examples2 successfully (in 71.64399933815002 s):
 x + y
 ----------------------------------------------------------------------
-Ran Examples3 successfully (in 72.20240497589111 s):
+Ran Examples3 successfully (in 65.65851593017578 s):
 y[0] + x
 ----------------------------------------------------------------------
-Ran Examples4 successfully (in 69.92940974235535 s):
+Ran Examples4 successfully (in 67.10379195213318 s):
 x[None:None:-1] + y[None:None:-1]
 ----------------------------------------------------------------------
-Ran Examples5 successfully (in 71.92503571510315 s):
+Ran Examples5 successfully (in 71.67406463623047 s):
 x[None:None:2] + y[None:None:-1]
 
 ======================================================================
@@ -195,19 +195,19 @@ DESCRIPTION: This is a list-element typo benchmark, testing list expression synt
 
 Running tests:
 ----------------------------------------------------------------------
-Ran Examples1 successfully (in 147.86937594413757 s):
+Ran Examples1 successfully (in 158.73656940460205 s):
 sorted(x) + [0]
 ----------------------------------------------------------------------
-Ran Examples2 successfully (in 57.41777443885803 s):
+Ran Examples2 successfully (in 62.82745432853699 s):
 y + x
 ----------------------------------------------------------------------
-Ran Examples3 successfully (in 213.07581758499146 s):
+Ran Examples3 successfully (in 211.79392099380493 s):
 x[None:None:-1]
 ----------------------------------------------------------------------
-Ran Examples4 successfully (in 237.93644833564758 s):
+Ran Examples4 successfully (in 244.0730595588684 s):
 x[None:None:2]
 ----------------------------------------------------------------------
-Ran Examples5 successfully (in 248.70042061805725 s):
+Ran Examples5 successfully (in 234.3030240535736 s):
 x[1:None:None] + y[-1:None:None]
 
 ======================================================================
