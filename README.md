@@ -74,7 +74,7 @@ usage: Synthesizer.py [-h] -io INPUT_OUTPUT_FILE -s SEARCH_SPACE_FILE
                       [-t {match,accuracy,height,top,best_by_height,penalized_height,interrupt}]
                       [-tp TACTIC_PARAMETER] [-mh MAX_HEIGHT] [--statistics]
 
-CorSys - Synthesizing best-effort python expressions whileweighting the chance
+CorSys - Synthesizing best-effort python expressions while weighting the chance
 for mistakes in given user outputs.
 
 options:
