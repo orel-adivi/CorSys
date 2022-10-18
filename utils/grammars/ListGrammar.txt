@@ -1,0 +1,12 @@
+EXP ::= 0
+EXP ::= None
+EXP ::= -1
+EXP ::= 2
+EXP ::= x
+EXP ::= sorted(EXP1)
+EXP ::= list(reversed(EXP1))
+EXP ::= len(EXP1)
+EXP ::= EXP1 + EXP2
+EXP ::= EXP1 - EXP2
+EXP ::= EXP1[EXP2]
+EXP ::= EXP1[EXP2:EXP3:EXP4]

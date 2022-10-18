@@ -88,7 +88,6 @@ class SearchSpaceReader(object):
                     variables.append(line)
             elif line in SearchSpaceReader.OPERATION_DICTIONARY:
                 function, arity = SearchSpaceReader.OPERATION_DICTIONARY[line]
-                print(f'{function}\t{arity}')
                 result.addFunction(function=function, arity=arity)
             else:
                 arity = 1
@@ -97,7 +96,6 @@ class SearchSpaceReader(object):
                         arity = i
                         break
                 function = partial(ExpressionGenerator.Generic.generateGenericNode, expr=line)
-                print(arity)
                 result.addFunction(function=function, arity=arity)
         result.addLiterals(literals=literals)
         result.addVariables(variables=variables)

@@ -61,7 +61,7 @@ def main() -> None:
                       if 'benchmark' in benchmark]
     for benchmark in sorted(benchmarks, key=lambda dirname: int(dirname.split('benchmark_')[1])):
         settings = {}
-        grammar_path = Path(str(BENCHMARKS) + '/' + benchmark + '/Grammar.csv')
+        grammar_path = Path(str(BENCHMARKS) + '/' + benchmark + '/Grammar.txt')
         with Path(str(BENCHMARKS) + '/' + benchmark + '/Settings.csv').open() as file:
             for row in csv.reader(file):
                 settings[row[0]] = row[1]
