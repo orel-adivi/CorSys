@@ -16,11 +16,11 @@
 
 "CorSys" is a demonstrative program synthesizer, which synthesizes best-effort Python expressions while
 weighting the chance for mistakes in given user outputs, using various metrics for mistake probability
-evaluation. CorSys enumerate all possible expressions using the given syntax, limited to a specified
+evaluation. CorSys enumerates all possible expressions using the given syntax, limited to a specified
 syntax-tree height, using a bottom-up enumeration methodology and using Observational Equivalence for
 pruning equivalent expressions under the given set of input-output examples. For each expression whose
-outputs are not observationally equivalent to a previous seen expression, the specified metric grades
-the distance between the actual outputs and the expected one. Finally, the synthesizer is able to
+outputs are not observationally equivalent to a previously seen expression, the specified metric grades
+the distance between the actual outputs and the expected ones. Finally, the synthesizer is able to
 return the best expression, under a criterion selected by the user. CorSys is using the Syntax-Guided
 Synthesis (SyGuS) methodology, and is given small-step specifications to work with Programming by Examples (PBE).
 
@@ -29,7 +29,7 @@ This paper describes a technique for dealing efficiently with incorrect input-ou
 user. In the paper, it is suggested to use a distance metric for rewarding more-likely-to-be-correct programs,
 specifically using Levenshtein distance. In this work, we generalize this concept of distance metric for various
 kinds of user mistakes, focusing on arithmetical mistakes (for example, rounding values and off-by-one calculation
-mistakes) and typing mistakes (for example, replacing an homophone letter and deleting a letter). Please read
+mistakes) and typing mistakes (for example, replacing similar-sounding letters and deleting a letter). Please read
 the paper for more details about this technique:
 
 > Peleg, Hila, and Nadia Polikarpova. 2020. “<span class="nocase">Perfect
@@ -40,7 +40,7 @@ the paper for more details about this technique:
 > Dagstuhl–Leibniz-Zentrum für Informatik.
 > <https://doi.org/10.4230/LIPIcs.ECOOP.2020.2>.
 
-The work is submitted as the final project in the course "Software Synthesis and Automated Reasoni" (236347),
+The work is submitted as the final project in the course "Software Synthesis and Automated Reasoning" (236347),
 at Taub Faculty of Computer Science, Technion - Israel Institute of Technology. The project was written by
 Orel Adivi `(orel.adivi [at] cs.technion.ac.il)` and Daniel Noor `(daniel.noor [at] cs.technion.ac.il)`,
 and under the supervision of Matan Peled and assistant professor Shachar Itzhaky. The work was done in about
@@ -59,7 +59,7 @@ The project uses NumPy, SciPy, and overrides Python libraries, which can be inst
 python -m pip install -r requirements.txt
 ```
 
-Then, running the synthesizer with `--help` flag gives the list of the parameters the provide:
+Then, running the synthesizer with `--help` flag gives the list of the parameters to provide:
 
 ```bash
 python Synthesizer.py --help
