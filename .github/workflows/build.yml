@@ -41,6 +41,6 @@ jobs:
       run: |
         python Synthesizer.py -io ./utils/examples/SanityExamples.csv -s ./utils/grammars/SanityGrammar.csv
         python Synthesizer.py -io ./utils/examples/SumExamples.csv -s ./utils/grammars/SumGrammar.csv -m DefaultMetric -t height -mh 2
-        python Synthesizer.py -io ./utils/examples/NoisyExamples.csv -s ./utils/grammars/NoisyGrammar.csv -m NormalMetric -t height -mh 2
+        python Synthesizer.py -io ./utils/examples/NoisyExamples.csv -s ./utils/grammars/NoisyGrammar.csv -m NormalMetric -mp 1.0 -t height -mh 2
         python Synthesizer.py -io ./utils/examples/ListExamples.csv -s ./utils/grammars/ListGrammar.csv -m DefaultMetric -t height -mh 2
         python Synthesizer.py -io ./utils/examples/StringExamples.csv -s ./utils/grammars/StringGrammar.csv -m LevenshteinMetric -mp False -t height -mh 2
