@@ -112,9 +112,9 @@ synthesizer. The other flags are covered in the following sections.
 
 The input-and-output pair examples are a major part of the specifications, and have be be supplied in a Comma-separated
 values (CSV) file. The path to this file has to be provided in the `--input-output` parameter (or `-io`). The first row
-of the file must include the name of each variable (all capitalized), and in the last column the symbolic name `OUTPUT`
-must appear to indicate the expected value (possibly with mistakes). After the first row, each row represent a single
-input-output example, where the value of each variable matches its name in the first row. This is a minimal example for
+of the file must include the name of each variable, and in the last column the symbolic name `OUTPUT` must appear to
+indicate the expected value (possibly with mistakes). After the first row, each row represent a single input-output
+example, where the value of each variable matches its name in the first row. This is a minimal example for
 this format:
 
 ```text
@@ -142,10 +142,10 @@ expression template.
 ```text
 EXP ::= 0
 EXP ::= 1
-EXP ::= X
-EXP ::= [ EXP1 ]
+EXP ::= x
+EXP ::= [EXP1]
 EXP ::= EXP1 + EXP2
-EXP ::= len( EXP1 )
+EXP ::= len(EXP1)
 ```
 
 Examples for search space files are available in the
