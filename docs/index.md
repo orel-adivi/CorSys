@@ -53,7 +53,7 @@ The synthesizer main file is [Synthesizer.py](https://github.com/orel-adivi/CorS
 which uses code implemented in [src directory](https://github.com/orel-adivi/CorSys/tree/main/src). For running
 the synthesizer, an installation of [CPython 3.9](https://www.python.org/downloads/release/python-3915/)
 or [CPython 3.10](https://www.python.org/downloads/release/python-3108/) is required (the implementation is platform
-independent, and was tested on Windows, MacOS, and Linux).
+independent, and was tested on Windows, macOS, and Linux).
 
 The project uses NumPy, SciPy, and overrides Python libraries, which can be installed using Pip package installer: 
 
@@ -141,32 +141,25 @@ todo
 The criterion of which expression to return is defined by the `--tactic` parameter (or `-t`). For several tactics,
 an additional parameter, `--tactic-parameter` (or `-tp`), is also required. The following values are available for
 the `--tactic` parameter:
-
 - `match` - the first expression whose distance value is equal or less than the defined value is returned.
 The `--tactic-parameter` defines the threshold distance for returning an expression, and should be between 0.0 to
 the number of examples.
-
 - `accuracy` - the first expression whose distance value, divided by the number of examples, is equal or less than the
 defined value is returned. The `--tactic-parameter` defines the threshold distance, after normalization, for returning
 an expression, and should be between 0.0 to 1.0.
-
 - `height` - the best expression, among all possible expressions whose syntax-tree height is up the the defined, is
 returned. Please note that the height threshold is defined by `--max-height` parameter, and  `--tactic-parameter` is
 ignored.
-
 - `top` - the best expressions, among all possible expressions whose syntax-tree height is up the the defined, are
 returned, one in each line (in descending accuracy). The `--tactic-parameter` defines the number of expressions to
 return.
-
 - `best_by_height` - the best expressions, among all possible expressions whose syntax-tree height is up the the
 defined, are returned, one in each line, so each line represent a different syntax-tree height limit. Please note
 that the maximal syntax-tree height is defined by `--max-height` parameter, and  `--tactic-parameter` is ignored.
-
 - `penalized_height` - the best expression, among all possible expressions whose syntax-tree height is up the the
 defined, is returned. Each expression is penalized according to its syntax-tree height, so smaller expressions are
 preferred. The `--tactic-parameter` defines the penalty for each addition of one for the syntax-tree height, and
 should be between 0.0 to 1.0.
-
 - `interrupt` - the best expression, till finishing searching all possible expressions whose syntax-tree height is
 up the the defined or till keyboard interrupt `(ctrl + c)`, is returned. The `--tactic-parameter` is ignored.
 
@@ -188,39 +181,61 @@ output the lack of other errors. The time that is required for each test is also
 output we got is available in [results.txt](https://github.com/orel-adivi/CorSys/blob/main/benchmarks/results.txt).
 
 The following benchmarks are available:
-
-- **benchmark_1** - This is a sanity benchmark, testing integer expression synthesis with DefaultMetric.
-
-- **benchmark_2** - This benchmark tests float expression synthesis with DefaultMetric.
-
-- **benchmark_3** - This benchmark tests string-related expression synthesis with DefaultMetric.
-
-- **benchmark_4** - This benchmark tests list-related expression synthesis with DefaultMetric.
-
-- **benchmark_5** - This is a numerical error benchmark, testing float expression synthesis with NormalMetric.
-
-- **benchmark_6** - This is a calculation error benchmark, testing integer expression synthesis with CalculationMetric.
-
-- **benchmark_7** - This is a typo benchmark, testing string expression synthesis with LevenshteinMetric.
-
-- **benchmark_8** - This is a typo benchmark, testing string expression synthesis with KeyboardMetric.
-
-- **benchmark_9** - This is a typo benchmark, testing string expression synthesis with HomophoneMetric.
-
-- **benchmark_10** - This is a list-element typo benchmark, testing list expression synthesis with HammingMetric.
+- **[benchmark_1](https://github.com/orel-adivi/CorSys/tree/main/benchmarks/benchmark_1)** -
+this is a sanity benchmark, testing integer expression synthesis with DefaultMetric.
+- **[benchmark_2](https://github.com/orel-adivi/CorSys/tree/main/benchmarks/benchmark_2)** -
+this benchmark tests float expression synthesis with DefaultMetric.
+- **[benchmark_3](https://github.com/orel-adivi/CorSys/tree/main/benchmarks/benchmark_3)** -
+this benchmark tests string-related expression synthesis with DefaultMetric.
+- **[benchmark_4](https://github.com/orel-adivi/CorSys/tree/main/benchmarks/benchmark_4)** -
+this benchmark tests list-related expression synthesis with DefaultMetric.
+- **[benchmark_5](https://github.com/orel-adivi/CorSys/tree/main/benchmarks/benchmark_5)** -
+this is a numerical error benchmark, testing float expression synthesis with NormalMetric.
+- **[benchmark_6](https://github.com/orel-adivi/CorSys/tree/main/benchmarks/benchmark_6)** -
+this is a calculation error benchmark, testing integer expression synthesis with CalculationMetric.
+- **[benchmark_7](https://github.com/orel-adivi/CorSys/tree/main/benchmarks/benchmark_7)** -
+this is a typo benchmark, testing string expression synthesis with LevenshteinMetric.
+- **[benchmark_8](https://github.com/orel-adivi/CorSys/tree/main/benchmarks/benchmark_8)** -
+this is a typo benchmark, testing string expression synthesis with KeyboardMetric.
+- **[benchmark_9](https://github.com/orel-adivi/CorSys/tree/main/benchmarks/benchmark_9)** -
+this is a typo benchmark, testing string expression synthesis with HomophoneMetric.
+- **[benchmark_10](https://github.com/orel-adivi/CorSys/tree/main/benchmarks/benchmark_10)** -
+this is a list-element typo benchmark, testing list expression synthesis with HammingMetric.
 
 
 ## Project Engineering
 
 ### Design and Development
 
-website & support files
-security
-design
+The project was designed with accordance to the object-oriented programming (OOP) principles. For security purposes,
+later commits were signed cryptographically, security Github Actions were enabled, and a
+[SECURITY.md](https://github.com/orel-adivi/CorSys/blob/main/SECURITY.md) file was written. For documentation, a
+[website](https://orel-adivi.github.io/CorSys/) is available and a
+[SUPPORT.md](https://github.com/orel-adivi/CorSys/blob/main/SUPPORT.md) file was written. The project was written using
+PyCharm Professional and was managed using [GitHub](https://github.com/orel-adivi/CorSys).
 
 
 ### Continuous Integration
-ci
+
+In order to ensure the correctness of commits sent to th GitHub server, a continuous integration pipeline was set.
+These checks are run automatically for each pull request and each push. The following actions were set:
+1) [Build](https://github.com/orel-adivi/CorSys/actions/workflows/build.yml) - basic tests are run with the updated
+code, to ensure the lack of syntax errors.
+2) [Benchmarks](https://github.com/orel-adivi/CorSys/actions/workflows/benchmarks.yml) - all the benchmarks are run
+with the updated code, to ensure its correctness.
+3) [Style check](https://github.com/orel-adivi/CorSys/actions/workflows/style.yml) - the coding style is automatically
+checked using Flake8, to match the PEP8 coding standard.
+4) [Vulnerabilities check](https://github.com/orel-adivi/CorSys/actions/workflows/vulnerabilities.yml) - the updated
+code is check to ensure it does not contain any known vulnerability.
+5) [Dependency review](https://github.com/orel-adivi/CorSys/actions/workflows/dependency-review.yml) - the dependencies
+are reviewed to check for any security issue.
+6) [Website](https://github.com/orel-adivi/CorSys/actions/workflows/website.yml) - the
+[CorSys website](https://orel-adivi.github.io/CorSys/) is updated with the current information.
+7) [Dependabot](https://github.com/orel-adivi/CorSys/blob/main/.github/dependabot.yml) - the dependency versions (in
+[requirements.txt](https://github.com/orel-adivi/CorSys/blob/main/requirements.txt)) are updated regularly.
+
+For the relevant actions, the checks were run in all the supported Python version (CPython 3.9 and CPython 3.10), and
+on all supported operating systems - Windows (Windows Server 2022), macOS (macOS Big Sur 11), and Linux (Ubuntu 20.04).
 
 
 ### Suggestions for Future Research
