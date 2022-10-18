@@ -142,7 +142,7 @@ expression template.
 ```text
 EXP ::= 0
 EXP ::= 1
-EXP ::= x
+EXP ::= X
 EXP ::= [ EXP1 ]
 EXP ::= EXP1 + EXP2
 EXP ::= len( EXP1 )
@@ -161,17 +161,25 @@ implementation for the following expression templates:
 
 In other cases, the value of the expression will be evaluated using Python's `eval`. Please see
 [BuiltinGrammar.txt](https://github.com/orel-adivi/CorSys/tree/main/utils/BuiltinGrammar.txt) for the list of the
+built-in expression templates.
 
 
 ### Metrics
 
-todo
-
--m {DefaultMetric,NormalMetric,CalculationMetric,VectorMetric,HammingMetric,LevenshteinMetric,PermutationMetric,KeyboardMetric,HomophoneMetric}, --metric {DefaultMetric,NormalMetric,CalculationMetric,VectorMetric,HammingMetric,LevenshteinMetric,PermutationMetric,KeyboardMetric,HomophoneMetric}
-                        the metric for the synthesizer (default =
-                        'DefaultMetric')
-  -mp METRIC_PARAMETER, --metric-parameter METRIC_PARAMETER
-                        the parameter for the metric
+The distance between the actual outputs and the expected outputs is calculated by the selected metric. All the metrics
+share a similar interface, where each metric implements a distance function for each of the basic Python types - int,
+float, str, and list. The metric has to be provided in the `--metric` parameter (or `-m`). For several metrics, an
+additional parameter, `--metric-parameter` (or `-mp`), is also required. The following values are available for
+the `--metric` parameter:
+- `DefaultMetric` - 
+- `NormalMetric` - 
+- `CalculationMetric` - 
+- `VectorMetric` - 
+- `HammingMetric` - 
+- `LevenshteinMetric` - 
+- `PermutationMetric` - 
+- `KeyboardMetric` - 
+- `HomophoneMetric` - 
 
 
 ### Tactics
