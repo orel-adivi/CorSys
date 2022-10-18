@@ -1,6 +1,6 @@
-Examples1,sorted(y)[-1]
+Examples1,x[2:-1:None]
 Examples2,x + y
-Examples3,y[0] + x[-1]
+Examples3,y[0] + x
 Examples4,x[None:None:-1] + y[None:None:-1]
 Examples5,x[None:None:2] + y[None:None:-1]
 metric,HomophoneMetric
