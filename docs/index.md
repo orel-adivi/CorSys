@@ -141,7 +141,7 @@ expression template.
 ```text
 EXP ::= 0
 EXP ::= 1
-EXP ::= X
+EXP ::= x
 EXP ::= [EXP1]
 EXP ::= EXP1 + EXP2
 EXP ::= len(EXP1)
