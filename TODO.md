@@ -4,3 +4,5 @@
 
 3) write README.md + update webpage
 4) write final presentation
+
+lists, default (+ optionally list comprehension)

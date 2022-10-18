@@ -12,6 +12,7 @@
 
 ![logo](/docs/logo.jpg)
 
+
 ## About the Project
 
 "CorSys" is a demonstrative program synthesizer, which synthesizes best-effort Python expressions while
@@ -45,6 +46,7 @@ at Taub Faculty of Computer Science, Technion - Israel Institute of Technology. 
 Orel Adivi `(orel.adivi [at] cs.technion.ac.il)` and Daniel Noor `(daniel.noor [at] cs.technion.ac.il)`,
 and under the supervision of Matan Peled and assistant professor Shachar Itzhaky. The work was done in about
 a month, from 19 September 2022 to 18 October 2022. The project is released under MIT licence.
+
 
 ## Usage
 
@@ -105,6 +107,7 @@ The `--help` flag (or `-h`) shows this message with the list of the parameters, 
 sets the maximal syntax-tree height to generate expressions, and `--statistics` flag shows statistics about the
 synthesizer. The other flags are covered in the following sections.
 
+
 ### Inputs and Outputs
 
 mention utils
@@ -113,6 +116,7 @@ todo
 -io INPUT_OUTPUT_FILE, --input-output INPUT_OUTPUT_FILE
                         the root for the input-output file
 
+
 ### Search Space
 
 mention utils
@@ -120,6 +124,7 @@ todo
 
 -s SEARCH_SPACE_FILE, --search-space SEARCH_SPACE_FILE
                         the root for the search space file
+
 
 ### Metrics
 
@@ -131,6 +136,7 @@ todo
   -mp METRIC_PARAMETER, --metric-parameter METRIC_PARAMETER
                         the parameter for the metric
 
+
 ### Tactics
 
 The criterion of which expression to return is defined by the `--tactic` parameter (or `-t`). For several tactics,
@@ -140,39 +146,70 @@ the `--tactic` parameter:
 - `match` - the first expression whose distance value is equal or less than the defined value is returned.
 The `--tactic-parameter` defines the threshold distance for returning an expression, and should be between 0.0 to
 the number of examples.
+
 - `accuracy` - the first expression whose distance value, divided by the number of examples, is equal or less than the
 defined value is returned. The `--tactic-parameter` defines the threshold distance, after normalization, for returning
 an expression, and should be between 0.0 to 1.0.
+
 - `height` - the best expression, among all possible expressions whose syntax-tree height is up the the defined, is
 returned. Please note that the height threshold is defined by `--max-height` parameter, and  `--tactic-parameter` is
 ignored.
+
 - `top` - the best expressions, among all possible expressions whose syntax-tree height is up the the defined, are
 returned, one in each line (in descending accuracy). The `--tactic-parameter` defines the number of expressions to
 return.
+
 - `best_by_height` - the best expressions, among all possible expressions whose syntax-tree height is up the the
 defined, are returned, one in each line, so each line represent a different syntax-tree height limit. Please note
 that the maximal syntax-tree height is defined by `--max-height` parameter, and  `--tactic-parameter` is ignored.
+
 - `penalized_height` - the best expression, among all possible expressions whose syntax-tree height is up the the
 defined, is returned. Each expression is penalized according to its syntax-tree height, so smaller expressions are
 preferred. The `--tactic-parameter` defines the penalty for each addition of one for the syntax-tree height, and
 should be between 0.0 to 1.0.
+
 - `interrupt` - the best expression, till finishing searching all possible expressions whose syntax-tree height is
 up the the defined or till keyboard interrupt `(ctrl + c)`, is returned. The `--tactic-parameter` is ignored.
 
+
 ## Benchmarks
 
-todo
+In order to evaluate the performance of the synthesizer, we wrote a set of ten benchmarks, each having a single Grammar
+file and five input-output pair files (total of 50 tests). Each of the benchmarks was built to demonstrate a different
+ability of the synthesizer, focusing on its unique abilities of correcting incorrect input-output specifications. In
+order to run the synthesizer with all the benchmarks, the following script can be executed:
 
-(1) sanity, default + - * //
-(2) floats, default
-(4) strings, default
-(3) lists, default (+ optionally list comprehension)
-(5) floats, NormalMetric - numerical errors
-(6) integers, CalculationMetric - calculation mistakes
-(7) strings, LevenshteinMetric - typos
-(8) strings, KeyboardMetric - typos
-(9) strings, HomophoneMetric - typos
-(10) lists, WeightedMetric(VectorMetric - correlation? + HammingMetric) - mistakes in lists
+```bash
+python RunAllBenchmarks.py
+```
+
+It is also possible ro run specific benchmarks by mentioning them as command line arguments. The script runs the
+synthesizer with each of the input-output pair files, with the relevant Grammar, and ensures the correctness of the
+output the lack of other errors. The time that is required for each test is also printed. We ran the script and the
+output we got is available in [results.txt](https://github.com/orel-adivi/CorSys/blob/main/benchmarks/results.txt).
+
+The following benchmarks are available:
+
+- **benchmark_1** - This is a sanity benchmark, testing integer expression synthesis with DefaultMetric.
+
+- **benchmark_2** - This benchmark tests float expression synthesis with DefaultMetric.
+
+- **benchmark_3** - This benchmark tests string-related expression synthesis with DefaultMetric.
+
+- **benchmark_4** - This benchmark tests list-related expression synthesis with DefaultMetric.
+
+- **benchmark_5** - This is a numerical error benchmark, testing float expression synthesis with NormalMetric.
+
+- **benchmark_6** - This is a calculation error benchmark, testing integer expression synthesis with CalculationMetric.
+
+- **benchmark_7** - This is a typo benchmark, testing string expression synthesis with LevenshteinMetric.
+
+- **benchmark_8** - This is a typo benchmark, testing string expression synthesis with KeyboardMetric.
+
+- **benchmark_9** - This is a typo benchmark, testing string expression synthesis with HomophoneMetric.
+
+- **benchmark_10** - This is a list-element typo benchmark, testing list expression synthesis with HammingMetric.
+
 
 ## Project Engineering
 
@@ -182,8 +219,10 @@ website & support files
 security
 design
 
+
 ### Continuous Integration
 ci
+
 
 ### Suggestions for Future Research
 
