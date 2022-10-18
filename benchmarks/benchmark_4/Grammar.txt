@@ -10,3 +10,4 @@ EXP ::= len(EXP1)
 EXP ::= EXP1 + EXP2
 EXP ::= EXP1[EXP2]
 EXP ::= EXP1[EXP2:EXP3:EXP4]
+EXP ::= [val * 2 for val in EXP1 if not val % 2]

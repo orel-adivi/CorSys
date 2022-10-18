@@ -1,7 +1,7 @@
 Examples1,sorted(x) + [0]
 Examples2,len(x + y)
 Examples3,x[None:None:-1]
-Examples4,x[None:None:2]
+Examples4,[val * 2 for val in x if not val % 2]
 Examples5,x[2:None:None] + y[-1:None:None]
 metric,DefaultMetric
 tactic,match
