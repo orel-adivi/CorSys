@@ -48,8 +48,9 @@ a month, from 19 September 2022 to 18 October 2022. The project is released unde
 
 ## Usage
 
-The synthesizer main file is [Synthesizer.py](./Synthesizer.py), which uses code implemented in [src directory](./src).
-For running the synthesizer, an installation of [CPython 3.9](https://www.python.org/downloads/release/python-3915/)
+The synthesizer main file is [Synthesizer.py](https://github.com/orel-adivi/CorSys/blob/main/Synthesizer.py),
+which uses code implemented in [src directory](https://github.com/orel-adivi/CorSys/tree/main/src). For running
+the synthesizer, an installation of [CPython 3.9](https://www.python.org/downloads/release/python-3915/)
 or [CPython 3.10](https://www.python.org/downloads/release/python-3108/) is required (the implementation is platform
 independent, and was tested on Windows, MacOS, and Linux).
 
