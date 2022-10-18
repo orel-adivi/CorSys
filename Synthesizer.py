@@ -49,7 +49,7 @@ def main() -> None:
     arguments = cl_parser.parse_args()
 
     input_output_pairs = InputOutputPairReader.readCSV(arguments.input_output_file)
-    search_space = SearchSpaceReader.readCSV(arguments.search_space_file)
+    search_space = SearchSpaceReader.readTXT(arguments.search_space_file)
     metric = MetricReader.parseMetric(arguments.metric, arguments.metric_parameter)
     generator = BestEffortProgramGenerator(search_space, arguments.max_height)
 

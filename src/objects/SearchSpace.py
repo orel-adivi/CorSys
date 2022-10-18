@@ -4,6 +4,7 @@
 #   @authors : Orel Adivi and Daniel Noor
 #
 from functools import partial
+from typing import Callable
 
 from src.synthesizer.ExpressionGenerator import ExpressionGenerator
 
@@ -20,64 +21,6 @@ class SearchSpace(object):
         - addLiterals - Add literal symbols to the object.
         - addFunction - Add a function symbol to the object.
     """
-
-    OPERATION_DICT = [
-        {},
-        {
-            '+': ExpressionGenerator.UnaryOperations.generatePlusNode,
-            '-': ExpressionGenerator.UnaryOperations.generateInverseNode,
-            'not': ExpressionGenerator.UnaryOperations.generateLogicalNotNode,
-            '~': ExpressionGenerator.UnaryOperations.generateBitwiseNotNode,
-            '[]': ExpressionGenerator.Subscripting.generateListNode,
-            'len': ExpressionGenerator.Functions.generateLenCallNode,
-            'sorted': ExpressionGenerator.Functions.generateSortedListNode,
-            'reversed': ExpressionGenerator.Functions.generateReversedListNode,
-            'capitalize': ExpressionGenerator.Functions.generateCapitalizeCallNode,
-            'casefold': ExpressionGenerator.Functions.generateCasefoldCallNode,
-            'lower': ExpressionGenerator.Functions.generateLowerCallNode,
-            'title': ExpressionGenerator.Functions.generateTitleCallNode,
-            'upper': ExpressionGenerator.Functions.generateUpperCallNode,
-            'abs': ExpressionGenerator.Functions.generateAbsCallNode
-        },
-        {
-            '+': ExpressionGenerator.BinaryOperations.generateAdditionNode,
-            '-': ExpressionGenerator.BinaryOperations.generateSubtractionNode,
-            '*': ExpressionGenerator.BinaryOperations.generateMultiplicationNode,
-            '/': ExpressionGenerator.BinaryOperations.generateDivisionNode,
-            '//': ExpressionGenerator.BinaryOperations.generateFloorDivisionNode,
-            '%': ExpressionGenerator.BinaryOperations.generateModuloNode,
-            '**': ExpressionGenerator.BinaryOperations.generatePowerNode,
-            '<<': ExpressionGenerator.BinaryOperations.generateLeftShiftNode,
-            '>>': ExpressionGenerator.BinaryOperations.generateRightShiftNode,
-            '|': ExpressionGenerator.BinaryOperations.generateBitwiseOrNode,
-            '^': ExpressionGenerator.BinaryOperations.generateBitwiseXorNode,
-            '&': ExpressionGenerator.BinaryOperations.generateBitwiseAndNode,
-            '@': ExpressionGenerator.BinaryOperations.generateMatrixMultiplicationNode,
-            'and': ExpressionGenerator.BooleanOperations.generateLogicalAndNode,
-            'or': ExpressionGenerator.BooleanOperations.generateLogicalOrNode,
-            '[]': ExpressionGenerator.Subscripting.generateListNode,
-            'subscript': ExpressionGenerator.Subscripting.generateSubscriptListNode,
-            'index': ExpressionGenerator.Functions.generateIndexCallNode,
-            'count': ExpressionGenerator.Functions.generateCountCallNode,
-            'join': ExpressionGenerator.Functions.generateJoinCallNode
-        },
-        {
-            'and': ExpressionGenerator.BooleanOperations.generateLogicalAndNode,
-            'or': ExpressionGenerator.BooleanOperations.generateLogicalOrNode,
-            '[]': ExpressionGenerator.Subscripting.generateListNode
-        },
-        {
-            'and': ExpressionGenerator.BooleanOperations.generateLogicalAndNode,
-            'or': ExpressionGenerator.BooleanOperations.generateLogicalOrNode,
-            '[]': ExpressionGenerator.Subscripting.generateListNode,
-            'slice': ExpressionGenerator.Subscripting.generateSliceListNode
-        },
-        {
-            'and': ExpressionGenerator.BooleanOperations.generateLogicalAndNode,
-            'or': ExpressionGenerator.BooleanOperations.generateLogicalOrNode,
-            '[]': ExpressionGenerator.Subscripting.generateListNode
-        }
-    ]
 
     def __init__(self):
         """
@@ -114,14 +57,14 @@ class SearchSpace(object):
         self._symbols[0] += [partial(ExpressionGenerator.Terminal.generateLiteralNode, value=literal)
                              for literal in literals]
 
-    def addFunction(self, identifier: str, arity: int) -> None:
+    def addFunction(self, function: Callable, arity: int) -> None:
         """
         Add a function symbol to the object.
 
-        :param identifier: Name of function (in string form).
+        :param function: The function.
         :param arity: Arity of function.
         :return: None.
         """
         for _ in range((arity + 1) - len(self._symbols)):
             self._symbols.append([])
-        self._symbols[arity].append(SearchSpace.OPERATION_DICT[arity][identifier])
+        self._symbols[arity].append(function)
