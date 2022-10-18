@@ -44,7 +44,7 @@ The work is submitted as the final project in the course "Software Synthesis and
 at Taub Faculty of Computer Science, Technion - Israel Institute of Technology. The project was written by
 Orel Adivi `(orel.adivi [at] cs.technion.ac.il)` and Daniel Noor `(daniel.noor [at] cs.technion.ac.il)`,
 and under the supervision of Matan Peled and assistant professor Shachar Itzhaky. The work was done in about
-a month, from 19 September 2022 to 18 October 2022. The project is released under MIT licence.
+a month, from 19 September 2022 to 18 October 2022. The project is released under MIT license.
 
 
 ## Usage
@@ -109,11 +109,11 @@ synthesizer. The other flags are covered in the following sections.
 
 ### Inputs and Outputs
 
-The input-and-output pair examples are a major part of the specifications, and have be be supplied in a Comma-separated
+The input-and-output pair examples are a major part of the specifications and have to be supplied in a Comma-separated
 values (CSV) file. The path to this file has to be provided in the `--input-output` parameter (or `-io`). The first row
-of the file must include the name of each variable, and in the last column the symbolic name `OUTPUT` must appear to
-indicate the expected value (possibly with mistakes). After the first row, each row represent a single input-output
-example, where the value of each variable matches its name in the first row. This is a minimal example for
+of the file must include the name of each variable, and in the last column, the symbolic name `OUTPUT` must appear to
+indicate the expected value (possibly with mistakes). After the first row, each row represents a single input-output
+example, where the value of each variable matches its name in the first row. This is a minimal example of
 this format:
 
 ```text
@@ -131,11 +131,12 @@ Examples for input-and-output pair example files are available in the
 
 ### Search Space (Grammar)
 
-The synthesis process traverse a specified search space, given in a txt (TXT) file. The path to this file has to be
-provided in the `--search-space` parameter (or `-s`). In this file, each line must start with `EXP ::= ` (due to Python
-type system, we decided to treat all Python types orthogonally and we do not support different Grammar variables), and
-after it the expression template. The allowed variables for the expression templates are `EXP1`, `EXP2`,`EXP3`, `EXP4`,
-`EXP5`, `EXP6`, `EXP7`, `EXP8`, and `EXP9`, such as the number of the maximal Grammar variable matches the arity of the
+The synthesis process traverses a specified search space, given in a text (TXT) file. The path to this file has to be
+provided in the `--search-space` parameter (or `-s`). In this file, each line must start with `EXP ::= ` (due to
+Python's type system, we decided to treat all Python types orthogonally and we do not support different Grammar
+variables), and after it the expression template. The allowed variables for the expression templates are `EXP1`,
+`EXP2`, `EXP3`, `EXP4`, `EXP5`, `EXP6`, `EXP7`, `EXP8`, and `EXP9`, such as the number of the maximal Grammar variable
+matches the arity of the
 expression template.
 
 ```text
@@ -177,12 +178,12 @@ the `--metric` parameter:
 numbers. The `--metric-parameter` defines the standard deviation value for use.
 - `CalculationMetric` - this metric considers two values closer if the differences between them can be explained by
 manual calculation mistakes.
-- `VectorMetric` - this metric lets the user choose a vector distance function and then uses it to measure distance
-between values. The `--metric-parameter` defines the vector distance function, and can be one of `braycurtis`,
+- `VectorMetric` - this metric lets the user choose a vector distance function and then uses it to measure the distance
+between values. The `--metric-parameter` defines the vector distance function and can be one of `braycurtis`,
 `canberra`, `correlation`, `cosine`, `jensenshannon`, `hamming`, `jaccard`, `russellrao`, and `yule`.
 - `HammingMetric` - this metric computes the Hamming distance between strings and normalizes it according to the string
 length.
-- `LevenshteinMetric` - this metric computes the Levensthein distance between strings and normalizes it according to the
+- `LevenshteinMetric` - this metric computes the Levenshtein distance between strings and normalizes it according to the
 string length. The `--metric-parameter` defines whether to use the recursive implementation (with memoization), in the
 case the truth value is `True`, or the dynamic programming implementation, in the case the truth value is `False`.
 - `PermutationMetric` - this metric considered lists equal if they contain the same elements, regardless of order.
@@ -197,7 +198,7 @@ The criterion of which expression to return is defined by the `--tactic` paramet
 an additional parameter, `--tactic-parameter` (or `-tp`), is also required. The following values are available for
 the `--tactic` parameter:
 - `match` - the first expression whose distance value is equal or less than the defined value is returned.
-The `--tactic-parameter` defines the threshold distance for returning an expression, and should be between 0.0 to
+The `--tactic-parameter` defines the threshold distance for returning an expression and should be between 0.0 to
 the number of examples.
 - `accuracy` - the first expression whose distance value, divided by the number of examples, is equal or less than the
 defined value is returned. The `--tactic-parameter` defines the threshold distance, after normalization, for returning
@@ -209,30 +210,30 @@ ignored.
 returned, one in each line (in descending accuracy). The `--tactic-parameter` defines the number of expressions to
 return.
 - `best_by_height` - the best expressions, among all possible expressions whose syntax-tree height is up to the
-defined value, are returned, one in each line, so each line represent a different syntax-tree height limit. Please note
+defined value, are returned, one in each line, so each line represents a different syntax-tree height limit. Please note
 that the maximal syntax-tree height is defined by `--max-height` parameter, and  `--tactic-parameter` is ignored.
-- `penalized_height` - the best expression, among all possible expressions whose syntax-tree height is up the the
+- `penalized_height` - the best expression, among all possible expressions whose syntax-tree height is up to the
 defined, is returned. Each expression is penalized according to its syntax-tree height, so smaller expressions are
-preferred. The `--tactic-parameter` defines the penalty for each addition of one for the syntax-tree height, and
+preferred. The `--tactic-parameter` defines the penalty for each addition of one for the syntax-tree height and
 should be between 0.0 to 1.0.
 - `interrupt` - the best expression, until finishing searching all possible expressions whose syntax-tree height is
-up the the defined or until keyboard interrupt `(ctrl + c)`, is returned. The `--tactic-parameter` is ignored.
+up to the defined or until keyboard interrupt `(ctrl + c)`, is returned. The `--tactic-parameter` is ignored.
 
 
 ## Benchmarks
 
 In order to evaluate the performance of the synthesizer, we wrote a set of ten benchmarks, each having a single Grammar
-file and five input-output pair files (total of 50 tests). Each of the benchmarks was built to demonstrate a different
-ability of the synthesizer, focusing on its unique abilities of correcting incorrect input-output specifications. In
+file and five input-output pair files (a total of 50 tests). Each of the benchmarks was built to demonstrate a different
+ability of the synthesizer, focusing on its unique abilities to correct incorrect input-output specifications. In
 order to run the synthesizer with all the benchmarks, the following script can be executed:
 
 ```bash
 python RunAllBenchmarks.py
 ```
 
-It is also possible ro run specific benchmarks by mentioning them as command line arguments. The script runs the
+It is also possible to run specific benchmarks by mentioning them as command-line arguments. The script runs the
 synthesizer with each of the input-output pair files, with the relevant Grammar, and ensures the correctness of the
-output the lack of other errors. The time that is required for each test is also printed. We ran the script and the
+output and the lack of other errors. The time that is required for each test is also printed. We ran the script and the
 output we got is available in [results.txt](https://github.com/orel-adivi/CorSys/blob/main/benchmarks/results.txt).
 
 The following benchmarks are available:
@@ -262,7 +263,7 @@ this is a list-element typo benchmark, testing list expression synthesis with Ha
 
 ### Design and Development
 
-The project was designed with accordance to the object-oriented programming (OOP) principles. For security purposes,
+The project was designed in accordance with the object-oriented programming (OOP) principles. For security purposes,
 later commits were signed cryptographically, security Github Actions were enabled, and a
 [SECURITY.md](https://github.com/orel-adivi/CorSys/blob/main/SECURITY.md) file was written. For documentation, a
 [website](https://orel-adivi.github.io/CorSys/) is available and a
@@ -272,7 +273,7 @@ PyCharm Professional and was managed using [GitHub](https://github.com/orel-adiv
 
 ### Continuous Integration
 
-In order to ensure the correctness of commits sent to th GitHub server, a continuous integration pipeline was set.
+In order to ensure the correctness of commits sent to the GitHub server, a continuous integration pipeline was set.
 These checks are run automatically for each pull request and each push. The following actions were set:
 - **[Build](https://github.com/orel-adivi/CorSys/actions/workflows/build.yml)** - basic tests are run with the updated
 code, to ensure the lack of syntax errors.
@@ -281,9 +282,9 @@ with the updated code, to ensure its correctness.
 - **[Style check](https://github.com/orel-adivi/CorSys/actions/workflows/style.yml)** - the coding style is
 automatically checked using Flake8, to match the PEP8 coding standard.
 - **[Vulnerabilities check](https://github.com/orel-adivi/CorSys/actions/workflows/vulnerabilities.yml)** - the
-updated code is check to ensure it does not contain any known vulnerability.
+updated code is checked to ensure it does not contain any known vulnerability.
 - **[Dependency review](https://github.com/orel-adivi/CorSys/actions/workflows/dependency-review.yml)** - the
-dependencies are reviewed to check for any security issue.
+dependencies are reviewed to check for any security issues.
 - **[Website](https://github.com/orel-adivi/CorSys/actions/workflows/website.yml)** - the
 [CorSys website](https://orel-adivi.github.io/CorSys/) is updated with the current information.
 - **[Dependabot](https://github.com/orel-adivi/CorSys/blob/main/.github/dependabot.yml)** - the dependency versions
@@ -295,41 +296,41 @@ on all supported operating systems - Windows (Windows Server 2022), macOS (macOS
 
 ### Suggestions for Future Research
 
-During the month of work, we were able to develop CorSys and to demonstrate its abilities. We suggest the following
+During the month of work, we were able to develop CorSys and demonstrate its abilities. We suggest the following
 directions for future research:
 - **Adding additional metrics** - there are currently nine supported metrics, which cover different kinds of possible
 user mistakes. Covering more kinds of mistakes is possible by implementing more metrics (for example, a metric that
 deals with typing with a constant offset of typing on a regular keyboard, which might be common with small keyboards).
-Additionally, a combination of existing metrics may be combined to a single metric, with uses different metrics for
+Additionally, a combination of existing metrics may be combined into a single metric, with uses different metrics for
 different types. As a proof of concept, we have implemented
 [CombinedMetric.py](https://github.com/orel-adivi/CorSys/blob/main/src/metrics/CombinedMetric.py) and found the current
 design to work with generating a metric that combines existing ones. It is also possible to be generalized to a weighted
 metric, where the metric for each type is calculated using several existing ones.
 - **Analyzing the frequency of user mistakes** - the metrics we generated are based on the mistakes we experienced as
-Python programmers. It might be helpful to analyse the frequency of general-purpose Python programmers for creating more
+Python programmers. It might be helpful to analyze the frequency of general-purpose Python programmers for creating more
 relevant metrics.
 - **Dealing with incorrect input specifications** - the current implementation assumes that the incorrect specifications
 are only in the output, assuming that mistaken input specifications are 'linearly' expressed as mistaken outputs. It is
 might be possible to find ways for dealing with mistaken input specifications independently of the output.
-- **Improving the efficiency with different implementation** - we found that for several input types and for several
-metrics, the time that was required to traverse all the expression with syntax-tree height of up to two - was up to five
-minutes. In order to be used in real conditions, this speed has to be improved. It is possible to do so by implementing
-more efficient algorithms for the metrics, improving the implementation of the synthesis process (for example, not
-treating all the expression types orthogonally, as it is now), or implementing the synthesizer is a different,
-preferably compiled, programming langauge. The efficiency of the synthesizer can be tested by creating an interactive
-game, where the synthesizer is required to find a matching example for a given Grammar and a set of input-output pairs,
-faster than a human.
+- **Improving the efficiency with different implementations** - we found that for several input types and for several
+metrics, the time that was required to traverse all the expressions with a syntax-tree height of up to two - was up to 
+five minutes. In order to be used in real conditions, this speed has to be improved. It is possible to do so by
+implementing more efficient algorithms for the metrics, improving the implementation of the synthesis process (for
+example, not treating all the expression types orthogonally, as it is now), or implementing the synthesizer in a
+different, preferably compiled, programming language. The efficiency of the synthesizer can be tested by creating an
+interactive game, where the synthesizer is required to find a matching example for a given Grammar and a set of
+input-output pairs, faster than a human.
 - **Improving the efficiency with jitting** - the performance of the implementation can be also improved using
 just-in-time (JIT) compilation. This can be achieved by using [PyPy](https://www.pypy.org/) Python interpreter, which
 is not currently supported.
 - **Testing the current implementation** - the correctness of the implementation is currently mainly checked by the
-benchmarks. Testing each Python file separately using unittests might help finding hiding bugs. We have created a
+benchmarks. Testing each Python file separately using unittests might help find hiding bugs. We have created a
 basic [unittest testing framework](https://github.com/orel-adivi/CorSys/blob/main/docs/unittesting_files.zip) for
 the project, and we tested a previous version of the file ExpressionGenerator.py using random numbers.
 - **Using the current implementation for different tasks** - the current implementation is a Syntax-Guided Synthesis
 (SyGuS) synthesizer that is given small-step specifications to work with Programming by Examples (PBE). However, the
-implementation can be generalize for different methodologies of software synthesis, such as CounterExample-Guided
-Inductive Synthesis (CEGIS). For instance, a program minimizer can be built, so it suggests the user a smaller
+implementation can be generalized for different methodologies of software synthesis, such as CounterExample-Guided
+Inductive Synthesis (CEGIS). For instance, a program minimizer can be built, so it suggests to the user a smaller
 expression whose values are close enough.
 
-Please feel free to contact us for any question you have with CorSys.
+Please feel free to contact us with any questions you have about CorSys.

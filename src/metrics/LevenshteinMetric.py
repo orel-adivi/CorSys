@@ -13,7 +13,7 @@ from src.objects.Metric import Metric
 
 class LevenshteinMetric(Metric):
     """
-    The LevenshteinMetric class implements the Levenshtein metric, which computes the Levensthein distance between
+    The LevenshteinMetric class implements the Levenshtein metric, which computes the Levenshtein distance between
     strings and normalizes it according to the string length. For other data types it uses the default metric.
 
     Public methods:
