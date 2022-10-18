@@ -1,6 +1,6 @@
 title: CorSys
 logo: ./logo.png
-description: Synthesizing best-effort python expressions while weighting the chance for mistakes in given user outputs.
+description: Synthesizing best-effort Python expressions while weighting the chance for mistakes in given user outputs.
 show_downloads: true
 google_analytics:
 theme: jekyll-theme-minimal
