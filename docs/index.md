@@ -142,9 +142,9 @@ expression template.
 EXP ::= 0
 EXP ::= 1
 EXP ::= X
-EXP ::= [ EXP1 ]
+EXP ::= [EXP1]
 EXP ::= EXP1 + EXP2
-EXP ::= len( EXP1 )
+EXP ::= len(EXP1)
 ```
 
 Examples for search space files are available in the
@@ -274,19 +274,19 @@ PyCharm Professional and was managed using [GitHub](https://github.com/orel-adiv
 
 In order to ensure the correctness of commits sent to th GitHub server, a continuous integration pipeline was set.
 These checks are run automatically for each pull request and each push. The following actions were set:
-1) **[Build](https://github.com/orel-adivi/CorSys/actions/workflows/build.yml)** - basic tests are run with the updated
+- **[Build](https://github.com/orel-adivi/CorSys/actions/workflows/build.yml)** - basic tests are run with the updated
 code, to ensure the lack of syntax errors.
-2) **[Benchmarks](https://github.com/orel-adivi/CorSys/actions/workflows/benchmarks.yml)** - all the benchmarks are run
+- **[Benchmarks](https://github.com/orel-adivi/CorSys/actions/workflows/benchmarks.yml)** - all the benchmarks are run
 with the updated code, to ensure its correctness.
-3) **[Style check](https://github.com/orel-adivi/CorSys/actions/workflows/style.yml)** - the coding style is
+- **[Style check](https://github.com/orel-adivi/CorSys/actions/workflows/style.yml)** - the coding style is
 automatically checked using Flake8, to match the PEP8 coding standard.
-4) **[Vulnerabilities check](https://github.com/orel-adivi/CorSys/actions/workflows/vulnerabilities.yml)** - the
+- **[Vulnerabilities check](https://github.com/orel-adivi/CorSys/actions/workflows/vulnerabilities.yml)** - the
 updated code is check to ensure it does not contain any known vulnerability.
-5) **[Dependency review](https://github.com/orel-adivi/CorSys/actions/workflows/dependency-review.yml)** - the
+- **[Dependency review](https://github.com/orel-adivi/CorSys/actions/workflows/dependency-review.yml)** - the
 dependencies are reviewed to check for any security issue.
-6) **[Website](https://github.com/orel-adivi/CorSys/actions/workflows/website.yml)** - the
+- **[Website](https://github.com/orel-adivi/CorSys/actions/workflows/website.yml)** - the
 [CorSys website](https://orel-adivi.github.io/CorSys/) is updated with the current information.
-7) **[Dependabot](https://github.com/orel-adivi/CorSys/blob/main/.github/dependabot.yml)** - the dependency versions
+- **[Dependabot](https://github.com/orel-adivi/CorSys/blob/main/.github/dependabot.yml)** - the dependency versions
 (in [requirements.txt](https://github.com/orel-adivi/CorSys/blob/main/requirements.txt)) are updated regularly.
 
 For the relevant actions, the checks were run in all the supported Python version (CPython 3.9 and CPython 3.10), and
