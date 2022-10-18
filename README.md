@@ -203,21 +203,21 @@ the number of examples.
 - `accuracy` - the first expression whose distance value, divided by the number of examples, is equal or less than the
 defined value is returned. The `--tactic-parameter` defines the threshold distance, after normalization, for returning
 an expression, and should be between 0.0 to 1.0.
-- `height` - the best expression, among all possible expressions whose syntax-tree height is up the the defined, is
+- `height` - the best expression, among all possible expressions whose syntax-tree height is up to the defined value, is
 returned. Please note that the height threshold is defined by `--max-height` parameter, and  `--tactic-parameter` is
 ignored.
-- `top` - the best expressions, among all possible expressions whose syntax-tree height is up the the defined, are
+- `top` - the best expressions, among all possible expressions whose syntax-tree height is up to the defined value, are
 returned, one in each line (in descending accuracy). The `--tactic-parameter` defines the number of expressions to
 return.
-- `best_by_height` - the best expressions, among all possible expressions whose syntax-tree height is up the the
-defined, are returned, one in each line, so each line represent a different syntax-tree height limit. Please note
+- `best_by_height` - the best expressions, among all possible expressions whose syntax-tree height is up to the
+defined value, are returned, one in each line, so each line represent a different syntax-tree height limit. Please note
 that the maximal syntax-tree height is defined by `--max-height` parameter, and  `--tactic-parameter` is ignored.
 - `penalized_height` - the best expression, among all possible expressions whose syntax-tree height is up the the
 defined, is returned. Each expression is penalized according to its syntax-tree height, so smaller expressions are
 preferred. The `--tactic-parameter` defines the penalty for each addition of one for the syntax-tree height, and
 should be between 0.0 to 1.0.
-- `interrupt` - the best expression, till finishing searching all possible expressions whose syntax-tree height is
-up the the defined or till keyboard interrupt `(ctrl + c)`, is returned. The `--tactic-parameter` is ignored.
+- `interrupt` - the best expression, until finishing searching all possible expressions whose syntax-tree height is
+up the the defined or until keyboard interrupt `(ctrl + c)`, is returned. The `--tactic-parameter` is ignored.
 
 
 ## Benchmarks
@@ -298,7 +298,7 @@ on all supported operating systems - Windows (Windows Server 2022), macOS (macOS
 
 During the month of work, we were able to develop CorSys and to demonstrate its abilities. We suggest the following
 directions for future research:
-- **Adding additional metrics** - there are currently nine supported metrics, which covers different kinds of possible
+- **Adding additional metrics** - there are currently nine supported metrics, which cover different kinds of possible
 user mistakes. Covering more kinds of mistakes is possible by implementing more metrics (for example, a metric that
 deals with typing with a constant offset of typing on a regular keyboard, which might be common with small keyboards).
 Additionally, a combination of existing metrics may be combined to a single metric, with uses different metrics for
