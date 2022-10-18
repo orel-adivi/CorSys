@@ -57,7 +57,7 @@ def main() -> None:
 
     :return: None
     """
-    cl_parser = argparse.ArgumentParser(description='CorSys - Synthesizing best-effort python expressions while'
+    cl_parser = argparse.ArgumentParser(description='CorSys - Synthesizing best-effort python expressions while '
                                                     'weighting the chance for mistakes in given user outputs.',
                                         epilog='For help with the synthesizer please read SUPPORT.md .',
                                         allow_abbrev=False)

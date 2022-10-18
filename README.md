@@ -14,17 +14,18 @@
 
 ## About the Project
 
-"CorSys" is a demonstrative program synthesizer, which synthesizing best-effort Python expressions while
+"CorSys" is a demonstrative program synthesizer, which synthesizes best-effort Python expressions while
 weighting the chance for mistakes in given user outputs, using various metrics for mistake probability
 evaluation. CorSys enumerate all possible expressions using the given syntax, limited to a specified
-syntax-tree height, using bottom-up enumeration methodology and uses Observational Equivalence for
+syntax-tree height, using a bottom-up enumeration methodology and using Observational Equivalence for
 pruning equivalent expressions under the given set of input-output examples. For each expression whose
 outputs are not observationally equivalent to a previous seen expression, the specified metric grades
 the distance between the actual outputs and the expected one. Finally, the synthesizer is able to
-return the best expression, under a criterion selected by the user.
+return the best expression, under a criterion selected by the user. CorSys is using the Syntax-Guided
+Synthesis (SyGuS) methodology, and is given small-step specifications to work with Programming by Examples (PBE).
 
 This project is based on a [previous work](https://github.com/peleghila/bester) by Peleg and Polikarpova (2020).
-This paper described technique for dealing efficiently with incorrect input-output specifications given by the
+This paper describes a technique for dealing efficiently with incorrect input-output specifications given by the
 user. In the paper, it is suggested to use a distance metric for rewarding more-likely-to-be-correct programs,
 specifically using Levenshtein distance. In this work, we generalize this concept of distance metric for various
 kinds of user mistakes, focusing on arithmetical mistakes (for example, rounding values and off-by-one calculation
@@ -47,7 +48,61 @@ a month, from 18 September 2022 to 18 October 2022. The project is released unde
 
 ## Usage
 
-todo
+The synthesizer main file is [Synthesizer.py](./Synthesizer.py), which uses code implemented in [src directory](./src).
+For running the synthesizer, an installation of [CPython 3.9](https://www.python.org/downloads/release/python-3915/)
+or [CPython 3.10](https://www.python.org/downloads/release/python-3108/) is required (the implementation is platform
+independent, and was tested on Windows, MacOS, and Linux).
+
+The project uses NumPy, SciPy, and overrides Python libraries, which can be installed using Pip package installer: 
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+Then, running the synthesizer with `--help` flag gives the list of the parameters the provide:
+
+```bash
+python Synthesizer.py --help
+```
+
+The following output is given:
+
+```text
+usage: Synthesizer.py [-h] -io INPUT_OUTPUT_FILE -s SEARCH_SPACE_FILE
+                      [-m {DefaultMetric,NormalMetric,CalculationMetric,VectorMetric,HammingMetric,LevenshteinMetric,PermutationMetric,KeyboardMetric,HomophoneMetric}]
+                      [-mp METRIC_PARAMETER]
+                      [-t {match,accuracy,height,top,best_by_height,penalized_height,interrupt}]
+                      [-tp TACTIC_PARAMETER] [-mh MAX_HEIGHT] [--statistics]
+
+CorSys - Synthesizing best-effort python expressions whileweighting the chance
+for mistakes in given user outputs.
+
+options:
+  -h, --help            show this help message and exit
+  -io INPUT_OUTPUT_FILE, --input-output INPUT_OUTPUT_FILE
+                        the root for the input-output file
+  -s SEARCH_SPACE_FILE, --search-space SEARCH_SPACE_FILE
+                        the root for the search space file
+  -m {DefaultMetric,NormalMetric,CalculationMetric,VectorMetric,HammingMetric,LevenshteinMetric,PermutationMetric,KeyboardMetric,HomophoneMetric}, --metric {DefaultMetric,NormalMetric,CalculationMetric,VectorMetric,HammingMetric,LevenshteinMetric,PermutationMetric,KeyboardMetric,HomophoneMetric}
+                        the metric for the synthesizer (default =
+                        'DefaultMetric')
+  -mp METRIC_PARAMETER, --metric-parameter METRIC_PARAMETER
+                        the parameter for the metric
+  -t {match,accuracy,height,top,best_by_height,penalized_height,interrupt}, --tactic {match,accuracy,height,top,best_by_height,penalized_height,interrupt}
+                        the tactic for the synthesizer (default = 'height')
+  -tp TACTIC_PARAMETER, --tactic-parameter TACTIC_PARAMETER
+                        the parameter for the tactic
+  -mh MAX_HEIGHT, --max-height MAX_HEIGHT
+                        the max height for the synthesizer to search (default
+                        = 2)
+  --statistics          whether to present statistics
+
+For help with the synthesizer please read SUPPORT.md .
+```
+
+The `--help` flag shows this message with the list of the parameters, the `--max-height` sets the maximal syntax-tree
+height to generate expressions, and `--statistics` shows statistics about the synthesizer. The other flags are covered
+in the following sections.
 
 ### Inputs and Outputs
 
