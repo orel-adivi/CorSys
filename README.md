@@ -110,20 +110,58 @@ synthesizer. The other flags are covered in the following sections.
 
 ### Inputs and Outputs
 
-mention utils
-todo
+The input-and-output pair examples are a major part of the specifications, and have be be supplied in a Comma-separated
+values (CSV) file. The path to this file has to be provided in the `--input-output` parameter (or `-io`). The first row
+of the file must include the name of each variable (all capitalized), and in the last column the symbolic name `OUTPUT`
+must appear to indicate the expected value (possibly with mistakes). After the first row, each row represent a single
+input-output example, where the value of each variable matches its name in the first row. This is a minimal example for
+this format:
 
--io INPUT_OUTPUT_FILE, --input-output INPUT_OUTPUT_FILE
-                        the root for the input-output file
+```text
+x,y,OUTPUT
+1,2,3
+3,4,7
+1,5,6
+0,0,0
+-1,-5,-6
+```
+
+Examples for input-and-output pair example files are available in the
+[utils/examples](https://github.com/orel-adivi/CorSys/tree/main/utils/examples) directory.
 
 
-### Search Space
+### Search Space (Grammar)
 
-mention utils
-todo
+The synthesis process traverse a specified search space, given in a txt (TXT) file. The path to this file has to be
+provided in the `--search-space` parameter (or `-s`). In this file, each line must start with `EXP ::= ` (due to Python
+type system, we decided to treat all Python types orthogonally and we do not support different Grammar variables), and
+after it the expression template. The allowed variables for the expression templates are `EXP1`, `EXP2`,`EXP3`, `EXP4`,
+`EXP5`, `EXP6`, `EXP7`, `EXP8`, and `EXP9`, such as the number of the maximal Grammar variable matches the arity of the
+expression template.
 
--s SEARCH_SPACE_FILE, --search-space SEARCH_SPACE_FILE
-                        the root for the search space file
+```text
+EXP ::= 0
+EXP ::= 1
+EXP ::= x
+EXP ::= [ EXP1 ]
+EXP ::= EXP1 + EXP2
+EXP ::= len( EXP1 )
+```
+
+Examples for search space files are available in the
+[utils/examples](https://github.com/orel-adivi/CorSys/tree/main/utils/examples) directory. We have a built-in
+implementation for the following expression templates:
+built-in expression templates.
+- **Terminals** - literals and variables.
+- **Unary operations** - `+`, `-`, `not`, and `~`.
+- **Binary operations** - `+`, `-`, `*`, `/`, `//`, `%`, `**`, `<<`, `>>`, `|`, `^`, `&`, and `@`.
+- **Boolean operations** - `and` (of arity up to 5) and `or` (of arity up to 5).
+- **Subscripting** - `[ ]` (of arity up to 5), subscripting (`l[]`), and slicing (`l[::]`).
+- **Functions** - `len`, `index`, `sorted`, `list(reversed())`, `count`, `join`, `capitalize`, `casefold`, `lower`,
+`title`, `upper`, and `abs`.
+
+In other cases, the value of the expression will be evaluated using Python's `eval`. Please see
+[BuiltinGrammar.txt](https://github.com/orel-adivi/CorSys/tree/main/utils/BuiltinGrammar.txt) for the list of the
 
 
 ### Metrics

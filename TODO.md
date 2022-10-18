@@ -1,8 +1,8 @@
 # Todo:
 1) search space reader - add functionality + support txt
-2) update benchmarks (informative examples) + eval + grammar files
+2) benchmarks - eval + grammar files (also in utils)
+3) write final presentation
 
-3) write README.md + update webpage
-4) write final presentation
+4) write README.md + update webpage
 
-lists, default (+ optionally list comprehension)
+maybe: insert list comprehension in lists, default benchmark + update README.md + webpage
