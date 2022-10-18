@@ -6,18 +6,10 @@
 from overrides import overrides
 
 from src.objects.Metric import Metric
-from src.metrics.DefaultMetric import DefaultMetric
-from src.metrics.NormalMetric import NormalMetric
-from src.metrics.CalculationMetric import CalculationMetric
-from src.metrics.HammingMetric import HammingMetric
-from src.metrics.LevenshteinMetric import LevenshteinMetric
-from src.metrics.PermutationMetric import PermutationMetric
-from src.metrics.KeyboardMetric import KeyboardMetric
-from src.metrics.HomophoneMetric import HomophoneMetric
+from src.io.MetricReader import MetricReader
 
 
-class CombinedMetric(DefaultMetric, NormalMetric, CalculationMetric, HammingMetric,
-                     LevenshteinMetric, PermutationMetric, KeyboardMetric, HomophoneMetric):
+class CombinedMetric(Metric):
     """
     The CombinedMetric class allows users to use different metrics for each type.
 
@@ -30,35 +22,28 @@ class CombinedMetric(DefaultMetric, NormalMetric, CalculationMetric, HammingMetr
         - distance - Computes the distance between any two values.
     """
 
-    REGULAR_METRICS = {
-        'DefaultMetric': DefaultMetric,
-        'NormalMetric': NormalMetric,
-        'CalculationMetric': CalculationMetric,
-        'HammingMetric': HammingMetric,
-        'LevenshteinMetric': LevenshteinMetric,
-        'PermutationMetric': PermutationMetric,
-        'KeyboardMetric': KeyboardMetric,
-        'HomophoneMetric': HomophoneMetric
-    }
-
     @overrides
-    def __init__(self, int_metric: str = 'DefaultMetric', float_metric: str = 'DefaultMetric',
-                 str_metric: str = 'DefaultMetric', list_metric: str = 'DefaultMetric'):
+    def __init__(self, int_metric: str, int_metric_parameter: str,
+                 float_metric: str, float_metric_parameter: str,
+                 str_metric: str, str_metric_parameter: str,
+                 list_metric: str, list_metric_parameter: str):
         """
         Initialize a combined metric object, assigning each supported type of variable its own metric.
 
         :param int_metric: The metric to be used for integers.
+        :param int_metric_parameter:
         :param float_metric: The metric to be used for floats.
+        :param float_metric_parameter:
         :param str_metric: The metric to be used for strings.
+        :param str_metric_parameter:
         :param list_metric: The metric to be used for lists.
+        :param list_metric_parameter:
         """
         Metric.__init__(self)
-        for class_name, class_object in CombinedMetric.REGULAR_METRICS.items():
-            class_object.__init__(self)
-        self.__int_metric_class = CombinedMetric.REGULAR_METRICS[int_metric]
-        self.__float_metric_class = CombinedMetric.REGULAR_METRICS[float_metric]
-        self.__str_metric_class = CombinedMetric.REGULAR_METRICS[str_metric]
-        self.__list_metric_class = CombinedMetric.REGULAR_METRICS[list_metric]
+        self.__int_metric_class = MetricReader.METRIC_DICTIONARY[int_metric](int_metric_parameter)
+        self.__float_metric_class = MetricReader.METRIC_DICTIONARY[float_metric](float_metric_parameter)
+        self.__str_metric_class = MetricReader.METRIC_DICTIONARY[str_metric](str_metric_parameter)
+        self.__list_metric_class = MetricReader.METRIC_DICTIONARY[list_metric](list_metric_parameter)
 
     @overrides
     def intDistance(self, actual: int, expected: int, *args, **kwargs) -> float:

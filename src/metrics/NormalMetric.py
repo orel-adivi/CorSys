@@ -25,11 +25,12 @@ class NormalMetric(Metric):
     """
 
     @overrides
-    def __init__(self) -> None:
+    def __init__(self, STD_DEV: float = 1.0) -> None:
         """
         Initialize a normal metric object.
         """
         super().__init__()
+        self.__STD_DEV = STD_DEV
         np.seterr(all='raise')
 
     @overrides
@@ -57,12 +58,12 @@ class NormalMetric(Metric):
         :param actual: Float value returned by the synthesized program.
         :param expected: Float value received as the desired output.
         :param EPS: Unused in this metric.
-        :param STD_DEV: The desired standard deviation of the normal distribution the function uses.
+        :param STD_DEV: Ignored.
         :return: The distance between the floats actual and expected according to the normal metric.
         """
         try:
-            res = scipy.stats.norm.pdf(x=actual, loc=expected, scale=STD_DEV)
-            max_val = scipy.stats.norm.pdf(x=expected, loc=expected, scale=STD_DEV)
+            res = scipy.stats.norm.pdf(x=actual, loc=expected, scale=self.__STD_DEV)
+            max_val = scipy.stats.norm.pdf(x=expected, loc=expected, scale=self.__STD_DEV)
         except FloatingPointError:
             return 1.0
         return (max_val - res) / max_val

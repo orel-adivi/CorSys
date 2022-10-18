@@ -3,6 +3,8 @@
 #   @date : 18 October 2022
 #   @authors : Orel Adivi and Daniel Noor
 #
+import functools
+
 from overrides import overrides
 import numpy as np
 
@@ -24,6 +26,7 @@ class LevenshteinMetric(Metric):
     """
 
     @staticmethod
+    @functools.cache
     def __calcLevenshteinDistRecursive(actual: str, expected: str):
         """
         Compute the Levenshtein distance between two strings recursively.

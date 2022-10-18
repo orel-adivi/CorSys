@@ -10,45 +10,9 @@ from functools import partial
 
 from src.io.InputOutputPairReader import InputOutputPairReader
 from src.io.SearchSpaceReader import SearchSpaceReader
-
-from src.objects.Metric import Metric
-from src.metrics.DefaultMetric import DefaultMetric
-from src.metrics.NormalMetric import NormalMetric
-from src.metrics.CalculationMetric import CalculationMetric
-from src.metrics.VectorMetric import VectorMetric
-from src.metrics.HammingMetric import HammingMetric
-from src.metrics.LevenshteinMetric import LevenshteinMetric
-from src.metrics.PermutationMetric import PermutationMetric
-from src.metrics.KeyboardMetric import KeyboardMetric
-from src.metrics.HomophoneMetric import HomophoneMetric
-# from src.metrics.CombinedMetric import CombinedMetric
-# from src.metrics.WeightedMetric import WeightedMetric
+from src.io.MetricReader import MetricReader
 
 from src.synthesizer.BestEffortProgramGenerator import BestEffortProgramGenerator
-
-
-def get_metric(metric_name: str, metric_parameter: str) -> Metric:
-    """
-    Convert metric name and parameter from string form to a metric object.
-
-    :param metric_name: Metric name is string form
-    :param metric_parameter: Metric parameter (if there is one) in string form
-    :return: A metric object
-    """
-    metrics = {
-        'DefaultMetric': lambda: DefaultMetric(),
-        'NormalMetric': lambda: NormalMetric(),     # todo support change std
-        'CalculationMetric': lambda: CalculationMetric(),
-        'VectorMetric': lambda: VectorMetric(dist_func=metric_parameter),
-        'HammingMetric': lambda: HammingMetric(),
-        'LevenshteinMetric': lambda: LevenshteinMetric(solve_recursively=eval(metric_parameter)),
-        'PermutationMetric': lambda: PermutationMetric(),
-        'KeyboardMetric': lambda: KeyboardMetric(),
-        'HomophoneMetric': lambda: HomophoneMetric()
-        # 'CombinedMetric': lambda: CombinedMetric()
-        # 'WeightedMetric': lambda: WeightedMetric()
-    }
-    return metrics[metric_name]()
 
 
 def main() -> None:
@@ -69,7 +33,6 @@ def main() -> None:
                            choices=['DefaultMetric', 'NormalMetric', 'CalculationMetric', 'VectorMetric',
                                     'HammingMetric', 'LevenshteinMetric', 'PermutationMetric', 'KeyboardMetric',
                                     'HomophoneMetric'],
-                           # 'CombinedMetric', 'WeightedMetric'
                            help='the metric for the synthesizer (default = \'DefaultMetric\')', dest='metric')
     cl_parser.add_argument('-mp', '--metric-parameter', action='store', type=str, default='',
                            help='the parameter for the metric', dest='metric_parameter')
@@ -86,10 +49,8 @@ def main() -> None:
     arguments = cl_parser.parse_args()
 
     input_output_pairs = InputOutputPairReader.readCSV(arguments.input_output_file)
-    inputs = input_output_pairs.inputs
-    outputs = input_output_pairs.outputs
     search_space = SearchSpaceReader.readCSV(arguments.search_space_file)
-    metric = get_metric(arguments.metric, arguments.metric_parameter)
+    metric = MetricReader.parseMetric(arguments.metric, arguments.metric_parameter)
     generator = BestEffortProgramGenerator(search_space, arguments.max_height)
 
     if arguments.tactic == 'match':
@@ -111,8 +72,10 @@ def main() -> None:
     elif arguments.tactic == 'interrupt':
         generation_function = partial(generator.findBestEffortUntilInterruptProgram)
     else:
-        return
+        assert False
 
+    inputs = input_output_pairs.inputs
+    outputs = input_output_pairs.outputs
     result = generation_function(inputs, outputs, metric=metric)
     if not isinstance(result, list):
         result = [result]

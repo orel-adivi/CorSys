@@ -32,7 +32,7 @@ kinds of user mistakes, focusing on arithmetical mistakes (for example, rounding
 mistakes) and typing mistakes (for example, replacing similar-sounding letters and deleting a letter). Please read
 the paper for more details about this technique:
 
-> Peleg, Hila, and Nadia Polikarpova. 2020. “<span class="nocase">Perfect
+> Peleg, Hila, and Polikarpova, Nadia. 2020. “<span class="nocase">Perfect
 > Is the Enemy of Good: Best-Effort Program Synthesis</span>.” In *34th
 > European Conference on Object-Oriented Programming (ECOOP 2020)*, edited
 > by Robert Hirschfeld and Tobias Pape, 166:2:1–30. Leibniz International
@@ -44,7 +44,7 @@ The work is submitted as the final project in the course "Software Synthesis and
 at Taub Faculty of Computer Science, Technion - Israel Institute of Technology. The project was written by
 Orel Adivi `(orel.adivi [at] cs.technion.ac.il)` and Daniel Noor `(daniel.noor [at] cs.technion.ac.il)`,
 and under the supervision of Matan Peled and assistant professor Shachar Itzhaky. The work was done in about
-a month, from 18 September 2022 to 18 October 2022. The project is released under MIT licence.
+a month, from 19 September 2022 to 18 October 2022. The project is released under MIT licence.
 
 ## Usage
 
@@ -74,8 +74,8 @@ usage: Synthesizer.py [-h] -io INPUT_OUTPUT_FILE -s SEARCH_SPACE_FILE
                       [-t {match,accuracy,height,top,best_by_height,penalized_height,interrupt}]
                       [-tp TACTIC_PARAMETER] [-mh MAX_HEIGHT] [--statistics]
 
-CorSys - Synthesizing best-effort python expressions while weighting the chance
-for mistakes in given user outputs.
+CorSys - Synthesizing best-effort python expressions while weighting the
+chance for mistakes in given user outputs.
 
 options:
   -h, --help            show this help message and exit
@@ -156,3 +156,4 @@ unittests
 pypy
 weighted metric
 constant diff keyboard
+combined metric
