@@ -168,18 +168,28 @@ built-in expression templates.
 
 The distance between the actual outputs and the expected outputs is calculated by the selected metric. All the metrics
 share a similar interface, where each metric implements a distance function for each of the basic Python types - int,
-float, str, and list. The metric has to be provided in the `--metric` parameter (or `-m`). For several metrics, an
+float, str, and list. Metrics are required to return 0.0 if the actual outputs and the expected outputs are totally
+equivalent, 1.0 if the actual outputs and the expected outputs are totally different, and any value between 0.0 and 1.0
+in any other case. The metric has to be provided in the `--metric` parameter (or `-m`). For several metrics, an
 additional parameter, `--metric-parameter` (or `-mp`), is also required. The following values are available for
 the `--metric` parameter:
-- `DefaultMetric` - 
-- `NormalMetric` - 
-- `CalculationMetric` - 
-- `VectorMetric` - 
-- `HammingMetric` - 
-- `LevenshteinMetric` - 
-- `PermutationMetric` - 
-- `KeyboardMetric` - 
-- `HomophoneMetric` - 
+- `DefaultMetric` - this metric uses the default implementation for equality of values.
+- `NormalMetric` - this metric uses a normal distribution function to determine the relative distance between two
+numbers. The `--metric-parameter` defines the standard deviation value for use.
+- `CalculationMetric` - this metric considers two values closer if the differences between them can be explained by
+manual calculation mistakes.
+- `VectorMetric` - this metric lets the user choose a vector distance function and then uses it to measure distance
+between values. The `--metric-parameter` defines the vector distance function, and can be one of `braycurtis`,
+`canberra`, `correlation`, `cosine`, `jensenshannon`, `hamming`, `jaccard`, `russellrao`, and `yule`.
+- `HammingMetric` - this metric computes the Hamming distance between strings and normalizes it according to the string
+length.
+- `LevenshteinMetric` - this metric computes the Levensthein distance between strings and normalizes it according to the
+string length. The `--metric-parameter` defines whether to use the recursive implementation (with memoization), in the
+case the truth value is `True`, or the dynamic programming implementation, in the case the truth value is `False`.
+- `PermutationMetric` - this metric considered lists equal if they contain the same elements, regardless of order.
+- `KeyboardMetric` - this metric computes the distance between two characters based on the physical distance between
+their keys on a QWERTY keyboard.
+- `HomophoneMetric` - this metric considers two strings closer if they are pronounced similarly.
 
 
 ### Tactics
@@ -322,5 +332,6 @@ the project, and we tested a previous version of the file ExpressionGenerator.py
 implementation can be generalize for different methodologies of software synthesis, such as CounterExample-Guided
 Inductive Synthesis (CEGIS). For instance, a program minimizer can be built, so it suggests the user a smaller
 expression whose values are close enough.
+
 
 Please feel free to contact us for any question you have with CorSys.

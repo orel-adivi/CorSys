@@ -11,7 +11,7 @@ from src.metrics.VectorMetric import VectorMetric
 class HammingMetric(VectorMetric):
     """
     The HammingMetric class implements the Hamming metric, which computes the Hamming distance between strings and
-    normalizes it according to the strings' length. For other data types it uses the default metric.
+    normalizes it according to the string length. For other data types it uses the default metric.
 
     Public methods:
         - __init__ - Initialize a Hamming metric object.

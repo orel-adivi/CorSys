@@ -26,15 +26,15 @@ class VectorMetric(Metric):
     """
 
     METRIC_FUNCTIONS = {
-        "braycurtis": (scipy.spatial.distance.braycurtis, False),
-        "canberra": (scipy.spatial.distance.canberra, True),
-        "correlation": (scipy.spatial.distance.correlation, False),
-        "cosine": (scipy.spatial.distance.cosine, False),
-        "jensenshannon": (scipy.spatial.distance.jensenshannon, False),
-        "hamming": (scipy.spatial.distance.hamming, True),
-        "jaccard": (scipy.spatial.distance.jaccard, False),
-        "russellrao": (scipy.spatial.distance.russellrao, False),
-        "yule": (scipy.spatial.distance.yule, False)
+        'braycurtis': (scipy.spatial.distance.braycurtis, False),
+        'canberra': (scipy.spatial.distance.canberra, True),
+        'correlation': (scipy.spatial.distance.correlation, False),
+        'cosine': (scipy.spatial.distance.cosine, False),
+        'jensenshannon': (scipy.spatial.distance.jensenshannon, False),
+        'hamming': (scipy.spatial.distance.hamming, True),
+        'jaccard': (scipy.spatial.distance.jaccard, False),
+        'russellrao': (scipy.spatial.distance.russellrao, False),
+        'yule': (scipy.spatial.distance.yule, False)
     }
 
     @overrides
