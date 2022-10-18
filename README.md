@@ -151,7 +151,6 @@ EXP ::= len( EXP1 )
 Examples for search space files are available in the
 [utils/examples](https://github.com/orel-adivi/CorSys/tree/main/utils/examples) directory. We have a built-in
 implementation for the following expression templates:
-built-in expression templates.
 - **Terminals** - literals and variables.
 - **Unary operations** - `+`, `-`, `not`, and `~`.
 - **Binary operations** - `+`, `-`, `*`, `/`, `//`, `%`, `**`, `<<`, `>>`, `|`, `^`, `&`, and `@`.
