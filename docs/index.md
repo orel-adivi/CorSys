@@ -109,31 +109,86 @@ synthesizer. The other flags are covered in the following sections.
 
 ### Inputs and Outputs
 
-mention utils
-todo
+The input-and-output pair examples are a major part of the specifications, and have be be supplied in a Comma-separated
+values (CSV) file. The path to this file has to be provided in the `--input-output` parameter (or `-io`). The first row
+of the file must include the name of each variable (all capitalized), and in the last column the symbolic name `OUTPUT`
+must appear to indicate the expected value (possibly with mistakes). After the first row, each row represent a single
+input-output example, where the value of each variable matches its name in the first row. This is a minimal example for
+this format:
 
--io INPUT_OUTPUT_FILE, --input-output INPUT_OUTPUT_FILE
-                        the root for the input-output file
+```text
+x,y,OUTPUT
+1,2,3
+3,4,7
+1,5,6
+0,0,0
+-1,-5,-6
+```
+
+Examples for input-and-output pair example files are available in the
+[utils/examples](https://github.com/orel-adivi/CorSys/tree/main/utils/examples) directory.
 
 
-### Search Space
+### Search Space (Grammar)
 
-mention utils
-todo
+The synthesis process traverse a specified search space, given in a txt (TXT) file. The path to this file has to be
+provided in the `--search-space` parameter (or `-s`). In this file, each line must start with `EXP ::= ` (due to Python
+type system, we decided to treat all Python types orthogonally and we do not support different Grammar variables), and
+after it the expression template. The allowed variables for the expression templates are `EXP1`, `EXP2`,`EXP3`, `EXP4`,
+`EXP5`, `EXP6`, `EXP7`, `EXP8`, and `EXP9`, such as the number of the maximal Grammar variable matches the arity of the
+expression template.
 
--s SEARCH_SPACE_FILE, --search-space SEARCH_SPACE_FILE
-                        the root for the search space file
+```text
+EXP ::= 0
+EXP ::= 1
+EXP ::= X
+EXP ::= [ EXP1 ]
+EXP ::= EXP1 + EXP2
+EXP ::= len( EXP1 )
+```
+
+Examples for search space files are available in the
+[utils/examples](https://github.com/orel-adivi/CorSys/tree/main/utils/examples) directory. We have a built-in
+implementation for the following expression templates:
+- **Terminals** - literals and variables.
+- **Unary operations** - `+`, `-`, `not`, and `~`.
+- **Binary operations** - `+`, `-`, `*`, `/`, `//`, `%`, `**`, `<<`, `>>`, `|`, `^`, `&`, and `@`.
+- **Boolean operations** - `and` (of arity up to 5) and `or` (of arity up to 5).
+- **Subscripting** - `[ ]` (of arity up to 5), subscripting (`l[]`), and slicing (`l[::]`).
+- **Functions** - `len`, `index`, `sorted`, `list(reversed())`, `count`, `join`, `capitalize`, `casefold`, `lower`,
+`title`, `upper`, and `abs`.
+
+In other cases, the value of the expression will be evaluated using Python's `eval`. Please see
+[BuiltinGrammar.txt](https://github.com/orel-adivi/CorSys/tree/main/utils/BuiltinGrammar.txt) for the list of the
+built-in expression templates.
 
 
 ### Metrics
 
-todo
-
--m {DefaultMetric,NormalMetric,CalculationMetric,VectorMetric,HammingMetric,LevenshteinMetric,PermutationMetric,KeyboardMetric,HomophoneMetric}, --metric {DefaultMetric,NormalMetric,CalculationMetric,VectorMetric,HammingMetric,LevenshteinMetric,PermutationMetric,KeyboardMetric,HomophoneMetric}
-                        the metric for the synthesizer (default =
-                        'DefaultMetric')
-  -mp METRIC_PARAMETER, --metric-parameter METRIC_PARAMETER
-                        the parameter for the metric
+The distance between the actual outputs and the expected outputs is calculated by the selected metric. All the metrics
+share a similar interface, where each metric implements a distance function for each of the basic Python types - int,
+float, str, and list. Metrics are required to return 0.0 if the actual outputs and the expected outputs are totally
+equivalent, 1.0 if the actual outputs and the expected outputs are totally different, and any value between 0.0 and 1.0
+in any other case. The metric has to be provided in the `--metric` parameter (or `-m`). For several metrics, an
+additional parameter, `--metric-parameter` (or `-mp`), is also required. The following values are available for
+the `--metric` parameter:
+- `DefaultMetric` - this metric uses the default implementation for equality of values.
+- `NormalMetric` - this metric uses a normal distribution function to determine the relative distance between two
+numbers. The `--metric-parameter` defines the standard deviation value for use.
+- `CalculationMetric` - this metric considers two values closer if the differences between them can be explained by
+manual calculation mistakes.
+- `VectorMetric` - this metric lets the user choose a vector distance function and then uses it to measure distance
+between values. The `--metric-parameter` defines the vector distance function, and can be one of `braycurtis`,
+`canberra`, `correlation`, `cosine`, `jensenshannon`, `hamming`, `jaccard`, `russellrao`, and `yule`.
+- `HammingMetric` - this metric computes the Hamming distance between strings and normalizes it according to the string
+length.
+- `LevenshteinMetric` - this metric computes the Levensthein distance between strings and normalizes it according to the
+string length. The `--metric-parameter` defines whether to use the recursive implementation (with memoization), in the
+case the truth value is `True`, or the dynamic programming implementation, in the case the truth value is `False`.
+- `PermutationMetric` - this metric considered lists equal if they contain the same elements, regardless of order.
+- `KeyboardMetric` - this metric computes the distance between two characters based on the physical distance between
+their keys on a QWERTY keyboard.
+- `HomophoneMetric` - this metric considers two strings closer if they are pronounced similarly.
 
 
 ### Tactics
@@ -219,20 +274,20 @@ PyCharm Professional and was managed using [GitHub](https://github.com/orel-adiv
 
 In order to ensure the correctness of commits sent to th GitHub server, a continuous integration pipeline was set.
 These checks are run automatically for each pull request and each push. The following actions were set:
-1) [Build](https://github.com/orel-adivi/CorSys/actions/workflows/build.yml) - basic tests are run with the updated
+1) **[Build](https://github.com/orel-adivi/CorSys/actions/workflows/build.yml)** - basic tests are run with the updated
 code, to ensure the lack of syntax errors.
-2) [Benchmarks](https://github.com/orel-adivi/CorSys/actions/workflows/benchmarks.yml) - all the benchmarks are run
+2) **[Benchmarks](https://github.com/orel-adivi/CorSys/actions/workflows/benchmarks.yml)** - all the benchmarks are run
 with the updated code, to ensure its correctness.
-3) [Style check](https://github.com/orel-adivi/CorSys/actions/workflows/style.yml) - the coding style is automatically
-checked using Flake8, to match the PEP8 coding standard.
-4) [Vulnerabilities check](https://github.com/orel-adivi/CorSys/actions/workflows/vulnerabilities.yml) - the updated
-code is check to ensure it does not contain any known vulnerability.
-5) [Dependency review](https://github.com/orel-adivi/CorSys/actions/workflows/dependency-review.yml) - the dependencies
-are reviewed to check for any security issue.
-6) [Website](https://github.com/orel-adivi/CorSys/actions/workflows/website.yml) - the
+3) **[Style check](https://github.com/orel-adivi/CorSys/actions/workflows/style.yml)** - the coding style is
+automatically checked using Flake8, to match the PEP8 coding standard.
+4) **[Vulnerabilities check](https://github.com/orel-adivi/CorSys/actions/workflows/vulnerabilities.yml)** - the
+updated code is check to ensure it does not contain any known vulnerability.
+5) **[Dependency review](https://github.com/orel-adivi/CorSys/actions/workflows/dependency-review.yml)** - the
+dependencies are reviewed to check for any security issue.
+6) **[Website](https://github.com/orel-adivi/CorSys/actions/workflows/website.yml)** - the
 [CorSys website](https://orel-adivi.github.io/CorSys/) is updated with the current information.
-7) [Dependabot](https://github.com/orel-adivi/CorSys/blob/main/.github/dependabot.yml) - the dependency versions (in
-[requirements.txt](https://github.com/orel-adivi/CorSys/blob/main/requirements.txt)) are updated regularly.
+7) **[Dependabot](https://github.com/orel-adivi/CorSys/blob/main/.github/dependabot.yml)** - the dependency versions
+(in [requirements.txt](https://github.com/orel-adivi/CorSys/blob/main/requirements.txt)) are updated regularly.
 
 For the relevant actions, the checks were run in all the supported Python version (CPython 3.9 and CPython 3.10), and
 on all supported operating systems - Windows (Windows Server 2022), macOS (macOS Big Sur 11), and Linux (Ubuntu 20.04).
@@ -240,10 +295,41 @@ on all supported operating systems - Windows (Windows Server 2022), macOS (macOS
 
 ### Suggestions for Future Research
 
-next
-small utils: program minimizer (counter example ?), game man vs. synthesizer
-unittests
-pypy
-weighted metric
-constant diff keyboard
-combined metric
+During the month of work, we were able to develop CorSys and to demonstrate its abilities. We suggest the following
+directions for future research:
+- **Adding additional metrics** - there are currently nine supported metrics, which covers different kinds of possible
+user mistakes. Covering more kinds of mistakes is possible by implementing more metrics (for example, a metric that
+deals with typing with a constant offset of typing on a regular keyboard, which might be common with small keyboards).
+Additionally, a combination of existing metrics may be combined to a single metric, with uses different metrics for
+different types. As a proof of concept, we have implemented
+[CombinedMetric.py](https://github.com/orel-adivi/CorSys/blob/main/src/metrics/CombinedMetric.py) and found the current
+design to work with generating a metric that combines existing ones. It is also possible to be generalized to a weighted
+metric, where the metric for each type is calculated using several existing ones.
+- **Analyzing the frequency of user mistakes** - the metrics we generated are based on the mistakes we experienced as
+Python programmers. It might be helpful to analyse the frequency of general-purpose Python programmers for creating more
+relevant metrics.
+- **Dealing with incorrect input specifications** - the current implementation assumes that the incorrect specifications
+are only in the output, assuming that mistaken input specifications are 'linearly' expressed as mistaken outputs. It is
+might be possible to find ways for dealing with mistaken input specifications independently of the output.
+- **Improving the efficiency with different implementation** - we found that for several input types and for several
+metrics, the time that was required to traverse all the expression with syntax-tree height of up to two - was up to five
+minutes. In order to be used in real conditions, this speed has to be improved. It is possible to do so by implementing
+more efficient algorithms for the metrics, improving the implementation of the synthesis process (for example, not
+treating all the expression types orthogonally, as it is now), or implementing the synthesizer is a different,
+preferably compiled, programming langauge. The efficiency of the synthesizer can be tested by creating an interactive
+game, where the synthesizer is required to find a matching example for a given Grammar and a set of input-output pairs,
+faster than a human.
+- **Improving the efficiency with jitting** - the performance of the implementation can be also improved using
+just-in-time (JIT) compilation. This can be achieved by using [PyPy](https://www.pypy.org/) Python interpreter, which
+is not currently supported.
+- **Testing the current implementation** - the correctness of the implementation is currently mainly checked by the
+benchmarks. Testing each Python file separately using unittests might help finding hiding bugs. We have created a
+basic [unittest testing framework](https://github.com/orel-adivi/CorSys/blob/main/docs/unittesting_files.zip) for
+the project, and we tested a previous version of the file ExpressionGenerator.py using random numbers.
+- **Using the current implementation for different tasks** - the current implementation is a Syntax-Guided Synthesis
+(SyGuS) synthesizer that is given small-step specifications to work with Programming by Examples (PBE). However, the
+implementation can be generalize for different methodologies of software synthesis, such as CounterExample-Guided
+Inductive Synthesis (CEGIS). For instance, a program minimizer can be built, so it suggests the user a smaller
+expression whose values are close enough.
+
+Please feel free to contact us for any question you have with CorSys.

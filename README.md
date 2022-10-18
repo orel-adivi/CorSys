@@ -333,5 +333,4 @@ implementation can be generalize for different methodologies of software synthes
 Inductive Synthesis (CEGIS). For instance, a program minimizer can be built, so it suggests the user a smaller
 expression whose values are close enough.
 
-
 Please feel free to contact us for any question you have with CorSys.
