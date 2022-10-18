@@ -1,5 +1,5 @@
 title: CorSys
-logo: ./logo.png
+logo: ./logo.jpg
 description: Synthesizing best-effort Python expressions while weighting the chance for mistakes in given user outputs.
 show_downloads: true
 google_analytics:

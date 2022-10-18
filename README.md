@@ -10,7 +10,7 @@
 [![GitHub repo size](https://img.shields.io/github/repo-size/orel-adivi/CorSys)](https://github.com/orel-adivi/CorSys)
 [![Website](https://img.shields.io/website?url=https%3A%2F%2Forel-adivi.github.io%2FCorSys%2F)](https://orel-adivi.github.io/CorSys/)
 
-![thumbnail](/docs/thumbnail.png)
+![logo](/docs/logo.jpg)
 
 ## About the Project
 
