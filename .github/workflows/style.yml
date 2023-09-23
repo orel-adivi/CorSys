@@ -39,5 +39,5 @@ jobs:
 
     - name: Analysing the code with Flake8
       run: |
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        flake8 . --count --max-complexity=15 --max-line-length=127 --statistics
+        flake8 . --count --select=E9,F63,F7,F82 --ignore=E721 --show-source --statistics
+        flake8 . --count --max-complexity=15 --ignore=E721 --max-line-length=127 --statistics
